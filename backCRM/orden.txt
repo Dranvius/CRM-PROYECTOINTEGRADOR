@@ -1,0 +1,191 @@
+//!Query ejemplo
+
+//!Traer datos de la base de datos
+const getBook = async () => {
+  try {
+    const res = await pool.query("select * from usuarios");
+    console.log(res.rows); //!Devuelve losd datos
+    pool.end(); //En una aplicación web no se utiliza
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+//!Insertar datos de la base de datos
+const insertUser = async () => {
+  try {
+    const text =
+      "INSERT INTO usuarios (nombre,apellido,usuario,contrasena) VALUES($1,$2,$3,$4)";
+    const nuevo = ["Nappy", "Nayu", "Unicornio", "123456789"];
+    //!Manejar el ingreso por medio de un array externo y concatenelo con varaible
+    //? Si tenemos un array podemos ingresarlo por medio de  pool.query(text,array) !Debe estar organizado
+
+    const res = await pool.query(text, nuevo); //Devuelve un comando un array de datos ingresados
+
+    console.log(res);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+//!Eliminar usuario
+const deleteUser = async () => {
+  try {
+    const queryText = "DELETE FROM usuarios where nombre = $1";
+    const dat = ["Nappy"];
+
+    const res = await pool.query(queryText, dat);
+
+    console.log(res);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+//!Cambiar información de un registro
+const putNewInfo = async () => {
+  try {
+    const queryText = "";
+    pool.query();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+//!Query proyecto
+
+//!Cambiar contraseña propia contraseña
+const changePassword = async (dats) => {
+  try {
+    const values = [dats[0], dats[1]]; //!Organizar los valores de la repuesta
+
+    const queryText = "UPDATE usuario SET password = $1 where nick = $2";
+
+    const res = await pool.query(queryText, values);
+
+    console.log(res);
+  } catch (error) {
+    console.error(error);
+    console.log("Error en la base de datos");
+  }
+};
+
+//?Ruta para cambiar contraseña
+App.put("/changePassword", (req, res) => {
+  try {
+    changePassword(req.body);
+    res.send(console.log("Contraseña cambiada"));
+  } catch (error) {
+    console.log(error);
+    console.log("Error en la ruta");
+  }
+});
+
+//!Creación de usuario
+const newUser = async (dats) => {
+  try {
+    const queryText1 =
+      "INSERT INTO personaldats (firstname,lastname,cedula,numberphone) VALUES ($1,$2,$3,$4)";
+    const queryText2 =
+      "INSERT INTO usuario (nick,contrasena,status,type) VALUES($1,$2,$3,$4)";
+
+    //?Datos
+    valores = [dats[0], dats[1]];
+
+    //*Peticion
+    const res1 = await pool.query(queryText1, valores[0]);
+    console.log(res1);
+    const res2 = await pool.query(queryText2, valores[1]);
+    console.log(res2);
+  } catch (error) {
+    console.log(error);
+    console.log("Error en la petición");
+  }
+};
+
+//?Ruta Creación de usuario
+App.put("/creacionUser", (req, res) => {
+  try {
+    newUser(req.body);
+    res.send(console.log("Actividad completada"));
+  } catch (error) {
+    console.log("Error en la ruta");
+    console.error(error);
+  }
+});
+
+//!Modificar gestor
+const modificarGestor = async (dats) => {
+  try {
+    const queryText1 =
+      "UPDATE usuario SET nick = $1 password = $2  where nick = $3";
+    const queryText2 =
+      "UPDATE personaldats SET firstname = $1 lastname = $2 cedula = $3 where nick = $2";
+
+    const res1 = pool.query(queryText1, values[0]);
+    const res2 = pool.query(queryText2, values[1]);
+  } catch (error) {
+    console.log("Error en la petición");
+    console.error(error);
+  }
+};
+
+//?Modificación datos todos los datos administrador.
+App.put("/modificarGestor", (req, res) => {
+  console.log("Modificación de datos de un usuario");
+
+  try {
+    modificarGestor(req.body);
+    res.send(console.log("Operación realizada"));
+  } catch (error) {
+    console.log("Error en la ruta");
+    console.error(error);
+  }
+});
+
+//!Crear cuentas
+const crearCliente = async (dats) => {
+  try {
+    const queryText =
+      "INSERT INTO cliente (idcreador, firstname, lastname,cedula,email,numberphone,status) VALUES($1,$2,$3,$4,$5,$6,$7)";
+
+    const query1 = await pool.query(queryText, values);
+
+    console.log(query1);
+    console.log("Operación finalizada");
+  } catch (error) {
+    console.log("Error desde petición");
+    console.error(error);
+  }
+};
+
+//?Ruta crear clientes
+
+App.post("/creacionClientes", (req, res) => {
+  console.log("Saludo desde creación de cleinte");
+  crearCliente(req.body);
+
+  res.send("Tarea finalizada");
+
+  try {
+  } catch (error) {
+    console.log("Error en la ruta");
+    console.error(error);
+  }
+});
+
+//!Crear cuentas
+const cambiarNombre = async (dats) => {
+  try {
+    const queryText =
+      "INSERT INTO cliente (idcreador, firstname, lastname,cedula,email,numberphone,status) VALUES($1,$2,$3,$4,$5,$6,$7)";
+
+    const query1 = await pool.query(queryText, values);
+
+    console.log(query1);
+    console.log("Operación finalizada");
+  } catch (error) {
+    console.log("Error desde petición");
+    console.error(error);
+  }
+};

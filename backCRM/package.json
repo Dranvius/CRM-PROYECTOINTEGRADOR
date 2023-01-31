@@ -1,0 +1,29 @@
+{
+  "name": "mesa-back",
+  "version": "1.0.0",
+  "description": "Backend Para el desarrollo del parques ",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "nodemon": "nodemon src/server.js"
+  },
+  "keywords": [
+    "parques",
+    "logica"
+  ],
+  "author": "Sergio Y Alexis Linares",
+  "license": "ISC",
+  "devDependencies": {
+    "colors": "^1.4.0",
+    "cors": "^2.8.5",
+    "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "install": "^0.13.0",
+    "jsonwebtoken": "^9.0.0",
+    "morgan": "^1.10.0",
+    "pg": "^8.8.0"
+  }
+}

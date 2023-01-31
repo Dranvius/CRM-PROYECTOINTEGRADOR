@@ -1,0 +1,530 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@1,800&display=swap');
+
+body {
+    background: linear-gradient(359deg, #1952eb, #1e0e70);
+    background-size: 500% 500%;
+
+    -webkit-animation: AnimationName 43s ease infinite;
+    -moz-animation: AnimationName 43s ease infinite;
+    animation: AnimationName 43s ease infinite;
+}
+
+h6{
+    text-align: center;
+    font-size: 40px;
+    color: white;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+
+#Botones-Menu-Usuario{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: red;
+    
+}
+
+ol, ul {
+    padding-left: 0px;
+}
+
+ol {
+    list-style:none;
+   }
+   
+   ol li {
+    line-height: 1.5;
+    color :white;
+   }
+   
+   ol {
+    list-style-type: none;
+    text-align: center;
+   }
+
+button{
+    border-color: white;
+}
+
+@-webkit-keyframes AnimationName {
+    0%{background-position:0% 77%}
+    50%{background-position:100% 24%}
+    100%{background-position:0% 77%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:0% 77%}
+    50%{background-position:100% 24%}
+    100%{background-position:0% 77%}
+}
+@keyframes AnimationName {
+    0%{background-position:0% 77%}
+    50%{background-position:100% 24%}
+    100%{background-position:0% 77%}
+}
+
+#container-profile-page{
+    display: grid;
+    grid-template-columns: 20% 80%;
+    grid-template-rows: 90% 10%;
+}
+
+#userinfo{
+        display: grid;
+        grid-template-rows: 70% 100%;
+}
+
+#top{
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+
+#container-General{
+    display: grid;
+    height: 100%;
+    grid-auto-columns: 50% 50%;
+}
+
+#left-area{
+   
+    grid-column: 1/2;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    flex-direction: column;
+    grid-auto-rows: 20% 10% 30% 20%;
+    justify-items: center;
+    align-items: center;
+}
+
+#descripcion{
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+#saludo{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 70px;
+}
+
+#list-action{
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 100%;
+    flex-direction: row;
+    align-items: center;
+}
+
+#perfil-text{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 30px;
+}
+
+#rigth-area{
+    background-color: whitesmoke;
+    grid-column: 2/2;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+#descripcion, #nombre{
+    color: white;
+}
+
+#nombre{
+    font-size: 20px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+#profile-pic{
+    
+    background-color: whitesmoke;
+    width: 88.3%;
+    height: 100%;
+}
+
+#listDats{
+    width: 100%;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    height: 70%;
+   
+}
+
+#primer, #segundo, #tercero{
+    color: white;
+}
+
+#saludo{
+    
+    color:white;
+}
+
+#formulario{
+    display: flex;
+    width: 100%;
+    height: 408px;
+    align-items: center;
+    justify-content: center;
+    margin:0px;
+}
+
+#pic{
+    display: flex;
+    width: 100%;
+    height: 50%;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+#logo{
+    width: 13%;
+    height: 25%;
+}
+
+
+/*Boton Stilos*/
+
+#red #pasillo_2{
+    width: 370px;
+    height: 66px;
+    display: flex;
+    justify-content: flex-end;
+    transform: translate(-139px, 1px);
+
+}
+
+#boton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-neon {
+    position: relative;
+    display: inline-block;
+    padding: 15px 30px;
+    color: rgb(255, 255, 255);
+    letter-spacing: 4px;
+    font-size: 15px;
+    text-decoration: none;
+    overflow: hidden;
+    transition: 0.1s;
+    cursor: pointer;
+    -webkit-transition: 0.1s;
+    -moz-transition: 0.1s;
+    -ms-transition: 0.1s;
+    -o-transition: 0.1s;
+}
+
+.svg-inline--fa {
+    display: var(--fa-display, inline-block);
+    height: 27px;
+    overflow: visible;
+    vertical-align: -0.125em;
+    width: 55px;
+}
+
+
+.btn-neon:hover {
+    background: rgb(255, 255, 255);
+    box-shadow: 0 0 10px rgb(0, 0, 0), 0 0 40px black, 0 0 80px rgb(0, 0, 0);
+    transition-delay: 1s;
+    color: rgb(0, 0, 0);
+}
+
+.btn-neon span {
+    position: absolute;
+    display: block;
+}
+
+#span1 {
+    top: 0;
+    left: -100%;
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgb(255, 255, 255));
+}
+
+.btn-neon:hover #span1 {
+    left: 100%;
+    transition: 1s;
+    -webkit-transition: 1s;
+    -moz-transition: 1s;
+    -ms-transition: 1s;
+    -o-transition: 1s;
+}
+
+#span3 {
+    bottom: 0;
+    right: -100%;
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(270deg, transparent, rgb(255, 255, 255));
+}
+
+
+.btn-neon:hover #span3 {
+    right: 100%;
+    transition: 1s;
+}
+
+
+button {
+    appearance: auto;
+    writing-mode: horizontal-tb;
+    font-style: 0;
+    font-variant-ligatures: 0;
+    font-variant-caps: 0;
+    font-variant-numeric: 0;
+    font-variant-east-asian: 0;
+    font-weight:0 ;
+    font-stretch: 0;
+    font-size: 0;
+    font-family: 0;
+    text-rendering: auto;
+    color: transparent;
+    letter-spacing: normal;
+    word-spacing: normal;
+    line-height: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: center;
+    align-items: flex-start;
+    cursor: pointer;
+    box-sizing: border-box;
+    background-color: transparent;
+    margin: 0em;
+    padding: 1px 6px;
+    border-width: 2px;
+    border-style: none;
+    border-color: buttonborder;
+    border-image: initial;
+    -webkit-writing-mode: horizontal-tb;
+    -ms-writing-mode: horizontal-tb;
+}
+
+
+/*
+Tablero
+*/
+
+/*
+Todo: Contenedor principal
+*/
+
+#general{
+
+    display: flex;
+    width: 61%;
+    height: 120%;
+    flex-wrap: wrap;
+
+}
+
+
+/*
+!Estilos Generales
+*/
+
+* {
+padding: 0px;
+margin: 0px;
+border:0px;
+}
+
+/*
+?Contrucción de contenedor
+*/
+
+#contenedor {
+display: grid;
+width: 263px;
+height: 214px;
+grid-template-columns: 63% 18.5%;
+grid-template-rows: 77.2%;
+
+}
+
+
+
+#hail {
+
+background-color: white;
+width: 167px;
+height: 166px;
+grid-column: 1/2;
+grid-row: 1/1;
+display: flex;
+align-items: center;
+justify-content: center;
+
+}
+
+.celdas{
+background-color: red;
+width: 120px;
+height: 120px;
+
+}
+
+#camino_2 {
+background-color: red;
+grid-column: 1/2;
+grid-row: 2/2;
+display: flex;
+/* height: 49px;
+width: 166px; */
+align-items: center;
+}
+
+.celda_2 {
+border: 1px solid black;
+height: 47px;
+width: 21.8px;
+
+}
+
+
+
+/*!Camino_1 No salida*/
+
+#camino_1 {
+background-color: red;
+/* width: 48px;
+height: 214px; */
+grid-column: 2/3;
+grid-row: 1/3;
+display: grid;
+
+
+}
+
+.celda_1 {
+
+height: 21.8px;
+width: 47px;
+border: 1px solid;
+
+}
+
+
+/*!Camino_2 Salida*/
+
+#camino_3 {
+background-color: red;
+/* width: 49px;*/
+height: 190px; 
+grid-column: 3/4;
+grid-row: 1/3;
+display: grid;
+}
+
+.celda_3 {
+border: 1px solid black;
+/* height: 21.8px; */
+width: 47px;
+}
+
+/*!Caras*/
+
+/*
+*green
+*/
+.green{
+transform: rotate(90deg) translate(24.5px, 25px);
+}
+
+.green #camino_1{
+background-color: darkgreen;
+
+}
+
+.green #camino_2{
+background-color: darkgreen;
+
+}
+
+.green #camino_3{
+background-color: darkgreen;
+
+}
+
+.green .celdas{
+background-color: darkgreen;
+}
+
+/*
+?Blue
+*/
+
+.blue .celdas{
+background-color: darkblue;
+}
+
+.blue{ 
+    transform: rotate(180deg) translate(49.5px, -49.5px); -webkit-transform: rotate(180deg) translate(49.5px, -49.5px); -moz-transform: rotate(180deg) translate(49.5px, -49.5px); -ms-transform: rotate(180deg) translate(49.5px, -49.5px); -o-transform: rotate(180deg) translate(49.5px, -49.5px);
+}
+
+.blue #camino_1{
+background-color: darkblue;
+
+}
+
+.blue #camino_2{
+background-color: darkblue;
+
+}
+
+.blue #camino_3{
+background-color: darkblue;
+
+}
+
+/*
+todo: Yellow
+*/
+
+.yellow{
+transform: rotate(-90deg) translate(-25px, -24.7px);
+}
+
+.yellow #camino_1{
+background-color: darkgoldenrod;
+
+}
+
+.yellow #camino_2{
+background-color: darkgoldenrod;
+
+}
+
+.yellow #camino_3{
+background-color: darkgoldenrod;
+
+}
+
+.yellow .celdas{
+background-color: darkgoldenrod;
+}
