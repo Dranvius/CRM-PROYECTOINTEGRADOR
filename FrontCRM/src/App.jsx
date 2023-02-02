@@ -8,6 +8,7 @@ import { NavbarLinks } from "./components/NavbarLinks";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { useAuthStore } from "./storage/globalStorage";
 import {DashBoard} from './pages/DashBoard';
+import { ListUsers } from './pages/ListUsers'
 export function App() {
   const isAuth = useAuthStore((state) => state.isAuth);
 
@@ -19,6 +20,7 @@ export function App() {
         <Routes>
           <Route path="/" element={<Boton />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/listusers" element={<ListUsers />} />
           
 
           <Route element={<ProtectedRoute isAllowed={isAuth} />}>

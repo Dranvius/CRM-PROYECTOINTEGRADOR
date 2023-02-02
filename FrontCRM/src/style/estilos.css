@@ -327,6 +327,73 @@ button {
 
 
 /*
+!User List
+*/
+
+#search{
+    
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.input-group {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+}
+
+#fila{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+
+
+#downPartUserList{
+    display: flex;
+    margin: 0px;
+    transform: translateX(217px);
+    width: 1000px;
+    align-items: baseline;
+    justify-content: space-evenly;
+    -webkit-transform: translateX(217px);
+    -moz-transform: translateX(217px);
+    -ms-transform: translateX(217px);
+    -o-transform: translateX(217px);
+}
+
+svg{
+    color:white;
+    height:2em;
+    width:2em;
+}
+
+#smallMenu{
+    width: 85px;
+    height: 46px;
+    display: flex;
+    align-self: center;
+    justify-content: space-between;
+    
+}
+
+#list-users{
+    color:white;
+    margin: 20px;
+    height: 370px;
+
+}
+
+td{
+    color:white;
+}
+
+
+/*
 Tablero
 */
 
