@@ -1,5 +1,8 @@
 import { NavbarLinks } from "../components/NavbarLinks";
+
+//Botones toaster
 import Swal from "sweetalert2";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { faComment } from "@fortawesome/free-solid-svg-icons";
@@ -15,7 +18,77 @@ import {TableList} from '../components/TableList'
 export function ListUsers() {
   //const ContextoVariableFuncional = useContext(ProyectoContext);
 
-  
+
+  const cambioName = async () => {
+    const { value: formValues } = await Swal.fire({
+      titleText: "Saludo desde toaster :\n",
+      iconColor: "yellow",
+      icon: "question",
+      color: "green",
+      width: "35%",
+      confirmButtonColor: "green",
+      confirmButtonAriaLabel: "Confirmar",
+      showCancelButton: true,
+      cancelButtonText: "Cancelar",
+      cancelButtonColor: "red",
+      background: "white",
+      footer:
+        "<center><b>RECUERDA</b><br>EL NOMBRE PUEDE AFECTAR EN EL LOGIN</center>",
+
+      html:
+        '<input id="swal-input1" className="swal2-input" placeholder="Nuevo Nombre">' +
+        '<input id="swal-input2" className="swal2-input" placeholder="Nuevo Apellido">',
+      focusConfirm: false,
+      preConfirm: () => {
+        return [
+          document.getElementById("swal-input1").value,
+          document.getElementById("swal-input2").value,
+        ];
+      },
+    });
+
+
+    if (formValues) {
+
+        Swal.fire({
+          icon: "success",
+          title: formValues,
+          confirmButtonColor: "green",
+        });
+
+
+      } 
+
+    // if (formValues) {
+    //   try {
+    //     formValues.push(profile.email);
+    //     console.log(formValues);
+    //     const peticion = await axios.post("/cambiarNombre", formValues);
+
+    //     Swal.fire({
+    //       icon: "success",
+    //       title: "Finalizado con exito",
+    //       confirmButtonColor: "green",
+    //     });
+
+    //     navigate("/profile");
+
+    //     console.log(peticion);
+    //   } catch (error) {
+    //     console.log(error);
+
+    //     Swal.fire({
+    //       title: "ALGO SALIO MAL",
+    //       confirmButtonColor: "red",
+    //       footer: "<center>INFORMAR AL AREA DE SISTEMAS</center>",
+    //       color: "black",
+    //       width: "20%",
+    //       icon: "error",
+    //     });
+    //   }
+    // }
+  };
+
 
     return (
       <>

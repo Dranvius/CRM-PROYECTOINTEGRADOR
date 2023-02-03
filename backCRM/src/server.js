@@ -5,10 +5,10 @@ import pg from "pg";
 import cors from "cors";
 import router from "./routes/autentificacion.routes.js";
 import profile from "./routes/peticionesProfilePage.routes.js";
-import { Configuracion } from "./database/config.js";
+import { ConfiguracionA } from "./database/config.js";
+import ListUsers from "../src/routes/usersPage.routes.js";
 
-
-const pool = new pg.Pool(Configuracion);
+const pool = new pg.Pool(ConfiguracionA);
 
 const App = Express();
 
@@ -28,6 +28,8 @@ App.use(Express.urlencoded({ extended: true }));
 
 App.use(router); 
 App.use(profile);
+App.use(ListUsers);
+
 
 //?Default Route
 

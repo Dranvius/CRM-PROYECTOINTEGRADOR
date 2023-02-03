@@ -1,8 +1,8 @@
 import jwt from "jsonwebtoken";
 import pg from 'pg';
-import { Configuracion } from "../database/config.js";
+import { ConfiguracionA } from "../database/config.js";
 
-const pool = new pg.Pool(Configuracion);
+const pool = new pg.Pool(ConfiguracionA)
 
 export const verificador = (req, res, next) => {
 
@@ -13,8 +13,6 @@ export const verificador = (req, res, next) => {
       message: "Error mal autentificado_1",
     });
   }
-
-
 
   //const token = autorizacion.split(' ')[1]; //!Toquen enviado por header
 

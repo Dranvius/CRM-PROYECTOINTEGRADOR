@@ -4,10 +4,7 @@ import { Router } from "express";
 
 //TODO controladores
 
-import {
-  changeName,
-  changePassword,
-} from "../controllers/controladorProfilePage.controller.js";
+import {changeName, changePassword} from "../controllers/controladorProfilePage.controller.js";
 
 //?Middlerwares
 
@@ -16,6 +13,9 @@ import { verificador } from "../middlerwares/requerirAutentificador.js";
 const profile = Router();
 
 //Exportando rutas
+
+
+
 
 profile.post("/cambiarNombre", verificador, changeName);
 

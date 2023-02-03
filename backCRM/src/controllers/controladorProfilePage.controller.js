@@ -1,4 +1,7 @@
-//*-------------------- Peticiones Profile Page
+import pg from 'pg';
+import { ConfiguracionA } from '../database/config.js';
+const pool = new pg.Pool(ConfiguracionA)
+//*-------------------- Peticiones profile Page
 
 
 //*--------------------------------------------------------------------------------Name
@@ -30,6 +33,9 @@ export const changeName = (req, res) => {
     console.log(error);
   }
 };
+
+
+
 
 //*--------------------------------------------------------------------------------Password 
 

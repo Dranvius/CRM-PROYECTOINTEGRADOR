@@ -1,4 +1,91 @@
+//REACT HOOK CONTEXT
+import { useContext,useState, useEffect} from "react";
+//Constante de contexto de la lista
+import {ListsContext} from '../context/ListsContext'
+//SweetAlert2
+import Swal from "sweetalert2";
+//Axios
+import axios from '../lib/axios.js'
+
+
+
 export function TableList() {
+
+  //USE STATE
+
+  const [datos,setDatos ] =useState([]);
+
+  //USE CONTEXT
+  
+  const ContextoObjetos = useContext(ListsContext)
+
+  //USE EFFECT
+  
+
+  useEffect( () => { 
+    async function fetchData() {
+        try {
+            const dats = await ContextoObjetos()
+            setDatos(dats);
+            console.log(datos);
+        } catch (err) {
+            console.log(err);
+        }
+    }
+    fetchData();
+  }, []);
+
+  const deleteUser = async () => {
+
+    const inputOptions = new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({
+          true: 'Si',
+          false: 'No',
+        })
+      }, 1000)
+    })
+    
+    const { value: opcion } = await Swal.fire({
+      icon: 'warning',
+      title: '¿Desea Elminar este usuario?',
+      input: 'radio',
+      inputOptions: inputOptions,
+      inputValidator: (value) => {
+        if (!value) {
+          return 'Debes escoger un valor !'
+        }
+      }
+    })
+    
+    if (opcion === true) {
+      Swal.fire({ html: `La seleción es: ${opcion}` })
+
+      const respuesta = await axios.post('/eliminarusuario',{
+        datos: [datos.id_users]
+      })
+      
+      console.log(respuesta);
+
+    }else{
+
+      Swal.fire({
+        icon: 'warning',
+        title: 'No desea eliminar nada',
+
+        inputOptions: inputOptions,
+        inputValidator: (value) => {
+          if (!value) {
+            return 'Debes escoger un valor !'
+          }
+        }
+      })
+
+    }
+
+  
+  };
+
   const usuarios = [
     {
       nombre: "sergio",
@@ -44,64 +131,7 @@ export function TableList() {
     },
   ];
 
-  const cambioName = async () => {
-    const { value: formValues } = await Swal.fire({
-      title: "Cambio Nombre",
-      titleText: "Nombre Actual :\n",
-      iconColor: "blue",
-      icon: "question",
-      color: "black",
-      width: "35%",
-      confirmButtonColor: "green",
-      confirmButtonAriaLabel: "Confirmar",
-      showCancelButton: true,
-      cancelButtonText: "Cancelar",
-      cancelButtonColor: "red",
-      background: "white",
-      footer:
-        "<center><b>RECUERDA</b><br>EL NOMBRE PUEDE AFECTAR EN EL LOGIN</center>",
-      html:
-        '<input id="swal-input1" className="swal2-input" placeholder="Nuevo Nombre">' +
-        '<input id="swal-input2" className="swal2-input" placeholder="Nuevo Apellido">',
-      focusConfirm: false,
-      preConfirm: () => {
-        return [
-          document.getElementById("swal-input1").value,
-          document.getElementById("swal-input2").value,
-        ];
-      },
-    });
-
-    if (formValues) {
-      try {
-        formValues.push(profile.email);
-        console.log(formValues);
-        const peticion = await axios.post("/cambiarNombre", formValues);
-
-        Swal.fire({
-          icon: "success",
-          title: "Finalizado con exito",
-          confirmButtonColor: "green",
-        });
-
-        navigate("/profile");
-
-        console.log(peticion);
-      } catch (error) {
-        console.log(error);
-
-        Swal.fire({
-          title: "ALGO SALIO MAL",
-          confirmButtonColor: "red",
-          footer: "<center>INFORMAR AL AREA DE SISTEMAS</center>",
-          color: "black",
-          width: "20%",
-          icon: "error",
-        });
-      }
-    }
-  };
-
+  
   return (
     <>
       <table className="table table-dark  table-hover">
@@ -117,20 +147,21 @@ export function TableList() {
           </tr>
         </thead>
         <tbody>
-          {usuarios.map((objeto, i) => (
+          {datos.map((objeto, i) => (
             <tr key={i}>
               <th scope="row">{i + 1}</th>
-              <td>{objeto.nombre}</td>
-              <td>{objeto.apellido}</td>
+              <td>{objeto.firstname}</td>
+              <td>{objeto.lastname}</td>
               <td>{objeto.cc}</td>
-              <td>{objeto.correo}</td>
-              <td>{objeto.telefono}</td>
+              <td>{objeto.email}</td>
+              <td>{objeto.numbercelphone}</td>
               <td>
-                <div class="btn-group">
-                  <a href="#" class="btn btn-primary">
+                <div className="btn-group">
+                  <a href="#" className="btn btn-primary" onClick={() =>{
+                  }}>
                     Editar
                   </a>
-                  <a href="#" class="btn btn-danger">
+                  <a href="#" className="btn btn-danger" onClick={() =>{deleteUser()}}>
                     Eliminar
                   </a>
                 </div>

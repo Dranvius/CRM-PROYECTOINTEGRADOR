@@ -16,7 +16,9 @@ const insertUser = async () => {
   try {
     const text =
       "INSERT INTO usuarios (nombre,apellido,usuario,contrasena) VALUES($1,$2,$3,$4)";
+    
     const nuevo = ["Nappy", "Nayu", "Unicornio", "123456789"];
+
     //!Manejar el ingreso por medio de un array externo y concatenelo con varaible
     //? Si tenemos un array podemos ingresarlo por medio de  pool.query(text,array) !Debe estar organizado
 
@@ -31,7 +33,7 @@ const insertUser = async () => {
 //!Eliminar usuario
 const deleteUser = async () => {
   try {
-    const queryText = "DELETE FROM usuarios where nombre = $1";
+    const queryText = "DELETE FROM usuarios WHERE nombre = $1";
     const dat = ["Nappy"];
 
     const res = await pool.query(queryText, dat);
