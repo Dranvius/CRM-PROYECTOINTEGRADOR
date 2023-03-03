@@ -1,175 +1,93 @@
 //REACT HOOK CONTEXT
-import { useContext,useState, useEffect} from "react";
+import { useContext, useState, useEffect } from "react";
 //Constante de contexto de la lista
-import {ListsContext} from '../context/ListsContext'
+import { ListsContext } from "../context/ListsContext";
 //SweetAlert2
 import Swal from "sweetalert2";
 //Axios
-import axios from '../lib/axios.js'
+import axios from "../lib/axios.js";
+//Import Dinamict list
+import {ListFunction} from '../functions/ListFunction';
 
-
-
-export function TableList() {
+//listado de informacion//
+export function TableList(props) {
+  console.log(props);
 
   //USE STATE
-
-  const [datos,setDatos ] =useState([]);
+  //Las variables de react
+  const [datos, setDatos] = useState([]);
 
   //USE CONTEXT
-  
-  const ContextoObjetos = useContext(ListsContext)
 
+  const ContextoObjetos = useContext(ListsContext);
+  console.log(ContextoObjetos);
   //USE EFFECT
-  
 
-  useEffect( () => { 
-    async function fetchData() {
+  if (props.ente === "usuario") {
+    useEffect(() => {
+      async function fetchData() {
         try {
-            const dats = await ContextoObjetos()
-            setDatos(dats);
-            console.log(datos);
+          const dats = await ContextoObjetos.datosListUsuario();
+          setDatos(dats);
         } catch (err) {
-            console.log(err);
-        }
-    }
-    fetchData();
-  }, []);
-
-  const deleteUser = async () => {
-
-    const inputOptions = new Promise((resolve) => {
-      setTimeout(() => {
-        resolve({
-          true: 'Si',
-          false: 'No',
-        })
-      }, 1000)
-    })
-    
-    const { value: opcion } = await Swal.fire({
-      icon: 'warning',
-      title: '¿Desea Elminar este usuario?',
-      input: 'radio',
-      inputOptions: inputOptions,
-      inputValidator: (value) => {
-        if (!value) {
-          return 'Debes escoger un valor !'
+          console.log(err);
         }
       }
-    })
-    
-    if (opcion === true) {
-      Swal.fire({ html: `La seleción es: ${opcion}` })
+      fetchData();
+    }, []);
 
-      const respuesta = await axios.post('/eliminarusuario',{
-        datos: [datos.id_users]
-      })
-      
-      console.log(respuesta);
+  
 
-    }else{
-
-      Swal.fire({
-        icon: 'warning',
-        title: 'No desea eliminar nada',
-
-        inputOptions: inputOptions,
-        inputValidator: (value) => {
-          if (!value) {
-            return 'Debes escoger un valor !'
-          }
+  } else if (props.ente === "cliente") {
+    useEffect(() => {
+      async function fetchData() {
+        try {
+          const dats = await ContextoObjetos.datosListCliente();
+          setDatos(dats);
+        } catch (err) {
+          console.log(err);
         }
-      })
+      }
+      fetchData();
+    }, []);
 
-    }
+    
+  }  else if (props.ente === "producto"){
+    useEffect(() =>{
+      async function fetchData() {
+        try {
+          const dats = await ContextoObjetos.datosListProducto();
+          setDatos(dats);
+        } catch (err) {
+          console.log(err)
+        }
+      }
+      fetchData();
+    },[]);
 
-  
-  };
+  }else if(props.ente === "cotizacion"){
+   
+    useEffect(() =>{
+      async function fetchData() {
+        try {
+          const dats = await ContextoObjetos.datosListCotizacion();
 
-  const usuarios = [
-    {
-      nombre: "sergio",
-      apellido: "linares",
-      correo: "Dranvius12@hotmail.com",
-      telefono: 123456789,
-      cc: 1023974646,
-    },
-    {
-      nombre: "alexis",
-      apellido: "ducuara",
-      correo: "Dranvius12@hotmail.com",
-      telefono: 123456789,
-      cc: 123456789,
-    },
-    {
-      nombre: "Nappy",
-      apellido: "blanco",
-      correo: "Dranvius12@hotmail.com",
-      telefono: 123456789,
-      cc: 987456123,
-    },
-    {
-      nombre: "Nappy",
-      apellido: "blanco",
-      correo: "Dranvius12@hotmail.com",
-      telefono: 123456789,
-      cc: 987456123,
-    },
-    {
-      nombre: "Nappy",
-      apellido: "blanco",
-      correo: "Dranvius12@hotmail.com",
-      telefono: 123456789,
-      cc: 987456123,
-    },
-    {
-      nombre: "Nappy",
-      apellido: "blanco",
-      correo: "Dranvius12@hotmail.com",
-      telefono: 123456789,
-      cc: 987456123,
-    },
-  ];
+          console.log(dats)
+
+          setDatos(dats);
+        } catch (err) {
+          console.log(err)
+        }
+      }
+      fetchData();
+    },[]);
+  }
 
   
+
   return (
     <>
-      <table className="table table-dark  table-hover">
-        <thead>
-          <tr>
-            <td scope="col">#</td>
-            <td scope="col">Nombre</td>
-            <td scope="col">Apellido</td>
-            <td scope="col">Cédula</td>
-            <td scope="col">Correo</td>
-            <td scope="col">Telefono</td>
-            <td scope="col">Botones de acción</td>
-          </tr>
-        </thead>
-        <tbody>
-          {datos.map((objeto, i) => (
-            <tr key={i}>
-              <th scope="row">{i + 1}</th>
-              <td>{objeto.firstname}</td>
-              <td>{objeto.lastname}</td>
-              <td>{objeto.cc}</td>
-              <td>{objeto.email}</td>
-              <td>{objeto.numbercelphone}</td>
-              <td>
-                <div className="btn-group">
-                  <a href="#" className="btn btn-primary" onClick={() =>{
-                  }}>
-                    Editar
-                  </a>
-                  <a href="#" className="btn btn-danger" onClick={() =>{deleteUser()}}>
-                    Eliminar
-                  </a>
-                </div>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <ListFunction prop={props.ente} datos={datos} />
     </>
   );
 }

@@ -7,8 +7,13 @@ import { HomePage } from "./pages/HomePage";
 import { NavbarLinks } from "./components/NavbarLinks";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { useAuthStore } from "./storage/globalStorage";
-import {DashBoard} from './pages/DashBoard';
+import { DashBoard } from './pages/DashBoard';
 import { ListUsers } from './pages/ListUsers'
+import { ListClient } from './pages/ListClient';
+import { ListProducts } from './pages/ListProducts';
+import { ListQuotation } from "./pages/ListQuotation";
+import { CotizacionesList } from './pages/CotizacionesList'
+
 export function App() {
   const isAuth = useAuthStore((state) => state.isAuth);
 
@@ -20,12 +25,15 @@ export function App() {
         <Routes>
           <Route path="/" element={<Boton />} />
           <Route path="/register" element={<RegisterPage />} />
-          <Route path="/listusers" element={<ListUsers />} />
-          
+
 
           <Route element={<ProtectedRoute isAllowed={isAuth} />}>
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/dashboard" element={<DashBoard />} />
+            <Route path="/cotizaciones" element={<CotizacionesList />} />
+            <Route path="/usuarios" element={<ListUsers />} />
+            <Route path="/clientes" element={<ListClient />} />
+            <Route path="/productos" element={<ListProducts />} />
           </Route>
 
         </Routes>

@@ -1,12 +1,11 @@
 import jwt from "jsonwebtoken";
-import pg from 'pg';
+import pg from "pg";
 import { ConfiguracionA } from "../database/config.js";
 
-const pool = new pg.Pool(ConfiguracionA)
+const pool = new pg.Pool(ConfiguracionA);
 
 export const verificador = (req, res, next) => {
-
-  const autorizacion = req.headers.authorization; //!Header con e Token
+  const autorizacion = req.headers.authorization; //!Header con el Token
 
   if (!autorizacion) {
     return res.status(401).json({
@@ -17,47 +16,55 @@ export const verificador = (req, res, next) => {
   //const token = autorizacion.split(' ')[1]; //!Toquen enviado por header
 
   if (!autorizacion) {
+    //!Existencia de TOken en el header
     return res.status(401).json({
       message: "Error mal autentificado_2",
     });
   }
 
+  
 
-  jwt.verify(autorizacion, "secret", async(err, user) => {
-    if (err)
-      return res.status(401).json({
-        message: "No autorizado",
-      });
+  try {
+    jwt.verify(autorizacion, process.env.JWT_SECRET, async (err, user) => {
+      //!Verificación del token
 
-
-      console.log('incio de la petición')
+      if (err)
+        return res.status(401).json({
+          message: "Error en token",
+        });
 
       try {
-        const queryText = "SELECT * FROM usuario WHERE correo = $1 AND passwordUser = $2";
-    
-        const dat = [user.user,user.password];
-        const res = await pool.query(queryText, dat);
-  
-        if(res.rows.length > 0){
+        const queryText =
+          "SELECT * FROM  usuario INNER JOIN personaldats ON personaldats.id_personalid = USUARIO.id_users WHERE usuario.email = $1";
 
-          const datosUser ={
-            name:res.rows[0].nombre,
-            lastName: res.rows[0].apellido,
-            tel:res.rows[0].telefono,
-            email:res.rows[0].correo,
-            password:res.rows[0].passworduser,
-          }
-          console.log("Fin")
+        const dat = [user.user];
+
+        const res = await pool.query(queryText, dat);
+
+        if (res.rows.length > 0) {
+          const datosUser = {
+            id: res.rows[0].id_personalid,
+            name: res.rows[0].firstname,
+            lastName: res.rows[0].lastname,
+            tel: res.rows[0].numbercelphone,
+            email: res.rows[0].email,
+            status: res.rows[0].tipo,
+          };
+
+          //Enviando datos de la autentificación
           req.user = datosUser;
+
           next();
         }
-      
       } catch (error) {
+        console.error(error);
         return res.status(401).json({
-          message: "No autorizado",
+          message: "No autorizado_4",
         });
       }
-
-  });
-
+    });
+  } catch (error) {
+    console.error("Error en requerirAutentificador");
+    console.error(error);
+  }
 };

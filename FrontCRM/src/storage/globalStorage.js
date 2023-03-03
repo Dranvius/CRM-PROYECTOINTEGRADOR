@@ -21,3 +21,7 @@ export const useAuthStore = create(persist((set) =>({
 }),{
     name: 'auth'
 }))
+
+//--->Storage?:nos permite almacenar datos de manera 
+//    local en el navegador y sin necesidad de realizar alguna 
+//    a una base de datos.//

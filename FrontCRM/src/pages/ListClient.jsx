@@ -8,18 +8,20 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { faComment } from "@fortawesome/free-solid-svg-icons";
 
-import { FaBeer } from "react-icons/fa";
 import { BsFillChatSquareFill } from "react-icons/bs";
 import { BsBookFill } from "react-icons/bs";
+
+import { useAuthStore } from "../storage/globalStorage.js"; 
 
 const element = <FontAwesomeIcon icon={faComment} />;
 
 import { TableList } from "../components/TableList";
-import { useAuthStore } from "../storage/globalStorage.js"; 
 
-export function ListUsers(props) {
+ 
+
+export function ListClient(props) {
   
-    const profile = useAuthStore((state) => state.user);
+  const profile = useAuthStore((state) => state.user);
 
 
 const profileStatus = profile.status;
@@ -27,10 +29,10 @@ const profileStatus = profile.status;
 
 
   console.log(props)
-
+  //crear nuevo cliente//
   const CrearUsu = async () => {
     const { value: formValues } = await Swal.fire({
-      titleText: "Crear nuevo Usuario :\n",
+      titleText: "Crear nuevo Cliente :\n",
       iconColor: "#447AD3",
       icon: "info",
       color: "#447AD3",
@@ -42,16 +44,16 @@ const profileStatus = profile.status;
       cancelButtonColor: "#dc3545",
       background: "white",
       footer:
-        "<center><b>¡¡RECUERDA!!</b><br>Tipo Activo es para usuario Administrador Desactivado es para usuario Gestor</center>",
+        "<center>¡¡RECUERDE!!<br/> El estado Activo para  nuevo cliente y   Desactivado para  eliminar <br></center>",
+
       html:
-        '<input id="swal-input1" class="swal2-input" placeholder="Nombre">' +
-        '<input id="swal-input2" class="swal2-input" placeholder="Apellido">' +
-        '<input id="swal-input3" class="swal2-input" placeholder="Cedula">' +
-        '<input id="swal-input4" class="swal2-input" placeholder="Celular">' +
-        '<input id="swal-input5" class="swal2-input" placeholder="Correo Electronico">' +
-        '<input id="swal-input6" class="swal2-input" placeholder="Contraseña">' +
-        '<input id="swal-input7" class="swal2-input" placeholder="Tipo">' +
-        '<input id="swal-input8" class="swal2-input" placeholder="Estado">',
+        '<input id="swal-input1" class="swal2-input" placeholder="Nuevo Nombre">' +
+        '<input id="swal-input2" class="swal2-input" placeholder="Nuevo Apellido">' +
+        '<input id="swal-input3" class="swal2-input" placeholder="Nueva Cedula">' +
+        '<input id="swal-input4" class="swal2-input" placeholder="Nuevo Correo Electronico">' +
+        '<input id="swal-input5" class="swal2-input" placeholder="Nuevo Celular">' +
+        '<input id="swal-input6" class="swal2-input" placeholder="Nuevo Estatus">',
+        
 
       focusConfirm: false,
       preConfirm: () => {
@@ -62,17 +64,17 @@ const profileStatus = profile.status;
           document.getElementById("swal-input4").value,
           document.getElementById("swal-input5").value,
           document.getElementById("swal-input6").value,
-          document.getElementById("swal-input7").value,
-          document.getElementById("swal-input8").value,
+          
         ];
       },
     });
 
     if (formValues) {
-   
-        //peticion al back-end//
-      const resultado = await axios.post("/CrearUsu", {
+      Swal.fire(JSON.stringify(formValues));
+
+      const resultado = await axios.post("/newClient", {
         datos: formValues,
+        creador:profile.id,
       });
 
       console.log(resultado);
@@ -81,34 +83,32 @@ const profileStatus = profile.status;
 
     return (
       <>
-        <NavbarLinks page="usuarios" typeUser={profileStatus}/>
+
+        <NavbarLinks page='clientes' typeUser={profileStatus}/>
 
         
         <div id="search" className="pt-2">
         <nav className="navbar bg-body-tertiary">
   <div className="container-fluid">
     <form className="d-flex" role="search">
-      <input className="form-control me-2" type="search" placeholder="Buscar Usuario" aria-label="Buscar"/>
+      <input className="form-control me-2" type="search" placeholder="Buscar Cliente" aria-label="Buscar"/>
       <button className=" btn btn-success" type="submit">Filtrar</button>
     </form>
   </div>
 </nav>
         </div>
-      
+        
 
         <div id="container-users">
           <div id="list-users">
-            <TableList ente="usuario"/>
+            <TableList ente="cliente"/>
           </div>
 
-          
           <div id="downPartUserList">
             <div id="smallMenu">
               <BsFillChatSquareFill />
+
               <BsBookFill />
-
-
-
             </div>
             <a
               type="button"
@@ -119,6 +119,7 @@ const profileStatus = profile.status;
             >
               Crear Usuario
             </a>
+
             <nav aria-label="Page navigation align-self-center ">
               <ul className="pagination  ">
                 <li className="page-item disabled">

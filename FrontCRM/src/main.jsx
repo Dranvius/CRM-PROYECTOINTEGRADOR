@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 
-
 import {ListsContextProvider} from './context/ListsContext';
 import {App} from './App';
 

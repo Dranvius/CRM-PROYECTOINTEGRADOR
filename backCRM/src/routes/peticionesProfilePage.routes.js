@@ -21,4 +21,6 @@ profile.post("/cambiarNombre", verificador, changeName);
 
 profile.post("/cambiarContrasena", verificador, changePassword);
 
+
+
 export default profile;

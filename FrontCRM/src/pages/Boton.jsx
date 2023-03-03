@@ -15,14 +15,13 @@ const element2 = <FontAwesomeIcon icon={faThumbsUp} />;
 export function Boton() {
   const setToken = useAuthStore((state) => state.setToken);
   const setUser = useAuthStore((state) => state.setUser);
+  
   const navigate = useNavigate();
   const [icon, setIcon] = useState(element2);
   const ContextoObjetos = useContext(ListsContext);
 
   const trigger = async (e) => {
     e.preventDefault();
-
-    
 
     const user = e.target[0].value;
     const password = e.target[1].value;
@@ -34,7 +33,13 @@ export function Boton() {
       check,
     });
 
-    setToken(peticion.data.token);
+      setToken(peticion.data.token); //!Respuesta peticiòn 30
+
+    console.table({
+      user,
+      password,
+      check
+    })
 
     const peticion2 = await axios.get("/login", {
       user,
@@ -42,7 +47,7 @@ export function Boton() {
       check,
     });
 
-    setUser(peticion2.data);
+    setUser(peticion2.data); //!Datos del usuario de manera local
 
     navigate("/profile");
   };
@@ -101,6 +106,7 @@ export function Boton() {
                 <span id="span2"></span>
                 <span id="span3"></span>
                 <span id="span4"></span>
+                
                 <div
                   id="icono"
                   onMouseOver={() => {

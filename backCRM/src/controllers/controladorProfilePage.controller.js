@@ -25,7 +25,7 @@ const modificarNombre = async (dats) => {
 
 export const changeName = (req, res) => {
   console.log("Peticion de cambio de nombre");
-
+  res.send("Nombre cambiado");
   try {
     modificarNombre(req.body);
     res.send("Operación realizada");
@@ -59,6 +59,7 @@ const modificarContraseña = async (dats) => {
 export const changePassword = (req, res) => {
   console.log("Peticion de cambio de contraseña");
 
+  res.send("Nombre cambiado");
   try {
     modificarContraseña(req.body);
     res.send("Operación realizada");

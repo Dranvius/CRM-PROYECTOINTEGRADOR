@@ -50,9 +50,9 @@ export function ProfilePage() {
 
     if (formValues) {
       try {
-        formValues.push(profile.email)
-        console.log(formValues)
-        const peticion = await axios.post("/cambiarNombre",formValues);
+        formValues.push(profile.email);
+        console.log(formValues);
+        const peticion = await axios.post("/cambiarNombre", formValues);
 
         Swal.fire({
           icon: "success",
@@ -75,15 +75,12 @@ export function ProfilePage() {
           icon: "error",
         });
       }
-
-      
     }
   };
 
   const cambioContraseña = async () => {
     const { value: formValues } = await Swal.fire({
-      
-      titleText: "Cambio Contraseña", 
+      titleText: "Cambio Contraseña",
       iconColor: "blue",
       icon: "question",
       color: "black",
@@ -94,23 +91,19 @@ export function ProfilePage() {
       cancelButtonText: "Cancelar",
       cancelButtonColor: "red",
       background: "white",
-      footer:
-        "<center><b>RECUERDA</b><br>Recordar la contraseña</center>",
-      html:
-        '<input id="swal-input1" class="swal2-input" placeholder="Nuevo Contarseña">',
+      footer: "<center><b>RECUERDA</b><br>Recordar la contraseña</center>",
+      html: '<input id="swal-input1" class="swal2-input" placeholder="Nuevo Contarseña">',
       focusConfirm: false,
       preConfirm: () => {
-        return [
-          document.getElementById("swal-input1").value,
-        ];
+        return [document.getElementById("swal-input1").value];
       },
     });
 
     if (formValues) {
       try {
-        formValues.push(profile.email)
-        console.log(formValues)
-        const peticion = await axios.post("/cambiarContrasena",formValues);
+        formValues.push(profile.email);
+        console.log(formValues);
+        const peticion = await axios.post("/cambiarContrasena", formValues);
 
         Swal.fire({
           icon: "success",
@@ -119,8 +112,6 @@ export function ProfilePage() {
         });
 
         navigate("/profile");
-
-        
       } catch (error) {
         console.log(error);
 
@@ -133,32 +124,36 @@ export function ProfilePage() {
           icon: "error",
         });
       }
-
-      
     }
   };
 
   const Name = profile.name;
   const Pic = "https://robohash.org/" + Name;
 
+  console.log(profile);
+
+  const profileStatus = profile.status;
+
   return (
     <div>
-      <NavbarLinks />
+      <NavbarLinks page="profile" typeUser={profileStatus} />
 
       <div id="container-General">
         <div id="left-area">
           <div id="saludo">BUEN DÍA</div>
 
-          <div id="nombre">
-            {profile.name.toUpperCase()} {profile.lastName.toUpperCase()}
+          <div id="photo">
+            <img
+              src="../src/img/logoB.png"
+              width="150px"
+              height="150px"
+              alt="ProfilePhoto"
+              id="foto-profile"
+            />
           </div>
 
-          <div id="descripcion">
-            <h2 id="perfil-text">PERFIL</h2>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat unde
-            commodi soluta accusamus possimus quas harum eos ipsam, eum,
-            pariatur cumque, aperiam odio id suscipit iusto minus consequuntur
-            quia atque.
+          <div id="nombre">
+            {profile.name.toUpperCase()} {profile.lastName.toUpperCase()}
           </div>
 
           <div id="list-action">
@@ -167,16 +162,20 @@ export function ProfilePage() {
               onClick={() => {
                 cambioName();
                 navigate("/profile");
-              }
-              }
+              }}
               role="button"
             >
               Cambiar Nombre
             </a>
-            <a className="btn btn-outline-light" onClick={ () =>{
-              cambioContraseña();
-              navigate("/profile");
-            }} role="button">
+
+            <a
+              className="btn btn-outline-light"
+              onClick={() => {
+                cambioContraseña();
+                navigate("/profile");
+              }}
+              role="button"
+            >
               Cambiar Contraseña
             </a>
             <a className="btn btn-outline-light" href="#" role="button">
@@ -195,48 +194,150 @@ export function ProfilePage() {
         </div>
 
         <div id="rigth-area">
-          <img id="profile-pic" src={Pic} />
+          <table className="table table-striped table-dark table-hover">
+            <thead>
+              <tr>
+                <th scope="col">Fecha</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Encabezado</th>
+                <th scope="col">#</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                onMouseOver={() => {
+                  console.log("Hola");
+                }}
+                onMouseOut={() => {
+                  console.log("Adios");
+                }}
+              >
+                <td>21/02/2023</td>
+                <td>Bienvenido al software</td>
+                <td>Saludos</td>
+                <th scope="row">1</th>
+              </tr>
+              <tr
+                onMouseOver={() => {
+                  console.log("Hola");
+                }}
+                onMouseOut={() => {
+                  console.log("Adios");
+                }}
+              >
+                <td>21/02/2023</td>
+                <td>Bienvenido al software</td>
+                <td>Saludos</td>
+                <th scope="row">1</th>
+              </tr>
+              <tr
+                onMouseOver={() => {
+                  console.log("Hola");
+                }}
+                onMouseOut={() => {
+                  console.log("Adios");
+                }}
+              >
+                <td>21/02/2023</td>
+                <td>Bienvenido al software</td>
+                <td>Saludos</td>
+                <th scope="row">1</th>
+              </tr>
+              <tr
+                onMouseOver={() => {
+                  console.log("Hola");
+                }}
+                onMouseOut={() => {
+                  console.log("Adios");
+                }}
+              >
+                <td>21/02/2023</td>
+                <td>Bienvenido al software</td>
+                <td>Saludos</td>
+                <th scope="row">1</th>
+              </tr>
+              <tr
+                onMouseOver={() => {
+                  console.log("Hola");
+                }}
+                onMouseOut={() => {
+                  console.log("Adios");
+                }}
+              >
+                <td>21/02/2023</td>
+                <td>Bienvenido al software</td>
+                <td>Saludos</td>
+                <th scope="row">1</th>
+              </tr>
+              <tr
+                onMouseOver={() => {
+                  console.log("Hola");
+                }}
+                onMouseOut={() => {
+                  console.log("Adios");
+                }}
+              >
+                <td>21/02/2023</td>
+                <td>Bienvenido al software</td>
+                <td>Saludos</td>
+                <th scope="row">1</th>
+              </tr>
+              <tr
+                onMouseOver={() => {
+                  console.log("Hola");
+                }}
+                onMouseOut={() => {
+                  console.log("Adios");
+                }}
+              >
+                <td>21/02/2023</td>
+                <td>Bienvenido al software</td>
+                <td>Saludos</td>
+                <th scope="row">1</th>
+              </tr>
+              <tr
+                onMouseOver={() => {
+                  console.log("Hola");
+                }}
+                onMouseOut={() => {
+                  console.log("Adios");
+                }}
+              >
+                <td>21/02/2023</td>
+                <td>Bienvenido al software</td>
+                <td>Saludos</td>
+                <th scope="row">1</th>
+              </tr>
+              <tr
+                onMouseOver={() => {
+                  console.log("Hola");
+                }}
+                onMouseOut={() => {
+                  console.log("Adios");
+                }}
+              >
+                <td>21/02/2023</td>
+                <td>Bienvenido al software</td>
+                <td>Saludos</td>
+                <th scope="row">1</th>
+              </tr>
+              <tr
+                onMouseOver={() => {
+                  console.log("Hola");
+                }}
+                onMouseOut={() => {
+                  console.log("Adios");
+                }}
+              >
+                <td>21/02/2023</td>
+                <td>Bienvenido al software</td>
+                <td>Saludos</td>
+                <th scope="row">1</th>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
-
-      {/* <div id="container-profile-page">
-        <div id="menu-lateral">
-          <div>
-            <h6>Acciones de perfil</h6>
-          </div>
-          <div id="Botones-Menu-Usuario">
-          <button id='primer'>Cambiar Nombre</button>
-          <button id='segundo'>Cambiar Correo</button>
-          <button id='segundo'>Cambiar Telefono</button>
-          <button id='tercero'>Cambiar Contraseña</button>
-          </div>
-        </div>
-
-        <div id="userinfo">
-          <div id="top">
-            <img id="profile-pic" src={Pic}/>
-            <h2 id="saludo">BUEN DÍA : {profile.name.toUpperCase()} {profile.lastName.toUpperCase()} </h2>
-          </div>
-          <div id="listDats">
-            <h1>INFORMACIÓN : </h1>
-            <ol>
-              <li>
-                <p className="fw-bolder">Nombre : {profile.name}</p>
-              </li>
-              <li>
-                <p className="fw-bolder">Apellido : {profile.lastName}</p>
-              </li>
-              <li>
-                <p className="fw-bolder">Correo : {profile.email}</p>
-              </li>
-              <li>
-                <p className="fw-bolder">Telefono : {profile.tel}</p>
-              </li>
-            </ol>
-
-          </div>
-        </div>
-      </div>*/}
     </div>
   );
 }

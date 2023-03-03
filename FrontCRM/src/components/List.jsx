@@ -1,12 +1,8 @@
 import {NavbarLinks} from '../components/NavbarLinks';
 
-
+//EJMPLO SIN USAR//
 export function List() {
   //const ContextoVariableFuncional = useContext(ProyectoContext);
-
-
-
-
 
 
 
@@ -34,7 +30,7 @@ export function List() {
     return (
     <>
       
-      <NavbarLinks />
+      
 
       <div id='container-users'>
 
