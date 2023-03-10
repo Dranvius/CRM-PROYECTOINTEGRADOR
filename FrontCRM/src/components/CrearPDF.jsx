@@ -191,7 +191,7 @@ export function CrearPDF(props) {
                       document.getElementById("swal-input3").value,
                       document.getElementById("swal-input4").value,
                       document.getElementById("swal-input5").value,
-                      datosUsarioSeleccionado[0].id_client,
+                      datosUsarioSeleccionado[0].id_client, //!ID CLIENTE
                     ];
                   },
                 });
@@ -247,6 +247,8 @@ export function CrearPDF(props) {
 
                       console.log(!check.some((valor) => valor === true));
                       
+                      //!Pimera condición de la lista de productos
+                      
                       if (!check.some((valor) => valor === true)) {
                         console.log("no hay productos seleccionados");
                         Swal.close();
@@ -255,6 +257,9 @@ export function CrearPDF(props) {
                           title:
                             "Error en el proceso\nDebes checkear por lo menos un producto",
                         });
+                        
+                      //!Pimera condición de la lista de productos
+
                       } else if (!nulos.some((valor) => valor > 0)) {
                         console.log("no hay numeros positivos");
                         Swal.close();
@@ -263,6 +268,7 @@ export function CrearPDF(props) {
                           title:
                             "Error en el proceso\nNo pueden existir cantidades negativos o 0!",
                         });
+
                       } else {
                         let ProductosSeleccionados = [];
 
@@ -289,16 +295,16 @@ export function CrearPDF(props) {
                       }
                     },
                   });
-                    
-                  console.log(productosEscogidos);
+
 
                   const peticionPdf = await axios.post("/construccionPDF", {
                     cliente: informacionCliente,
                     productos: productosEscogidos,
                     usuarioCreador: profile,
                   });
-
+                  console.log("Petición realizada");
                   console.log(peticionPdf);
+                  
                 }
               }
             } else {

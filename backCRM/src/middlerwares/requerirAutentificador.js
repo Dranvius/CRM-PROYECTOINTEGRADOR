@@ -5,6 +5,8 @@ import { ConfiguracionA } from "../database/config.js";
 const pool = new pg.Pool(ConfiguracionA);
 
 export const verificador = (req, res, next) => {
+
+  //!AUTOMATICO
   const autorizacion = req.headers.authorization; //!Header con el Token
 
   if (!autorizacion) {

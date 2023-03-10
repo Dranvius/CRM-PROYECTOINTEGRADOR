@@ -25,26 +25,20 @@ export function Boton() {
 
     const user = e.target[0].value;
     const password = e.target[1].value;
-    const check = e.target[2].value;
+    
 
     const peticion = await axios.post("/login", {
       user,
       password,
-      check,
     });
 
       setToken(peticion.data.token); //!Respuesta peticiòn 30
 
-    console.table({
-      user,
-      password,
-      check
-    })
+
 
     const peticion2 = await axios.get("/login", {
       user,
       password,
-      check,
     });
 
     setUser(peticion2.data); //!Datos del usuario de manera local
@@ -85,19 +79,6 @@ export function Boton() {
                 className="form-control"
                 id="exampleInputPassword1"
               />
-            </div>
-            <div className="mb-3 form-check">
-              <input
-                type="checkbox"
-                className="form-check-input "
-                id="exampleCheck1"
-              />
-              <label
-                className="form-check-label text-light"
-                htmlFor="exampleCheck1"
-              >
-                ¡Recuerdame!
-              </label>
             </div>
 
             <div id="boton">

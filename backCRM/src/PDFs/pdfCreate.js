@@ -1,5 +1,9 @@
 import fs from "fs";
 import { pathToFileURL } from "url";
+
+//import * as fonts from 'pdfmake/build/vfs_fonts.js';
+
+
 export var fonts = {
   Courier: {
     normal: "Courier",
@@ -19,6 +23,12 @@ export var fonts = {
     italics: "Times-Italic",
     bolditalics: "Times-BoldItalic",
   },
+Roboto: {
+  normal: 'Roboto-Regular.ttf',
+  bold: 'Roboto-Medium.ttf',
+  italics: 'Roboto-Italic.ttf',
+  bolditalics: 'Roboto-MediumItalic.ttf'
+},
   Symbol: {
     normal: "Symbol",
   },
@@ -211,7 +221,7 @@ export const llenadoPDF = (datosCliente, datosProducto, datosUsuario) => {
       },
     ],
     defaultStyle: {
-      font: "Helvetica",
+      fonts: "Helvetica",
     },
     styles: {
       header: {
