@@ -2,8 +2,8 @@ import axios from "../lib/axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShare } from "@fortawesome/free-solid-svg-icons";
 import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
-import { useContext } from "react";
-import { ListsContext } from "../context/ListsContext";
+// import { useContext } from "react";
+// import { ListsContext } from "../context/ListsContext";
 import { useState } from "react";
 import { useAuthStore } from "../storage/globalStorage.js"; 
 import { useNavigate } from "react-router-dom";
@@ -18,7 +18,7 @@ export function Boton() {
   
   const navigate = useNavigate();
   const [icon, setIcon] = useState(element2);
-  const ContextoObjetos = useContext(ListsContext);
+  //const ContextoObjetos = useContext(ListsContext);
 
   const trigger = async (e) => {
     e.preventDefault();

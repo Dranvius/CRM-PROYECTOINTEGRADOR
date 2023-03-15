@@ -23,12 +23,12 @@ export var fonts = {
     italics: "Times-Italic",
     bolditalics: "Times-BoldItalic",
   },
-Roboto: {
-  normal: 'Roboto-Regular.ttf',
-  bold: 'Roboto-Medium.ttf',
-  italics: 'Roboto-Italic.ttf',
-  bolditalics: 'Roboto-MediumItalic.ttf'
-},
+  Roboto: {
+    normal: 'Roboto-Regular.ttf',
+    bold: 'Roboto-Medium.ttf',
+    italics: 'Roboto-Italic.ttf',
+    bolditalics: 'Roboto-MediumItalic.ttf'
+  },
   Symbol: {
     normal: "Symbol",
   },
@@ -55,31 +55,31 @@ export const llenadoPDF = (datosCliente, datosProducto, datosUsuario) => {
 
     let primerParte = (parseInt(valor.price) * parseInt(valor.discount.slice(0, -1))) / 100
 
-  
+
 
     let segundaParte = primerParte * parseInt(valor.cantidad)
 
-  
+
 
     let partetrestpuntocero = parseInt(valor.cantidad) * parseInt(valor.price);
 
-   
+
 
     let terceraParte = partetrestpuntocero - segundaParte;
 
-        
+
     precios.push(terceraParte)
-    
-    productName = productName +  valor.nameproduct + " " + productDescripcion + valor.description + "\n\n";
+
+    productName = productName + valor.nameproduct + " " + productDescripcion + valor.description + "\n\n";
     productocantidad = productocantidad + valor.id_product + "\n\n";
     productCantidad = productCantidad + valor.cantidad + "\n\n";
-    productPrice = productPrice +terceraParte+ "\n\n";
+    productPrice = productPrice + terceraParte + "\n\n";
 
   });
 
   let subTotal = 0;
 
-  precios.map((value) => subTotal = subTotal +value)
+  precios.map((value) => subTotal = subTotal + value)
 
   const Total = subTotal + ((subTotal * 19) / 100);
 
@@ -113,10 +113,10 @@ export const llenadoPDF = (datosCliente, datosProducto, datosUsuario) => {
         style: ["subheader"],
         ul: [
           "Nombre Cliente : " +
-            datosCliente[0] +
-            " " +
-            datosCliente[1] +
-            "\n\n",
+          datosCliente[0] +
+          " " +
+          datosCliente[1] +
+          "\n\n",
           "Telefono Cliente : " + datosCliente[4] + "\n\n",
           "Cédula Cliente : " + datosCliente[2] + "\n\n",
           "Correo Cliente: " + datosCliente[3] + "\n\n",
@@ -155,7 +155,7 @@ export const llenadoPDF = (datosCliente, datosProducto, datosUsuario) => {
         style: "tableExample",
         table: {
           widths: [420, 100],
-          heights: ["auto","auto","auto"],
+          heights: ["auto", "auto", "auto"],
           style: ["resultTable"],
           body: [[{
             text: "Sub - Total",
@@ -181,9 +181,9 @@ export const llenadoPDF = (datosCliente, datosProducto, datosUsuario) => {
             alignment: "right",
             border: [false, false, false, false]
           }, Total]
-        ],
-          
-          
+          ],
+
+
         },
       },
       {
@@ -217,7 +217,7 @@ export const llenadoPDF = (datosCliente, datosProducto, datosUsuario) => {
         color: "black",
         width: 1,
         alignment: "left",
-        
+
       },
     ],
     defaultStyle: {
@@ -233,8 +233,8 @@ export const llenadoPDF = (datosCliente, datosProducto, datosUsuario) => {
         bold: true,
         alignment: 'right',
         border: [false, false, false, false],
-       
-    },
+
+      },
       subheader: {
         fontSize: 10,
         bold: false,
@@ -248,5 +248,5 @@ export const llenadoPDF = (datosCliente, datosProducto, datosUsuario) => {
     },
   };
 
-  return {pdf:docDefinition,resultado:Total};
+  return { pdf: docDefinition, resultado: Total };
 };

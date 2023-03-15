@@ -1,17 +1,26 @@
 import React from "react";
+//!Herramientas para hacer rutas en funciòn del componenet APP
 import { useNavigate } from "react-router-dom";
-import { useAuthStore } from "../storage/globalStorage";
 import { Link } from "react-router-dom";
+
+//! Estado global del cambio del usuario
+import { useAuthStore } from "../storage/globalStorage";
+
 
 //parte superior pagina//
 export function NavbarLinks({ page, typeUser }) {
 
+  //!Uso de zustand
   const logout = useAuthStore((state) => state.logout);
+  //!Navigate
+    //*Navegaciòn component
+      //!Tener presente APP  
   const navigate = useNavigate();
 
-  console.log(typeUser);
-
+  //*Manejo de condiciones props para devolver el componente
+    //*En funciòn del ususario y de la pagina accedida
   if (typeUser == false) {
+
     return (
       <>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark ">
@@ -104,7 +113,7 @@ export function NavbarLinks({ page, typeUser }) {
             </div>
 
             <button
-              className="navbar-text"
+              className="navbar-text,borderColor:black"
               onClick={() => {
                 logout();
                 navigate("/");

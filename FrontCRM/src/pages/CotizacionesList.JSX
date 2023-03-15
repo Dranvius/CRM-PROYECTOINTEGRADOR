@@ -1,17 +1,13 @@
 import { NavbarLinks } from "../components/NavbarLinks";
 
 //Botones toaster
-import Swal from "sweetalert2";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import { faComment } from "@fortawesome/free-solid-svg-icons";
 
-import { FaBeer } from "react-icons/fa";
 import { BsFillChatSquareFill } from "react-icons/bs";
 import { BsBookFill } from "react-icons/bs";
 
-const element = <FontAwesomeIcon icon={faComment} />;
+//const element = <FontAwesomeIcon icon={faComment} />;
 
 import { TableList } from "../components/TableList";
 import { CrearPDF } from "../components/CrearPDF";
@@ -21,7 +17,7 @@ import { useAuthStore } from "../storage/globalStorage.js";
 export function CotizacionesList() {
   const profile = useAuthStore((state) => state.user);
   const profileStatus = profile.status;
-  console.log("Estado cliente" + profileStatus);
+  
 
   return (
     <>

@@ -1,6 +1,4 @@
 import { createContext } from "react";
-import img from '../img/logo.png'
-import { useState, useEffect } from "react";
 import Axios from '../lib/axios'
 //!Exportaciones
 
@@ -17,7 +15,7 @@ async function datosListUsuario (){
 
       return peticion.data;
   } catch (error) {
-      console.error(error)
+      
   }
 }
 
@@ -28,7 +26,7 @@ async function datosListCliente (){
 
       return peticion.data;
   } catch (error) {
-      console.error(error)
+      
   }
 }
 
@@ -39,7 +37,7 @@ async function datosListProducto (){
 
       return peticion.data;
   } catch (error) {
-      console.error(error)
+   
   }
 }
 
@@ -48,11 +46,11 @@ async function datosListCotizacion (){
   try {
       const peticion = await Axios.get('/quotationDats'); //SELECTS
 
-      console.log(peticion);
+      
 
       return peticion.data;
   } catch (error) {
-      console.error(error)
+      
   }
 }
 
@@ -64,7 +62,7 @@ async function datosClienteOrden() {
 
     return peticion.data;
   } catch (error) {
-    console.error(error);
+    
   }
 }
 
@@ -73,8 +71,7 @@ async function datosProductos() {
     const peticion = await Axios.get("/datosproductos");
     return peticion.data;
   } catch (error) {
-    console.log("Error en la peticion en base de datos");
-    console.error(error);
+    
   }
 }
 

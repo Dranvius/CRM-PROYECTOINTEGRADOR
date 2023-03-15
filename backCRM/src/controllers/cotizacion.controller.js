@@ -9,7 +9,7 @@ import { ConfiguracionA } from "../database/config.js";
 //!Modulo para crear Documentos o manej de archivos
 import fs from "fs";
 //! fonts para el pdf
-import {llenadoPDF } from "../PDFs/pdfCreate.js";
+import { llenadoPDF } from "../PDFs/pdfCreate.js";
 //!PATH
 import path from "path";
 //!NODEMAILER
@@ -33,8 +33,7 @@ const BDatosUsarioSeleccionado = async (datos) => {
 
     return res1;
   } catch (error) {
-    console.log("Error en la petición");
-    console.error(error);
+
   }
 };
 
@@ -43,8 +42,7 @@ export const ReqDatosUsuaruioSeleccionado = async (req, res) => {
     const peticion = await BDatosUsarioSeleccionado(req.body);
     res.json(peticion.rows);
   } catch (error) {
-    console.log("Error en la ruta");
-    console.error(error);
+
   }
 };
 
@@ -61,8 +59,7 @@ const dataClient = async (clienteName) => {
 
     return peticion.rows[0];
   } catch (error) {
-    console.log(error);
-    console.error(error);
+
   }
 };
 
@@ -75,7 +72,7 @@ const llenadoTablaCotizacion = async (
   productos
 ) => {
   try {
-    
+
     //!Ingresar en SENT_QUOTATION ENVIAR AUTOMATICAMENTE
     const queryText1 =
       "INSERT INTO sent_quotation(nombre_usuario,nomb_cli_coti) VALUES($1,$2)";
@@ -83,12 +80,11 @@ const llenadoTablaCotizacion = async (
     const datosSendCotizacion = [nombreUsuario.name, nombreCliente[0]];
     const peticionSend = await pool.query(queryText1, datosSendCotizacion);
 
-    console.log("Send cotizacion");
-    console.log(peticionSend);
+
 
     //!LLENADO EN LA TABLA QUOTATION
 
-    const queryText0 ="INSERT INTO quotation(valor_total,cliente_coti) VALUES($1,$2)";
+    const queryText0 = "INSERT INTO quotation(valor_total,cliente_coti) VALUES($1,$2)";
 
     const datosCotizacion = [total, id];
     const peticionCliente = await pool.query(queryText0, datosCotizacion);
@@ -112,8 +108,7 @@ const llenadoTablaCotizacion = async (
 
     return "TABLAS LLENADAS";
   } catch (error) {
-    console.log(error);
-    console.error(error);
+
   }
 };
 
@@ -137,46 +132,46 @@ export const generarPDF = async (req, res) => {
 
     //!Creador de transport para enviar mensajes (Configuración especial de windows)
 
-  const transporter = nodemailer.createTransport({
-    host:"smtp.gmail.com",
-    port:465,
-    secure: true,
-    auth: {
-      user: "linaresmodulareslm@gmail.com",
-      pass: "cuglrkxinfwxtwfw",
-    },
-  });
+    const transporter = nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true,
+      auth: {
+        user: "linaresmodulareslm@gmail.com",
+        pass: "cuglrkxinfwxtwfw",
+      },
+    });
 
     //!Donde se realiza la petición para la creación del documento.
-      //?Acá es donde debo realizar el envio de la correo.
+    //?Acá es donde debo realizar el envio de la correo.
 
     //var pdfDoc = printer.createPdfKitDocument(datosPDF.pdf);
-    
-    const pdfDoc =  pdfMake.createPdf(datosPDF.pdf,null,null,pdfFonts.pdfMake.vfs);
-   
+
+    const pdfDoc = pdfMake.createPdf(datosPDF.pdf, null, null, pdfFonts.pdfMake.vfs);
+
 
     pdfDoc.getBuffer((buffer) => {
-       //! Datos de envio
+      //! Datos de envio
 
 
       let message = {
-        to:'dranvius12@hotmail.com',
+        to: 'dranvius12@hotmail.com',
         subject: 'Cotización de los productos solicitado',
         text: 'Espero tenga un buen día. Comparto con usted la cotización de los productos solicitados',
         attachments: [
-        //!Ligar el documento al mensaje Enviando
+          //!Ligar el documento al mensaje Enviando
           {
             filename: 'archivo.pdf',
             content: buffer,
           },
         ],
       };
-      
+
       transporter.sendMail(message, (err, info) => {
         if (err) {
-          console.log(err);
+
         } else {
-          console.log(info);
+
         }
       });
     });
@@ -204,21 +199,21 @@ export const generarPDF = async (req, res) => {
       // let segundaParte = (((parseInt(valor.price) * parseInt(valor.discount.slice(0, -1))) / 100) * parseInt(valor.cantidad));
       // let partetrestpuntocero =parseInt(valor.cantidad) * parseInt(valor.price);
 
-      
+
 
       let terceraParte =
         parseInt(valor.cantidad) * parseInt(valor.price) -
         ((parseInt(valor.price) * parseInt(valor.discount.slice(0, -1))) /
           100) *
-          parseInt(valor.cantidad);
+        parseInt(valor.cantidad);
 
-      console.log(terceraParte);
+
 
       precios.push(terceraParte);
     });
 
     let subTotal = 0;
-    console.log(precios);
+
     precios.map((value) => (subTotal = subTotal + value));
     const Total = subTotal + (subTotal * 19) / 100;
 
@@ -231,7 +226,7 @@ export const generarPDF = async (req, res) => {
       req.body.productos
     );
 
-    console.log(finalProceso);
+
 
     res.json({
       valorTotal: Total,
@@ -241,8 +236,7 @@ export const generarPDF = async (req, res) => {
       datosCliente: req.body.cliente,
     });
   } catch (error) {
-    console.log("Error en la ruta");
-    console.error(error);
+
   }
 };
 
@@ -256,8 +250,7 @@ const dataCotizacion = async () => {
 
     return peticion.rows;
   } catch (error) {
-    console.log(error);
-    console.error(error);
+
   }
 };
 
@@ -267,7 +260,6 @@ export const enviarDatosCotizaciones = async (req, res) => {
 
     res.json(peticion);
   } catch (error) {
-    console.log("Error en la ruta");
-    console.error(error);
+
   }
 };

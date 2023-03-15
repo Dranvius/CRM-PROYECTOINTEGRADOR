@@ -1,21 +1,18 @@
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../storage/globalStorage";
 import { NavbarLinks } from "../components/NavbarLinks";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { useState } from "react";
 import axios from "../lib/axios";
-import { useState } from "react";
+
 import Swal from "sweetalert2";
 
 export function ProfilePage() {
   const profile = useAuthStore((state) => state.user);
   const navigate = useNavigate();
-  const [img, setImg] = useState("");
-  const [valores, setValores] = useState("");
+  // const [img, setImg] = useState("");
+  // const [valores, setValores] = useState("");
 
-  // const traerElemento = async (){
-  //   const valores = await Axios.get('',{})
-
-  // }
   const cambioName = async () => {
     const { value: formValues } = await Swal.fire({
       title: "Cambio Nombre",
@@ -51,7 +48,7 @@ export function ProfilePage() {
     if (formValues) {
       try {
         formValues.push(profile.email);
-        console.log(formValues);
+        
         const peticion = await axios.post("/cambiarNombre", formValues);
 
         Swal.fire({
@@ -59,13 +56,8 @@ export function ProfilePage() {
           title: "Finalizado con exito",
           confirmButtonColor: "green",
         });
-
         navigate("/profile");
-
-        console.log(peticion);
       } catch (error) {
-        console.log(error);
-
         Swal.fire({
           title: "ALGO SALIO MAL",
           confirmButtonColor: "red",
@@ -102,7 +94,7 @@ export function ProfilePage() {
     if (formValues) {
       try {
         formValues.push(profile.email);
-        console.log(formValues);
+       
         const peticion = await axios.post("/cambiarContrasena", formValues);
 
         Swal.fire({
@@ -113,7 +105,7 @@ export function ProfilePage() {
 
         navigate("/profile");
       } catch (error) {
-        console.log(error);
+        console.error(error);
 
         Swal.fire({
           title: "ALGO SALIO MAL",
@@ -130,7 +122,7 @@ export function ProfilePage() {
   const Name = profile.name;
   const Pic = "https://robohash.org/" + Name;
 
-  console.log(profile);
+ 
 
   const profileStatus = profile.status;
 

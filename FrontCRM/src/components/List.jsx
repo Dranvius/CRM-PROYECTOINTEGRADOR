@@ -1,10 +1,6 @@
-import {NavbarLinks} from '../components/NavbarLinks';
-
 //EJMPLO SIN USAR//
 export function List() {
   //const ContextoVariableFuncional = useContext(ProyectoContext);
-
-
 
   const usuarios = [
     
@@ -20,9 +16,7 @@ export function List() {
     nombre:"Nappy",
     apellido:"blanco"
   }
-
 ]
-
 
   if (usuarios.length === 0) {
     return <h1>No hay tareas</h1>;
@@ -47,19 +41,8 @@ export function List() {
         ))
         }
 
-
-  {/* <li class="list-group-item">Cras justo odio <button>eliminar</button> </li> */}
-
         </ul>
 
-
-        {/* {usuarios.map((objeto, i) => (
-          <div key={i}>
-            <h1>{objeto.nombre}</h1>
-            <h1>{objeto.apellido}</h1>
-          </div>
-        ))
-        } */}
         </div>
 
       </div>

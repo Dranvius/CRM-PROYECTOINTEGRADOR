@@ -24,7 +24,7 @@ export const verificador = (req, res, next) => {
     });
   }
 
-  
+
 
   try {
     jwt.verify(autorizacion, process.env.JWT_SECRET, async (err, user) => {
@@ -59,14 +59,13 @@ export const verificador = (req, res, next) => {
           next();
         }
       } catch (error) {
-        console.error(error);
+
         return res.status(401).json({
           message: "No autorizado_4",
         });
       }
     });
   } catch (error) {
-    console.error("Error en requerirAutentificador");
-    console.error(error);
+
   }
 };

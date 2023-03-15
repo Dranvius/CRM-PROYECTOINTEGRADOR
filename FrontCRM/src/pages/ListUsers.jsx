@@ -1,32 +1,26 @@
 import { NavbarLinks } from "../components/NavbarLinks";
-import  axios  from "../lib/axios";
-
+import axios from "../lib/axios";
 //Botones toaster
 import Swal from "sweetalert2";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import { faComment } from "@fortawesome/free-solid-svg-icons";
-
 import { FaBeer } from "react-icons/fa";
 import { BsFillChatSquareFill } from "react-icons/bs";
 import { BsBookFill } from "react-icons/bs";
-
-const element = <FontAwesomeIcon icon={faComment} />;
-
 import { TableList } from "../components/TableList";
-import { useAuthStore } from "../storage/globalStorage.js"; 
+import { useAuthStore } from "../storage/globalStorage.js";
+
+//const element = <FontAwesomeIcon icon={faComment} />;
+
+
 
 export function ListUsers(props) {
-  
-    const profile = useAuthStore((state) => state.user);
+
+  const profile = useAuthStore((state) => state.user);
 
 
-const profileStatus = profile.status;
-  console.log("Estado cliente"+profileStatus);
+  const profileStatus = profile.status;
 
-
-  console.log(props)
 
   const CrearUsu = async () => {
     const { value: formValues } = await Swal.fire({
@@ -69,87 +63,84 @@ const profileStatus = profile.status;
     });
 
     if (formValues) {
-   
-        //peticion al back-end//
+
+      //peticion al back-end//
       const resultado = await axios.post("/CrearUsu", {
         datos: formValues,
       });
-
-      console.log(resultado);
     }
   }
 
-    return (
-      <>
-        <NavbarLinks page="usuarios" typeUser={profileStatus}/>
+  return (
+    <>
+      <NavbarLinks page="usuarios" typeUser={profileStatus} />
 
-        
-        <div id="search" className="pt-2">
+
+      <div id="search" className="pt-2">
         <nav className="navbar bg-body-tertiary">
-  <div className="container-fluid">
-    <form className="d-flex" role="search">
-      <input className="form-control me-2" type="search" placeholder="Buscar Usuario" aria-label="Buscar"/>
-      <button className=" btn btn-success" type="submit">Filtrar</button>
-    </form>
-  </div>
-</nav>
-        </div>
-      
-
-        <div id="container-users">
-          <div id="list-users">
-            <TableList ente="usuario"/>
+          <div className="container-fluid">
+            <form className="d-flex" role="search">
+              <input className="form-control me-2" type="search" placeholder="Buscar Usuario" aria-label="Buscar" />
+              <button className=" btn btn-success" type="submit">Filtrar</button>
+            </form>
           </div>
-
-          
-          <div id="downPartUserList">
-            <div id="smallMenu">
-              <BsFillChatSquareFill />
-              <BsBookFill />
+        </nav>
+      </div>
 
 
-
-            </div>
-            <a
-              type="button"
-              className="btn btn-success"
-              onClick={() => {
-                CrearUsu();
-              }}
-            >
-              Crear Usuario
-            </a>
-            <nav aria-label="Page navigation align-self-center ">
-              <ul className="pagination  ">
-                <li className="page-item disabled">
-                  <a className="page-link" href="#" tabIndex="-1">
-                    Previous
-                  </a>
-                </li>
-                <li className="page-item">
-                  <a className="page-link" href="#">
-                    1
-                  </a>
-                </li>
-                <li className="page-item">
-                  <a className="page-link" href="#">
-                    2
-                  </a>
-                </li>
-                <li className="page-item">
-                  <a className="page-link" href="#">
-                    3
-                  </a>
-                </li>
-                <li className="page-item">
-                  <a className="page-link" href="#">
-                    Next
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
+      <div id="container-users">
+        <div id="list-users">
+          <TableList ente="usuario" />
         </div>
-      </>
-    );
+
+
+        <div id="downPartUserList">
+          <div id="smallMenu">
+            <BsFillChatSquareFill />
+            <BsBookFill />
+
+
+          </div>
+          <a
+            type="button"
+            className="btn btn-success"
+            onClick={() => {
+              CrearUsu();
+            }}
+          >
+            Crear Usuario
+          </a>
+          <nav aria-label="Page navigation align-self-center ">
+            <ul className="pagination  ">
+              <li className="page-item disabled">
+                <a className="page-link" href="#" tabIndex="-1">
+                  Previous
+                </a>
+              </li>
+              <li className="page-item">
+                <a className="page-link" href="#">
+                  1
+                </a>
+              </li>
+              <li className="page-item">
+                <a className="page-link" href="#">
+                  2
+                </a>
+              </li>
+              <li className="page-item">
+                <a className="page-link" href="#">
+                  3
+                </a>
+              </li>
+              <li className="page-item">
+                <a className="page-link" href="#">
+                  Next
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </>
+  );
 }

@@ -2,7 +2,7 @@
 import pg from "pg";
 import { ConfiguracionA } from "../database/config.js";
 
-import {encrypt} from "../helpers/encryptThem.js";
+import { encrypt } from "../helpers/encryptThem.js";
 
 const pool = new pg.Pool(ConfiguracionA);
 
@@ -18,7 +18,6 @@ const traerDatosUsers = async () => {
 
     return res1;
   } catch (error) {
-    console.log("Error en la peticiòn");
     console.error(error);
   }
 }
@@ -28,11 +27,8 @@ export const AllDats = async (req, res) => {
   try {
     const resBD = await traerDatosUsers();
 
-    console.log("Saludo desde los datos");
-
     res.json(resBD.rows);
   } catch (error) {
-    console.log("Error ruta");
     console.error(error);
   }
 }
@@ -42,16 +38,15 @@ export const AllDats = async (req, res) => {
 //!BD
 const eliminar = async (dats) => {
   try {
-    const queryText = "UPDATE usuario SET status = false where id_users = $1";
+    const queryText = "UPDATE usuario SET statusu = false where id_users = $1";
 
     const ar = [dats];
-    console.log(ar)
+
     const res1 = await pool.query(queryText, ar);
 
     return res1;
   } catch (error) {
-    console.log("Error en la peticiòn");
-    console.error(error);
+
   }
 };
 
@@ -61,7 +56,6 @@ export const EliminarUsario = async (req, res) => {
     const resBD = await eliminar(req.body.datos);
     res.send("Usario eleminado");
   } catch (error) {
-    console.log("Error ruta");
     console.error(error);
   }
 };
@@ -100,93 +94,64 @@ const editar = async (change) => {
 
     const res2 = await pool.query(queryText2, cambioUser);
   } catch (error) {
-    console.log("Error ruta");
-    console.error(error);
+
   }
 };
 
 //Ruta req y res en editicion de datos//
 export const EditarUsuario = async (req, res) => {
   try {
-    
+
     const resBD = await editar(req.body);
 
     res.send("Usario modificado");
   } catch (error) {
-    console.log("Error ruta");
-    console.error(error);
+
   }
 };
 
 
 //---CREAR USUARIO--//
- const CrearUsuBD = async (change) => {
+const CrearUsuBD = async (change) => {
   try {
     const querytext = "INSERT INTO personaldats (firstname , lastname , cc , numbercelphone) VALUES ($1,$2,$3,$4)";
-    console.log("entrada 1")
-    console.log(change);
 
     const creaUs = [
-        change.datos[0],
-        change.datos[1],
-        change.datos[2],
-        change.datos[3]
-      ];
-    
-    const querytext1= "INSERT INTO  usuario (email,pass,tipo,statusu) VALUES ( $1, $2, $3, $4)";
-    // console.log("entrada 2")
+      change.datos[0],
+      change.datos[1],
+      change.datos[2],
+      change.datos[3]
+    ];
 
+    const querytext1 = "INSERT INTO  usuario (email,pass,tipo,statusu) VALUES ( $1, $2, $3, $4)";
 
-    // console.time("INICIO")
-    // const passes= await encrypt(change.datos[5]);
-    // console.timeEnd("fIN")
-
-
-    // console.log("entrada 3")
-
-    // console.log(passes)
     const creaUsu2 = [
-
       change.datos[4],
       await encrypt(change.datos[5]),
-      change.datos[6]== "Activo" ? true : false, 
-      change.datos[7]== "Activo" ? true : false
+      change.datos[6] == "Activo" ? true : false,
+      change.datos[7] == "Activo" ? true : false
     ];
- 
 
-    const res2 = await pool.query(querytext1,creaUsu2);
-    console.log(res2)
-    console.table(creaUs)
-    console.table(creaUsu2)
-    
-    const res1 = await pool.query(querytext,creaUs);
-    console.log(res1)
-    console.table(creaUs)
-    console.table(creaUsu2)
-    console.log(change.datos[4]);
 
- 
+    const res2 = await pool.query(querytext1, creaUsu2);
 
- 
-
+    const res1 = await pool.query(querytext, creaUs);
 
 
     return 1;
   } catch (error) {
-    console.log("Error ruta");
     console.error(error);
   }
-  
+
 };
 
 //Ruta req y res crear de usuario//
-  export const CrearUsu= async (req, res) => {
+export const CrearUsu = async (req, res) => {
   try {
     const resBD = await CrearUsuBD(req.body);
-    res.send("Usario Creado" +resBD);
+    res.send("Usario Creado" + resBD);
   } catch (error) {
-    console.log("Error ruta");
     console.error(error);
   }
-  };
+};
 

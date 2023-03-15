@@ -160,7 +160,7 @@ export const dataC = {
 export function DashBoard() {
   const profile = useAuthStore((state) => state.user);
   const profileStatus = profile.status;
-  console.log("Estado cliente" + profileStatus);
+
 
   return (
     <>

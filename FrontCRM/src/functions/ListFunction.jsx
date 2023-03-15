@@ -1,19 +1,10 @@
-import { text } from "@fortawesome/fontawesome-svg-core";
 import Swal from "sweetalert2";
 
 import  axios  from "../lib/axios";
 
 export const ListFunction = ({prop,datos}) => {
-
-  console.log(prop);
-  console.log(datos);
-
 //listado de funciones para crear y eliminar//
-
-
   //Botones de Usuario //
-
-
     //EDITAR USUARIO//
 
   const editUser = async (indice) => {
@@ -48,8 +39,6 @@ export const ListFunction = ({prop,datos}) => {
         datos: formValues,
         index: indice,
       });
-
-      console.log(resultado);
     }
   };
 
@@ -84,8 +73,6 @@ export const ListFunction = ({prop,datos}) => {
       const respuesta = await axios.post("/eliminarusuario", {
         datos: indice,
       });
-
-      console.log(respuesta);
     } else {
       Swal.fire({
         icon: "warning",
@@ -135,13 +122,8 @@ export const ListFunction = ({prop,datos}) => {
         datos: formValues,
         index: indice,
       });
-
-      console.log(resultado);
     }
   };
-
- 
-
 
 
   //Eliminar cliente//
@@ -174,8 +156,6 @@ export const ListFunction = ({prop,datos}) => {
       const respuesta = await axios.post("/deletClient", {
         datos: indice,
       });
-
-      console.log(respuesta);
     } else {
       Swal.fire({
         icon: "warning",
@@ -201,9 +181,8 @@ export const ListFunction = ({prop,datos}) => {
           '<input id="swal-input2" class="swal2-input" placeholder="Precio">' +
           '<input id="swal-input3" class="swal2-input" placeholder="Descripcion">' +
           '<input id="swal-input4" class="swal2-input" placeholder="Descuento">' +
-          '<input id="swal-input5" class="swal2-input" placeholder="Status">',
+          '<input id="swal-input5" class="swal2-input" placeholder="Estado">',
           
-        
         focusConfirm: false,
         preConfirm: () => {
           return [
@@ -212,8 +191,6 @@ export const ListFunction = ({prop,datos}) => {
             document.getElementById("swal-input3").value,
             document.getElementById("swal-input4").value,
             document.getElementById("swal-input5").value,
-            
-  
           ];
         },
       });
@@ -223,8 +200,6 @@ export const ListFunction = ({prop,datos}) => {
           datos: formValues,
           index: indice,
         });
-  
-        console.log(resultado);
       }
     };
   
@@ -259,8 +234,6 @@ export const ListFunction = ({prop,datos}) => {
         const respuesta = await axios.post("/deleteProduct", {
           datos: indice,
         });
-  
-        console.log(respuesta);
       } else {
         Swal.fire({
           icon: "warning",
@@ -282,13 +255,14 @@ export const ListFunction = ({prop,datos}) => {
         return(<table className="table table-dark  table-hover">
         <thead>
           
-          <tr>
+        <tr>
             <td scope="col">#</td>
             <td scope="col">Nombre</td>
             <td scope="col">Apellido</td>
             <td scope="col">Cédula</td>
             <td scope="col">Correo</td>
             <td scope="col">Telefono</td>
+            <td scope="col">Contraseña</td>
             <td scope="col">Tipo</td>
             <td scope="col">Estado</td>
             <td scope="col">Botones de acción</td>
@@ -303,7 +277,7 @@ export const ListFunction = ({prop,datos}) => {
               <td>{objeto.cc}</td>
               <td>{objeto.email}</td>
               <td>{objeto.numbercelphone}</td>
-              
+              <td>{objeto.pass}</td>
               <td>{objeto.tipo == true ? "Activo" : "Desactivo"}</td>
               <td>{objeto.statusu == true ? "Activo" : "Desactivo"}</td>
               <td>
@@ -337,14 +311,14 @@ export const ListFunction = ({prop,datos}) => {
         return(<table className="table table-dark  table-hover">
         <thead>
           
-          <tr>
+        <tr>
             <td scope="col">#</td>
             <td scope="col">Nombre</td>
             <td scope="col">Apellido</td>
             <td scope="col">Cédula</td>
             <td scope="col">Correo</td>
             <td scope="col">Telefono</td>
-            <td scope="col">status</td>
+            <td scope="col">Estado</td>
             <td scope="col">Usuario creador</td>
             <td scope="col">Botones de acción</td>
           </tr>
@@ -352,14 +326,14 @@ export const ListFunction = ({prop,datos}) => {
         <tbody>
           {datos.map((objeto, i) => (
             <tr key={i}>
-              <th scope="row">{i+1}</th>
+            <th scope="row">{i+1}</th>
               <td>{objeto.firstname}</td>
               <td>{objeto.lastname}</td>
               <td>{objeto.cc}</td>
               <td>{objeto.mail}</td>
               <td>{objeto.numbercelphone}</td>
-              <td>{objeto.status == true ? "Activo" : "Desactivo"}</td>
-              <td>{objeto.email}</td> 
+              <td>{(objeto.statusc === true) ? "Activo" : "Desactivado"}</td>
+              <td>{objeto.email}</td>
               <td>
                 <div className="btn-group">
                   <a
@@ -398,10 +372,10 @@ export const ListFunction = ({prop,datos}) => {
             <td scope="col">Precio</td>
             <td scope="col">Descripcion</td>
             <td scope="col">Descuento</td>
-            <td scope="col">Status</td>
+            <td scope="col">Estado</td>
             <td scope="col">Botones</td>
             
-         </tr>
+        </tr>
         </thead>
         <tbody>
           {datos.map((objeto, i) => (

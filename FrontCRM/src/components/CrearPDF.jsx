@@ -21,7 +21,7 @@ export function CrearPDF(props) {
   // obtener la fecha de hoy en formato `MM/DD/YYYY`
 
   var now = today.toLocaleDateString("en-US");
-  console.log(now);
+  
 
   //USE STATE
 
@@ -44,9 +44,9 @@ export function CrearPDF(props) {
         setCliente(dats);
         setProducto(datsProduct);
 
-        console.log(producto);
+        
       } catch (err) {
-        console.log(err);
+
       }
     }
     fetchData();
@@ -92,10 +92,6 @@ export function CrearPDF(props) {
 
     ))
 
-      console.log(tr);
-     
-
-    
     return tr
 
   }
@@ -168,21 +164,21 @@ export function CrearPDF(props) {
                 const { value: informacionCliente } = await Swal.fire({
                   title: "Datos del cliente para la cotización son :",
                   html:
-                    '<input id="swal-input1" class="swal2-input" placeholder="Nombre" value=' +
-                    datosUsarioSeleccionado[0].firstname +
-                    ">" +
-                    '<input id="swal-input2" class="swal2-input" placeholder="Apellido" value=' +
-                    datosUsarioSeleccionado[0].lastname +
-                    ">" +
-                    '<input id="swal-input3" class="swal2-input" placeholder="Apellido" value=' +
-                    datosUsarioSeleccionado[0].cc +
-                    ">" +
-                    '<input id="swal-input4" class="swal2-input" placeholder="Apellido" value=' +
-                    datosUsarioSeleccionado[0].mail +
-                    ">" +
-                    '<input id="swal-input5" class="swal2-input" placeholder="Apellido" value=' +
-                    datosUsarioSeleccionado[0].numbercelphone +
-                    ">",
+                  '<input id="swal-input1" class="swal2-input" placeholder="Nombre" value=' +
+                  datosUsarioSeleccionado[0].firstname +
+                  " disabled>" +
+                  '<input id="swal-input2" class="swal2-input" placeholder="Apellido" value=' +
+                  datosUsarioSeleccionado[0].lastname +
+                  " disabled>" +
+                  '<input id="swal-input3" class="swal2-input" placeholder="Apellido" value=' +
+                  datosUsarioSeleccionado[0].cc +
+                  " disabled>" +
+                  '<input id="swal-input4" class="swal2-input" placeholder="Apellido" value=' +
+                  datosUsarioSeleccionado[0].mail +
+                  " disabled>" +
+                  '<input id="swal-input5" class="swal2-input" placeholder="Apellido" value=' +
+                  datosUsarioSeleccionado[0].numbercelphone +
+                  " disabled>",
                   focusConfirm: false,
                   preConfirm: async () => {
                     return [
@@ -191,7 +187,7 @@ export function CrearPDF(props) {
                       document.getElementById("swal-input3").value,
                       document.getElementById("swal-input4").value,
                       document.getElementById("swal-input5").value,
-                      datosUsarioSeleccionado[0].id_client, //!ID CLIENTE
+                      datosUsarioSeleccionado[0].id_client
                     ];
                   },
                 });
@@ -302,9 +298,6 @@ export function CrearPDF(props) {
                     productos: productosEscogidos,
                     usuarioCreador: profile,
                   });
-                  console.log("Petición realizada");
-                  console.log(peticionPdf);
-                  
                 }
               }
             } else {

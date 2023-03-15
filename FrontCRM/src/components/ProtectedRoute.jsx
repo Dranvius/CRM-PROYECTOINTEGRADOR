@@ -1,3 +1,4 @@
+//!Protecciòn de rutas
 import {Navigate, Outlet} from 'react-router-dom'
 
 export function ProtectedRoute({isAllowed, children}) {
@@ -6,3 +7,5 @@ export function ProtectedRoute({isAllowed, children}) {
 
   return children ? <>{children}</> : <Outlet/>
 }
+
+//!Debe ser igual la sintaxis en todos los casos

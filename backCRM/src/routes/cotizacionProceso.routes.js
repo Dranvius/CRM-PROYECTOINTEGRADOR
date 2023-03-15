@@ -5,7 +5,7 @@ const cotizacionRoutes = Router();
 //importar controlador
 import {ReqDatosUsuaruioSeleccionado, generarPDF,enviarDatosCotizaciones} from '../controllers/cotizacion.controller.js'
 //Rutas de ListClientes
-import {verificador} from '../middlerwares/requerirAutentificador.js'
+
 
 cotizacionRoutes.post("/cotizacionStart",ReqDatosUsuaruioSeleccionado);
 cotizacionRoutes.post("/construccionPDF",generarPDF)

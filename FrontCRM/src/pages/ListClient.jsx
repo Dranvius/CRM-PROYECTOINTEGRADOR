@@ -1,34 +1,22 @@
 import { NavbarLinks } from "../components/NavbarLinks";
 import  axios  from "../lib/axios";
-
 //Botones toaster
 import Swal from "sweetalert2";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-import { faComment } from "@fortawesome/free-solid-svg-icons";
-
 import { BsFillChatSquareFill } from "react-icons/bs";
 import { BsBookFill } from "react-icons/bs";
-
 import { useAuthStore } from "../storage/globalStorage.js"; 
-
-const element = <FontAwesomeIcon icon={faComment} />;
-
 import { TableList } from "../components/TableList";
 
- 
+
+//const element = <FontAwesomeIcon icon={faComment} />;
+
 
 export function ListClient(props) {
   
   const profile = useAuthStore((state) => state.user);
 
+  const profileStatus = profile.status;
 
-const profileStatus = profile.status;
-  console.log("Estado cliente"+profileStatus);
-
-
-  console.log(props)
   //crear nuevo cliente//
   const CrearUsu = async () => {
     const { value: formValues } = await Swal.fire({
@@ -50,8 +38,8 @@ const profileStatus = profile.status;
         '<input id="swal-input1" class="swal2-input" placeholder="Nuevo Nombre">' +
         '<input id="swal-input2" class="swal2-input" placeholder="Nuevo Apellido">' +
         '<input id="swal-input3" class="swal2-input" placeholder="Nueva Cedula">' +
-        '<input id="swal-input4" class="swal2-input" placeholder="Nuevo Correo Electronico">' +
-        '<input id="swal-input5" class="swal2-input" placeholder="Nuevo Celular">' +
+        '<input id="swal-input5" class="swal2-input" placeholder="Nuevo Correo Electronico">' +
+        '<input id="swal-input4" class="swal2-input" placeholder="Nuevo Celular">' +
         '<input id="swal-input6" class="swal2-input" placeholder="Nuevo Estatus">',
         
 
@@ -76,29 +64,24 @@ const profileStatus = profile.status;
         datos: formValues,
         creador:profile.id,
       });
-
-      console.log(resultado);
     }
   }
 
     return (
       <>
 
-        <NavbarLinks page='clientes' typeUser={profileStatus}/>
-
-        
+        <NavbarLinks page='clientes' typeUser={profileStatus} />
         <div id="search" className="pt-2">
-        <nav className="navbar bg-body-tertiary">
-  <div className="container-fluid">
-    <form className="d-flex" role="search">
-      <input className="form-control me-2" type="search" placeholder="Buscar Cliente" aria-label="Buscar"/>
-      <button className=" btn btn-success" type="submit">Filtrar</button>
-    </form>
-  </div>
-</nav>
+          <nav className="navbar bg-body-tertiary">
+            <div className="container-fluid">
+              <form className="d-flex" role="search">
+                <input className="form-control me-2" type="search" placeholder="Buscar Cliente" aria-label="Buscar" />
+                <button className=" btn btn-success" type="submit">Filtrar</button>
+              </form>
+            </div>
+          </nav>
         </div>
         
-
         <div id="container-users">
           <div id="list-users">
             <TableList ente="cliente"/>

@@ -9,10 +9,9 @@ import ListUsers from "../src/routes/usersPage.routes.js";
 import ListClients  from "../src/routes/clientPage.routes.js";
 import ListProducts from "../src/routes/products.Page.routes.js"
 import cotizacionRoutes from './routes/cotizacionProceso.routes.js';
-import { encrypt, compareEncrypt } from "../src/helpers/encryptThem.js";
 import dotenv from 'dotenv'
 const pool = new pg.Pool(ConfiguracionA);
-import bcryptjs from 'bcryptjs';
+
 const App = Express();
 
 dotenv.config()
