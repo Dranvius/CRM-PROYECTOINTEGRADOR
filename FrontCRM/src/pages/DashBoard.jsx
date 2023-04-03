@@ -69,7 +69,7 @@ export const optionsA = {
     },
     title: {
       display: true,
-      text: "Ventas mes",
+      text: "Ventas Semana",
       color: "white",
     },
   },
@@ -177,36 +177,36 @@ export function DashBoard() {
       </div>
 
       <div id="estadisticas-card">
-        <div class="card text-bg-dark mb-3" style={{ width: "300px",margin:"5px" }}>
-          <div class="card-top">
-          <img src="../src/img/greenarrowup.png" class="card-img-top" alt="..." style={{ width: "50px", height:"50px",margin:"19px"}} />
+        <div className="card text-bg-dark mb-3" style={{ width: "300px",margin:"5px" }}>
+          <div className="card-top">
+          <img src="../src/img/greenarrowup.png" className="card-img-top" alt="..." style={{ width: "50px", height:"50px",margin:"19px"}} />
           <h1>17.200</h1>
           </div>
 
-          <div class="card-body">
-            <p class="card-text">
+          <div className="card-body">
+            <p className="card-text">
               Ganancias totales semana.
             </p>
           </div>
         </div>
-        <div class="card text-bg-dark mb-3" style={{ width: "300px",margin:"5px" }}>
-        <div class="card-top">
-          <img src="../src/img/redarrowdown.png" class="card-img-top" alt="..." style={{ width: "50px", height:"50px",margin:"19px"}} />
+        <div className="card text-bg-dark mb-3" style={{ width: "300px",margin:"5px" }}>
+        <div className="card-top">
+          <img src="../src/img/redarrowdown.png" className="card-img-top" alt="..." style={{ width: "50px", height:"50px",margin:"19px"}} />
           <h1>17.200</h1>
         </div>
-          <div class="card-body">
-            <p class="card-text">
+          <div className="card-body">
+            <p className="card-text">
               Perdidas totales semana.
             </p>
           </div>
         </div>
-        <div class="card text-bg-dark mb-3" style={{ width: "300px",margin:"5px" }}>
-          <div class="card-top">
-          <img src="../src/img/logoB.png" class="card-img-top" alt="..." style={{ width: "50px", height:"50px",margin:"19px"}} />
+        <div className="card text-bg-dark mb-3" style={{ width: "300px",margin:"5px" }}>
+          <div className="card-top">
+          <img src="../src/img/logoB.png" className="card-img-top" alt="..." style={{ width: "50px", height:"50px",margin:"19px"}} />
           <h1>17.200</h1>
           </div>
-          <div class="card-body">
-            <p class="card-text">
+          <div className="card-body">
+            <p className="card-text">
               Presupuesto mensual.
             </p>
           </div>

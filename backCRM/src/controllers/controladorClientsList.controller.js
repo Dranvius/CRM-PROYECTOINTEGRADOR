@@ -155,7 +155,7 @@ export const EliminarCliente = async (req, res) => {
 
 const BaseDatosClientesOrdenados = async () => {
   try {
-    const queryText = "SELECT firstname,lastname FROM client";
+    const queryText = "SELECT * FROM client";
     const res1 = await pool.query(queryText);
 
     return res1;

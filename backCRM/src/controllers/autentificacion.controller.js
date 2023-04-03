@@ -9,10 +9,13 @@ const pool = new pg.Pool(ConfiguracionA);
 export const loginHandler = async (req, res) => {
 
   try {
+ 
     const queryText =
       "SELECT * FROM usuario INNER JOIN personaldats ON personaldats.id_personalid = usuario.id_users WHERE usuario.email = $1";
     const res1 = await pool.query(queryText, [req.body.user]);
+
     const { email, pass, tipo } = res1.rows[0];
+
 
 
     //!Verificaciòn correo.
@@ -35,7 +38,7 @@ export const loginHandler = async (req, res) => {
       {
         user: req.body.user,
         // password: req.body.password, //!Posiblemente no
-        role: tipo === false ? "administrador" : "gestor",
+        role: tipo === false ? false : true,
       },
       process.env.JWT_SECRET, //! FIRMA DE GENERACIÒN DE TOKEN 
       {

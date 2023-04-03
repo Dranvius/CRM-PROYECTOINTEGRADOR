@@ -101,6 +101,12 @@ button {
     grid-template-rows: 90% 10%;
 }
 
+#container-users{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+
 #userinfo {
     display: grid;
     grid-template-rows: 70% 100%;
@@ -375,6 +381,33 @@ button {
     -webkit-writing-mode: horizontal-tb;
     -ms-writing-mode: horizontal-tb;
 }
+/*
+!Status Light
+*/
+
+#circleStatusGreen{
+     border-radius: 100%;
+     -webkit-border-radius: 100%;
+     -moz-border-radius: 100%;
+     -ms-border-radius: 100%;
+     -o-border-radius: 100%;
+     background-color: green;
+     width: 20px;
+     height: 20px;
+     margin:0 auto
+}
+
+#circleStatusRed{
+    border-radius: 100%;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    -ms-border-radius: 100%;
+    -o-border-radius: 100%;
+    background-color: red;
+    width: 20px;
+    height: 20px;
+    margin:0 auto
+}
 
 
 /*
@@ -407,14 +440,8 @@ button {
 #downPartUserList {
     display: flex;
     margin: 0px;
-    transform: translateX(217px);
-    width: 1000px;
-    align-items: baseline;
-    justify-content: space-evenly;
-    -webkit-transform: translateX(217px);
-    -moz-transform: translateX(217px);
-    -ms-transform: translateX(217px);
-    -o-transform: translateX(217px);
+    justify-content: space-around;
+    flex-direction: row-reverse;
 }
 
 svg {
@@ -425,7 +452,7 @@ svg {
 
 #smallMenu {
     width: 85px;
-    height: 46px;
+    /* height: 46px; */
     display: flex;
     align-self: center;
     justify-content: space-between;
@@ -435,7 +462,7 @@ svg {
 #list-users {
     color: white;
     margin: 20px;
-    height: 346px;
+    /* height: 346px; */
 
 }
 
@@ -554,6 +581,18 @@ span {
     justify-content: center;
     align-items: center;
 }
+
+
+/*
+!Navegador de desarrollo y busqueda
+*/
+#containerTop{
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+}
+
+
 /*
 Tablero
 */

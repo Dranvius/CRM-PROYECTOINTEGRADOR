@@ -1,11 +1,14 @@
 import { NavbarLinks } from "../components/NavbarLinks";
 import  axios  from "../lib/axios";
+
 //Botones toaster
 import Swal from "sweetalert2";
 import { BsFillChatSquareFill } from "react-icons/bs";
 import { BsBookFill } from "react-icons/bs";
 import { useAuthStore } from "../storage/globalStorage.js"; 
 import { TableList } from "../components/TableList";
+import {useState,useRef} from 'react'
+import { PagNavigate } from "../components/pagNavigate";
 
 
 //const element = <FontAwesomeIcon icon={faComment} />;
@@ -14,7 +17,7 @@ import { TableList } from "../components/TableList";
 export function ListClient(props) {
   
   const profile = useAuthStore((state) => state.user);
-
+  const referencia = useRef();
   const profileStatus = profile.status;
 
   //crear nuevo cliente//
@@ -67,6 +70,26 @@ export function ListClient(props) {
     }
   }
 
+  //!PAGINACIÓN
+
+  const [datosPorProceso,datosPorProcesoSet] = useState(5);
+
+    const cambioPag = () =>{
+        return allDats.slice(datosPorProceso,datosPorProceso+5)
+    }
+    
+
+    const nextPage = () =>{
+        datosPorProcesoSet(datosPorProceso+5)
+    }
+
+    const backPage = () =>{
+        datosPorProcesoSet(datosPorProceso-5)
+    }
+
+
+    
+    console.log(referencia)
     return (
       <>
 
@@ -84,7 +107,7 @@ export function ListClient(props) {
         
         <div id="container-users">
           <div id="list-users">
-            <TableList ente="cliente"/>
+            <TableList ente="cliente" />
           </div>
 
           <div id="downPartUserList">
@@ -104,31 +127,16 @@ export function ListClient(props) {
             </a>
 
             <nav aria-label="Page navigation align-self-center ">
-              <ul className="pagination  ">
-                <li className="page-item disabled">
-                  <a className="page-link" href="#" tabIndex="-1">
+              <ul className="pagination">
+                <li className="page-item disabled" ref={referencia}>
+                  <button className="page-link" >
                     Previous
-                  </a>
+                  </button>
                 </li>
-                <li className="page-item">
-                  <a className="page-link" href="#">
-                    1
-                  </a>
-                </li>
-                <li className="page-item">
-                  <a className="page-link" href="#">
-                    2
-                  </a>
-                </li>
-                <li className="page-item">
-                  <a className="page-link" href="#">
-                    3
-                  </a>
-                </li>
-                <li className="page-item">
-                  <a className="page-link" href="#">
+                <li className="page-item" id="siguientes">
+                  <button className="page-link"  >
                     Next
-                  </a>
+                  </button>
                 </li>
               </ul>
             </nav>

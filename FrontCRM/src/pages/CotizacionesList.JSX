@@ -1,23 +1,27 @@
 import { NavbarLinks } from "../components/NavbarLinks";
-
+import {useState,useEffect,createContext} from 'react'
 //Botones toaster
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faComment } from "@fortawesome/free-solid-svg-icons";
-
 import { BsFillChatSquareFill } from "react-icons/bs";
 import { BsBookFill } from "react-icons/bs";
 
 //const element = <FontAwesomeIcon icon={faComment} />;
-
 import { TableList } from "../components/TableList";
 import { CrearPDF } from "../components/CrearPDF";
-
 import { useAuthStore } from "../storage/globalStorage.js";
+//!Importación del contexto
+import {ListsContext} from '../context/ListsContext'
+
 
 export function CotizacionesList() {
   const profile = useAuthStore((state) => state.user);
+  const [datosCliente,setDatosCliente] = useState([]);
+  const contexto = createContext(ListsContext);
   const profileStatus = profile.status;
   
+
+  console.log(contexto);
 
   return (
     <>
@@ -55,25 +59,10 @@ export function CotizacionesList() {
           </div>
           <CrearPDF />
           <nav aria-label="Page navigation align-self-center ">
-            <ul className="pagination  ">
+            <ul className="pagination">
               <li className="page-item disabled">
-                <a className="page-link" href="#" tabIndex="-1">
+                <a className="page-link">
                   Previous
-                </a>
-              </li>
-              <li className="page-item">
-                <a className="page-link" href="#">
-                  1
-                </a>
-              </li>
-              <li className="page-item">
-                <a className="page-link" href="#">
-                  2
-                </a>
-              </li>
-              <li className="page-item">
-                <a className="page-link" href="#">
-                  3
                 </a>
               </li>
               <li className="page-item">
