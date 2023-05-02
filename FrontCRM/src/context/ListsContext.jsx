@@ -75,6 +75,30 @@ async function datosProductos() {
   }
 }
 
+//!Taer datos respeto a id de dcotización
+
+const cotizacionDatos =  async (indice) =>{
+  
+  //nombre cliente
+  //Apellido del cliente
+  //Telefono del cliente
+  //Cédula del cliente
+  //Correo del Cliente
+  //Datos de cotización
+  try {
+    const datos = await Axios.post('/indiceCotizacion',{
+      indice
+    })
+
+    
+
+    return datos.data;
+
+  } catch (error) {
+    console.error(error)
+  }
+}
+
   
 const envio = {
   datosListUsuario,
@@ -83,7 +107,10 @@ const envio = {
   datosListCotizacion,
   datosClienteOrden,
   datosProductos,
+  cotizacionDatos,
 }
+
+
 
 
 
@@ -98,3 +125,6 @@ export function ListsContextProvider(props) {
     </ListsContext.Provider>
   );
 }
+
+
+

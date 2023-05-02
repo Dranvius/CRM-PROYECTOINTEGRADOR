@@ -87,7 +87,6 @@ export function ListUsers(props) {
             <BsFillChatSquareFill />
             <BsBookFill />
 
-
           </div>
           <a
             type="button"

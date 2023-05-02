@@ -51,6 +51,7 @@ export const verificador = (req, res, next) => {
             tel: res.rows[0].numbercelphone,
             email: res.rows[0].email,
             status: res.rows[0].tipo,
+            cc: res.rows[0].cc
           };
 
           //Enviando datos de la autentificación

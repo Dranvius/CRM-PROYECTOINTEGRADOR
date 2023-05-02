@@ -1,17 +1,19 @@
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../storage/globalStorage";
 import { NavbarLinks } from "../components/NavbarLinks";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { useState } from "react";
+import { useEffect,useState } from "react";
 import axios from "../lib/axios";
 
 import Swal from "sweetalert2";
 
 export function ProfilePage() {
+  
   const profile = useAuthStore((state) => state.user);
+  const setUser = useAuthStore((state) => state.setUser);
   const navigate = useNavigate();
-  // const [img, setImg] = useState("");
-  // const [valores, setValores] = useState("");
+
+  
+  //?Funciones
 
   const cambioName = async () => {
     const { value: formValues } = await Swal.fire({
@@ -21,9 +23,9 @@ export function ProfilePage() {
         profile.name.toUpperCase() +
         "\n" +
         profile.lastName.toUpperCase(),
-      iconColor: "blue",
       icon: "question",
-      color: "black",
+      iconColor: "#447AD3",
+      color: "#447AD3",
       width: "35%",
       confirmButtonColor: "green",
       confirmButtonAriaLabel: "Confirmar",
@@ -32,7 +34,7 @@ export function ProfilePage() {
       cancelButtonColor: "red",
       background: "white",
       footer:
-        "<center><b>RECUERDA</b><br>EL NOMBRE PUEDE AFECTAR EN EL LOGIN</center>",
+        "<center><b>RECUERDA</b><br>No utilice nombres repetidos</center>",
       html:
         '<input id="swal-input1" class="swal2-input" placeholder="Nuevo Nombre">' +
         '<input id="swal-input2" class="swal2-input" placeholder="Nuevo Apellido">',
@@ -47,22 +49,36 @@ export function ProfilePage() {
 
     if (formValues) {
       try {
-        formValues.push(profile.email);
-        
+        formValues.push(profile.cc);
+
         const peticion = await axios.post("/cambiarNombre", formValues);
+
+        console.log(peticion)
+
+        const newVlues = {
+          id: profile.id,
+          name: formValues[0],
+          lastName: formValues[1],
+          tel: profile.tel,
+          email: profile.email,
+          cc: profile.cc
+        }
+
+        setUser(newVlues)
 
         Swal.fire({
           icon: "success",
           title: "Finalizado con exito",
           confirmButtonColor: "green",
         });
-        navigate("/profile");
+        
+
+
       } catch (error) {
         Swal.fire({
-          title: "ALGO SALIO MAL",
+          title: "Algo salio mal",
           confirmButtonColor: "red",
           footer: "<center>INFORMAR AL AREA DE SISTEMAS</center>",
-          color: "black",
           width: "20%",
           icon: "error",
         });
@@ -73,9 +89,9 @@ export function ProfilePage() {
   const cambioContraseña = async () => {
     const { value: formValues } = await Swal.fire({
       titleText: "Cambio Contraseña",
-      iconColor: "blue",
       icon: "question",
-      color: "black",
+      iconColor: "#447AD3",
+      color: "#447AD3",
       width: "35%",
       confirmButtonColor: "green",
       confirmButtonAriaLabel: "Confirmar",
@@ -83,8 +99,9 @@ export function ProfilePage() {
       cancelButtonText: "Cancelar",
       cancelButtonColor: "red",
       background: "white",
-      footer: "<center><b>RECUERDA</b><br>Recordar la contraseña</center>",
-      html: '<input id="swal-input1" class="swal2-input" placeholder="Nuevo Contarseña">',
+      footer:
+        "<center><b>RECUERDA</b><br>No debe olvide su contraseña</center>",
+      html: '<input id="swal-input1" class="swal2-input" placeholder="Nueva Contarseña">',
       focusConfirm: false,
       preConfirm: () => {
         return [document.getElementById("swal-input1").value];
@@ -94,7 +111,7 @@ export function ProfilePage() {
     if (formValues) {
       try {
         formValues.push(profile.email);
-       
+
         const peticion = await axios.post("/cambiarContrasena", formValues);
 
         Swal.fire({
@@ -103,7 +120,16 @@ export function ProfilePage() {
           confirmButtonColor: "green",
         });
 
-        navigate("/profile");
+        const newVlues = {
+          id: profile.id,
+          name: profile.name,
+          lastName: profile.lastName,
+          tel: profile.tel,
+          email: profile.email,
+          cc: profile.cc
+        }
+
+        setUser(newVlues)
       } catch (error) {
         console.error(error);
 
@@ -119,10 +145,69 @@ export function ProfilePage() {
     }
   };
 
-  const Name = profile.name;
-  const Pic = "https://robohash.org/" + Name;
+  const cambioCorreo = async () => {
+    const { value: formValues } = await Swal.fire({
+      titleText: "Cambio correo electrónico",
+      icon: "question",
+      iconColor: "#447AD3",
+      color: "#447AD3",
+      width: "35%",
+      confirmButtonColor: "green",
+      confirmButtonAriaLabel: "Confirmar",
+      showCancelButton: true,
+      cancelButtonText: "Cancelar",
+      cancelButtonColor: "red",
+      background: "white",
+      footer:
+        "<center><b>RECUERDA</b><br>Recuerde que este correo es su usuario de autentificación</center>",
+      html: '<input id="swal-input1" class="swal2-input" placeholder="Nuevo Correo">',
+      focusConfirm: false,
+      preConfirm: () => {
+        return [document.getElementById("swal-input1").value];
+      },
+    });
 
- 
+    if (formValues) {
+      try {
+        formValues.push(profile.cc);
+
+        const peticion = await axios.post("/cambiarCorreo", formValues);
+
+        console.log(peticion)
+
+        const newVlues = {
+          id: profile.id,
+          name: profile.name,
+          lastName: profile.lastName,
+          tel: profile.tel,
+          email: formValues[0],
+          cc: profile.cc
+        }
+        
+        Swal.fire({
+          icon: "success",
+          title: "Finalizado con exito",
+          confirmButtonColor: "green",
+        });
+
+        // setTimeout(() =>{
+        //   window.location.href = window.location.href;
+        // },1000) 
+        
+        setUser(newVlues)
+      } catch (error) {
+        console.error(error);
+
+        Swal.fire({
+          title: "ALGO SALIO MAL",
+          confirmButtonColor: "red",
+          footer: "<center>INFORMAR AL AREA DE SISTEMAS</center>",
+          width: "20%",
+          icon: "error",
+        });
+      }
+    }
+  };
 
   const profileStatus = profile.status;
 
@@ -170,7 +255,13 @@ export function ProfilePage() {
             >
               Cambiar Contraseña
             </a>
-            <a className="btn btn-outline-light" href="#" role="button">
+            <a
+              className="btn btn-outline-light"
+              onClick={() => {
+                cambioCorreo();
+              }}
+              role="button"
+            >
               Cambiar Correo
             </a>
           </div>

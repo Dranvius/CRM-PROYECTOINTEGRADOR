@@ -59,18 +59,6 @@ export function ListProducts(props) {
   return (
     <>
       <NavbarLinks page='productos' typeUser={profileStatus} />
-      <div id="search" className="pt-2">
-        <nav className="navbar bg-body-tertiary">
-          <div className="container-fluid">
-            <form className="d-flex" role="search">
-              <input className="form-control me-2" type="search" placeholder="Buscar Producto" aria-label="Buscar" />
-              <button className=" btn btn-success" type="submit">Filtrar</button>
-            </form>
-          </div>
-        </nav>
-      </div>
-
-
       <div id="container-users">
         <div id="list-users">
           <TableList ente="producto" />
@@ -92,35 +80,6 @@ export function ListProducts(props) {
             Crear Producto
           </a>
 
-          <nav aria-label="Page navigation align-self-center ">
-            <ul className="pagination  ">
-              <li className="page-item disabled">
-                <a className="page-link" href="#" tabIndex="-1">
-                  Previous
-                </a>
-              </li>
-              <li className="page-item">
-                <a className="page-link" href="#">
-                  1
-                </a>
-              </li>
-              <li className="page-item">
-                <a className="page-link" href="#">
-                  2
-                </a>
-              </li>
-              <li className="page-item">
-                <a className="page-link" href="#">
-                  3
-                </a>
-              </li>
-              <li className="page-item">
-                <a className="page-link" href="#">
-                  Next
-                </a>
-              </li>
-            </ul>
-          </nav>
         </div>
       </div>
     </>

@@ -1,13 +1,15 @@
 import { Boton } from "./pages/Boton";
 import { ProfilePage } from "./pages/ProfilePage";
-import { BrowserRouter, Routes, Route } from "react-router-dom"; //!Especificar que se mostrara
+import { BrowserRouter, Routes, Route,Router } from "react-router-dom"; //!Especificar que se mostrara
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { useAuthStore } from "./storage/globalStorage";
 import { DashBoard } from './pages/DashBoard';
 import { ListUsers } from './pages/ListUsers'
 import { ListClient } from './pages/ListClient';
 import { ListProducts } from './pages/ListProducts';
-import { CotizacionesList } from './pages/CotizacionesList'
+import { CotizacionesList } from './pages/CotizacionesList';
+import {ViewPdf} from './pages/ViewPdf.jsx'
+import {PDFViewer} from '@react-pdf/renderer'
 
 export function App() {
 
@@ -31,6 +33,7 @@ export function App() {
             <Route path="/usuarios" element={<ListUsers />} />
             <Route path="/clientes" element={<ListClient />} />
             <Route path="/productos" element={<ListProducts />} />
+            <Route path="/vistaPdf/:index" element= {<ViewPdf/>} />
 
           </Route>
 

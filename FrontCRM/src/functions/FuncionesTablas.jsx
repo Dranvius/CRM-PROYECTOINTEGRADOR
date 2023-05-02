@@ -1,8 +1,15 @@
 import Swal from "sweetalert2";
 //!Axios modificado para tener una cabecera o HEADER automatico
 import  axios  from "../lib/axios";
+//!Rutas react
+import { useNavigate } from "react-router-dom";
+//!PDF Visualizador
+import {ViewPdf} from "../pages/ViewPdf"
+
 //!Funciones utilizadas de los Botones
 //TODO: listado de funciones para crear y eliminar
+
+
 
 //!BOTONES USUARIO
 
@@ -198,7 +205,7 @@ export const editProduct = async (indice) => {
   }
 };
 
-//eliminar producto//
+//?Eliminar producto
 export const deleteProduct = async (indice) => {
   const inputOptions = new Promise((resolve) => {
     setTimeout(() => {
@@ -448,3 +455,52 @@ export const viewTableDats = (ente, datos) => {
     );
   }
 };
+
+//!Botones de cotización
+//?Eliminar cotización
+
+export const deleteCoutation = async (indice) => {
+
+  const inputOptions = new Promise((resolve) => {
+    setTimeout(() => {
+      resolve({
+        true: "Si",
+        false: "No",
+      });
+    }, 1000);
+  });
+
+  const { value: opcion } = await Swal.fire({
+    icon: "warning",
+    title: "¿Desea Elminar esta cotización?",
+    input: "radio",
+    inputOptions: inputOptions,
+    inputValidator: (value) => {
+      if (!value) {
+        return "Debes escoger un valor !";
+      }
+    },
+  });
+
+  if (opcion === "true") {
+    Swal.fire({ html: `La seleción es: ${opcion}` });
+
+    const respuesta = await axios.post("/deleteCotizacion", {
+      datos: indice,
+    });
+  } else {
+    Swal.fire({
+      icon: "warning",
+      title: "No desea eliminar nada",
+
+      inputOptions: inputOptions,
+      inputValidator: (value) => {
+        if (!value) {
+          return "Debes escoger un valor !";
+        }
+      },
+    });
+  }
+
+
+}

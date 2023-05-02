@@ -2,12 +2,11 @@ import axios from "../lib/axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShare } from "@fortawesome/free-solid-svg-icons";
 import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
-// import { useContext } from "react";
-// import { ListsContext } from "../context/ListsContext";
 import { useState } from "react";
 import { useAuthStore } from "../storage/globalStorage.js"; 
 import { useNavigate } from "react-router-dom";
 import "../style/estilos.css";
+import Swal from 'sweetalert2'
 
 const element = <FontAwesomeIcon icon={faShare} />;
 const element2 = <FontAwesomeIcon icon={faThumbsUp} />;
@@ -18,7 +17,18 @@ export function Boton() {
   
   const navigate = useNavigate();
   const [icon, setIcon] = useState(element2);
-  //const ContextoObjetos = useContext(ListsContext);
+
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'bottom',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  })
 
   const trigger = async (e) => {
     e.preventDefault();
@@ -27,23 +37,37 @@ export function Boton() {
     const password = e.target[1].value;
     
 
+    try {
+
     const peticion = await axios.post("/login", {
       user,
       password,
     });
 
-      setToken(peticion.data.token); //!Respuesta peticiòn 30
-
-
+    setToken(peticion.data.token); //!Respuesta peticiòn 30
 
     const peticion2 = await axios.get("/login", {
       user,
       password,
     });
 
+    console.log(peticion2.data);
+
     setUser(peticion2.data); //!Datos del usuario de manera local
 
     navigate("/profile");
+
+    } catch (error) {
+     
+      Toast.fire({
+        icon: 'error',
+        title: 'Contraseña o correo incorrecto'
+      })
+      console.log("error de autentificación")
+    }
+
+
+    
   };
 
   return (
@@ -55,13 +79,15 @@ export function Boton() {
       <div className="row" id="formulario">
         <div className="col-6 ">
 
+          
+
           <form onSubmit={trigger}>
             <div className="mb-3 text-center text-light">
               <label htmlFor="exampleInputEmail1" className="form-label">
                 Usuario/Correo Electronico
               </label>
               <input
-                type="email"
+                type="text"
                 className="form-control"
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
@@ -103,6 +129,7 @@ export function Boton() {
             </div>
           </form>
         </div>
+
       </div>
     </>
   );

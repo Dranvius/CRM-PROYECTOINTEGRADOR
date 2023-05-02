@@ -244,7 +244,7 @@ export const generarPDF = async (req, res) => {
 
 const dataCotizacion = async () => {
   try {
-    const queryText = "SELECT * FROM quotation ORDER BY quotation.id_quotation";
+    const queryText = "SELECT * FROM quotation INNER JOIN client ON quotation.cliente_coti = client.id_client  ORDER BY quotation.id_quotation";
 
     const peticion = await pool.query(queryText);
 
@@ -258,8 +258,42 @@ export const enviarDatosCotizaciones = async (req, res) => {
   try {
     const peticion = await dataCotizacion();
 
+   
+
     res.json(peticion);
   } catch (error) {
 
   }
 };
+
+
+//!Traer datos de cotizaciones realizadas (Cantidades daos especificos)
+const dataCotizacionRealizada = async (indice) =>{
+  try {
+    const solicitud = 'SELECT * FROM client INNER JOIN quotation ON quotation.cliente_coti = client.id_client INNER JOIN quotation_product ON quotation_product.rela_cotiqp = quotation.id_quotation INNER JOIN product ON product.id_product = quotation_product.rela_prodqp WHERE id_quotation = $1';
+    const filtrado = [indice]
+
+    const data = await pool.query(solicitud,filtrado);
+    
+
+    return data.rows;
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+//Request | Rest 
+
+export const llevarInformacionACotizacion = async (req,res) =>{
+
+  try {
+    const peticion = await dataCotizacionRealizada(req.body.indice);
+
+    
+
+    res.json(peticion);
+  } catch (error) {
+    console.err(error);
+  }
+
+}

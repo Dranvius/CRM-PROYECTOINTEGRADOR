@@ -87,23 +87,10 @@ export function ListClient(props) {
         datosPorProcesoSet(datosPorProceso-5)
     }
 
-
-    
-    console.log(referencia)
     return (
       <>
 
         <NavbarLinks page='clientes' typeUser={profileStatus} />
-        <div id="search" className="pt-2">
-          <nav className="navbar bg-body-tertiary">
-            <div className="container-fluid">
-              <form className="d-flex" role="search">
-                <input className="form-control me-2" type="search" placeholder="Buscar Cliente" aria-label="Buscar" />
-                <button className=" btn btn-success" type="submit">Filtrar</button>
-              </form>
-            </div>
-          </nav>
-        </div>
         
         <div id="container-users">
           <div id="list-users">
@@ -126,20 +113,6 @@ export function ListClient(props) {
               Crear Usuario
             </a>
 
-            <nav aria-label="Page navigation align-self-center ">
-              <ul className="pagination">
-                <li className="page-item disabled" ref={referencia}>
-                  <button className="page-link" >
-                    Previous
-                  </button>
-                </li>
-                <li className="page-item" id="siguientes">
-                  <button className="page-link"  >
-                    Next
-                  </button>
-                </li>
-              </ul>
-            </nav>
           </div>
         </div>
       </>

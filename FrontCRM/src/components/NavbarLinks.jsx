@@ -113,7 +113,7 @@ export function NavbarLinks({ page, typeUser }) {
             </div>
 
             <button
-              className="navbar-text,borderColor:black"
+              className="navbar-text borderColor:black"
               onClick={() => {
                 logout();
                 navigate("/");

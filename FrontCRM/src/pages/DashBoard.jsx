@@ -177,7 +177,7 @@ export function DashBoard() {
       </div>
 
       <div id="estadisticas-card">
-        <div className="card text-bg-dark mb-3" style={{ width: "300px",margin:"5px" }}>
+        <div className="card text-bg-dark mb-3" style={{ width: "250px",margin:"5px" }}>
           <div className="card-top">
           <img src="../src/img/greenarrowup.png" className="card-img-top" alt="..." style={{ width: "50px", height:"50px",margin:"19px"}} />
           <h1>17.200</h1>
@@ -189,7 +189,7 @@ export function DashBoard() {
             </p>
           </div>
         </div>
-        <div className="card text-bg-dark mb-3" style={{ width: "300px",margin:"5px" }}>
+        <div className="card text-bg-dark mb-3" style={{ width: "250px",margin:"5px" }}>
         <div className="card-top">
           <img src="../src/img/redarrowdown.png" className="card-img-top" alt="..." style={{ width: "50px", height:"50px",margin:"19px"}} />
           <h1>17.200</h1>
@@ -200,9 +200,9 @@ export function DashBoard() {
             </p>
           </div>
         </div>
-        <div className="card text-bg-dark mb-3" style={{ width: "300px",margin:"5px" }}>
+        <div className="card text-bg-dark mb-3" style={{ width: "250px",margin:"5px" }}>
           <div className="card-top">
-          <img src="../src/img/logoB.png" className="card-img-top" alt="..." style={{ width: "50px", height:"50px",margin:"19px"}} />
+          <img src="../src/img/upBar.png" className="card-img-top" alt="..." style={{ width: "50px", height:"50px",margin:"19px"}} />
           <h1>17.200</h1>
           </div>
           <div className="card-body">

@@ -526,8 +526,8 @@ Graficos
     width: 100%;
     height: 200px;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: space-evenly;
 }
 
 .card-top {
@@ -535,7 +535,7 @@ Graficos
     flex-direction: center;
     background-color: transparent;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
 }
 
 /*
@@ -799,3 +799,11 @@ todo: Yellow
 .yellow .celdas {
     background-color: darkgoldenrod;
 }
+
+.col-6{
+    width: 25%;
+}
+
+
+
+

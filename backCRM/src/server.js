@@ -9,6 +9,7 @@ import ListUsers from "../src/routes/usersPage.routes.js";
 import ListClients  from "../src/routes/clientPage.routes.js";
 import ListProducts from "../src/routes/products.Page.routes.js"
 import cotizacionRoutes from './routes/cotizacionProceso.routes.js';
+import ListCorreos from './routes/correo.routes.js';
 import dotenv from 'dotenv'
 const pool = new pg.Pool(ConfiguracionA);
 
@@ -35,6 +36,7 @@ App.use(Express.urlencoded({ extended: true }));
 //?RUTAS
 
 App.use(router); 
+//App.use(ListCorreos);  //Para correos;
 App.use(profile);
 App.use(ListUsers);
 App.use(ListClients);
