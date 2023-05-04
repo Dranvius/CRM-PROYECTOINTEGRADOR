@@ -478,7 +478,7 @@ export function TableList(props) {
                 <input
                   className="form-control me-2"
                   type="search"
-                  placeholder="Nombre cliente"
+                  placeholder="Cédula cliente"
                   aria-label="Buscar"
                 />
                 <button className=" btn btn-success" type="submit">

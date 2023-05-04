@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../storage/globalStorage";
 import { NavbarLinks } from "../components/NavbarLinks";
 import { useEffect,useState } from "react";
+import { perdata } from "../emails/data_perfil.js";
 import axios from "../lib/axios";
 
 import Swal from "sweetalert2";
@@ -287,136 +288,14 @@ export function ProfilePage() {
               </tr>
             </thead>
             <tbody>
-              <tr
-                onMouseOver={() => {
-                  console.log("Hola");
-                }}
-                onMouseOut={() => {
-                  console.log("Adios");
-                }}
-              >
-                <td>21/02/2023</td>
-                <td>Bienvenido al software</td>
-                <td>Saludos</td>
-                <th scope="row">1</th>
+            {perdata.map((valor, i) => (
+              <tr>
+              <td>{valor.Fecha}</td>
+              <td>{valor.Descripcion}</td>
+              <td>{valor.Email}</td>
+              <td>{valor.N}</td>
               </tr>
-              <tr
-                onMouseOver={() => {
-                  console.log("Hola");
-                }}
-                onMouseOut={() => {
-                  console.log("Adios");
-                }}
-              >
-                <td>21/02/2023</td>
-                <td>Bienvenido al software</td>
-                <td>Saludos</td>
-                <th scope="row">1</th>
-              </tr>
-              <tr
-                onMouseOver={() => {
-                  console.log("Hola");
-                }}
-                onMouseOut={() => {
-                  console.log("Adios");
-                }}
-              >
-                <td>21/02/2023</td>
-                <td>Bienvenido al software</td>
-                <td>Saludos</td>
-                <th scope="row">1</th>
-              </tr>
-              <tr
-                onMouseOver={() => {
-                  console.log("Hola");
-                }}
-                onMouseOut={() => {
-                  console.log("Adios");
-                }}
-              >
-                <td>21/02/2023</td>
-                <td>Bienvenido al software</td>
-                <td>Saludos</td>
-                <th scope="row">1</th>
-              </tr>
-              <tr
-                onMouseOver={() => {
-                  console.log("Hola");
-                }}
-                onMouseOut={() => {
-                  console.log("Adios");
-                }}
-              >
-                <td>21/02/2023</td>
-                <td>Bienvenido al software</td>
-                <td>Saludos</td>
-                <th scope="row">1</th>
-              </tr>
-              <tr
-                onMouseOver={() => {
-                  console.log("Hola");
-                }}
-                onMouseOut={() => {
-                  console.log("Adios");
-                }}
-              >
-                <td>21/02/2023</td>
-                <td>Bienvenido al software</td>
-                <td>Saludos</td>
-                <th scope="row">1</th>
-              </tr>
-              <tr
-                onMouseOver={() => {
-                  console.log("Hola");
-                }}
-                onMouseOut={() => {
-                  console.log("Adios");
-                }}
-              >
-                <td>21/02/2023</td>
-                <td>Bienvenido al software</td>
-                <td>Saludos</td>
-                <th scope="row">1</th>
-              </tr>
-              <tr
-                onMouseOver={() => {
-                  console.log("Hola");
-                }}
-                onMouseOut={() => {
-                  console.log("Adios");
-                }}
-              >
-                <td>21/02/2023</td>
-                <td>Bienvenido al software</td>
-                <td>Saludos</td>
-                <th scope="row">1</th>
-              </tr>
-              <tr
-                onMouseOver={() => {
-                  console.log("Hola");
-                }}
-                onMouseOut={() => {
-                  console.log("Adios");
-                }}
-              >
-                <td>21/02/2023</td>
-                <td>Bienvenido al software</td>
-                <td>Saludos</td>
-                <th scope="row">1</th>
-              </tr>
-              <tr
-                onMouseOver={() => {
-                  console.log("Hola");
-                }}
-                onMouseOut={() => {
-                  console.log("Adios");
-                }}
-              >
-                <td>21/02/2023</td>
-                <td>Bienvenido al software</td>
-                <td>Saludos</td>
-                <th scope="row">1</th>
-              </tr>
+              ))}
             </tbody>
           </table>
         </div>
