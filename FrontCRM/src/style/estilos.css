@@ -1,12 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@1,800&display=swap');
 
+
+#root{
+    width: 100%;
+    height: 100%;
+}
+
 body {
     background: linear-gradient(359deg, #1952eb, #1e0e70);
-    background-size: 500% 500%;
+    background-size: 100%;
 
-    -webkit-animation: AnimationName 43s ease infinite;
-    -moz-animation: AnimationName 43s ease infinite;
-    animation: AnimationName 43s ease infinite;
+    -webkit-animation: AnimationName 10s ease infinite;
+    -moz-animation: AnimationName 10s ease infinite;
+    animation: AnimationName 10s ease infinite;
 }
 
 h6 {
@@ -24,10 +30,6 @@ h6 {
     flex-direction: column;
     background-color: red;
 
-}
-
-#aumentador{
-    display: flex;
 }
 
 ol,
@@ -51,6 +53,7 @@ ol {
 
 button {
     border-color: white;
+    background-color: transparent;
 }
 
 @-webkit-keyframes AnimationName {
@@ -102,6 +105,7 @@ button {
 }
 
 #container-users{
+    height: 87.5vh;
     display: flex;
     flex-direction: column;
     align-content: center;
@@ -121,91 +125,107 @@ button {
 }
 
 
+/*PAGINA USUARIO PRINCIPAL*/
+
 #container-General {
+    height: 87.5vh;
     display: grid;
-    height: 100%;
-    grid-auto-columns: 50% 50%;
+    grid-auto-rows: 80% 20%;
+
 }
 
-#left-area {
-    grid-column: 1/2;
-    width: 100%;
-    height: 100%;
+/*Card de usuario*/
+
+.contenedor{
     display: grid;
-    flex-direction: column;
-    grid-auto-rows: 22% 30% 14% 18%;
-    justify-items: center;
+    grid-row: 1 / 2;
     align-items: center;
-}
-
-#descripcion {
-    text-align: center;
-    width: 100%;
-    height: 100%;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-}
-
-#saludo {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 70px;
-}
-
-#list-action {
-    display: flex;
-    justify-content: space-evenly;
-    width: 100%;
-    height: 100%;
-    flex-direction: row;
-    align-items: center;
-}
-
-#perfil-text {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 30px;
-}
-
-#rigth-area {
-    background-color: #212529;
-    grid-column: 2/2;
-    width: 100%;
-    height: 96.6%;
-    display: flex;
-
     justify-content: center;
-    color: white;
-    align-items: flex-start;
 }
 
-#descripcion,
-#nombre {
-    color: white;
-}
-
-#nombre {
-    font-size: 20px;
-    font-family: 'Open Sans', sans-serif;
-}
-
-#profile-pic {
-
-    background-color: whitesmoke;
-    width: 88.3%;
-    height: 100%;
-}
-
-#listDats {
-    width: 100%;
-    color: white;
+.tarjeta{
+    height: 436px;
+    width: 459px;
+    background-color: #15297c;
+    border-radius: 10%;
+    box-shadow: 16px 14px 20px #0000008c;
+    position: relative;
+    overflow: hidden;
     display: flex;
+    align-items: center;
+    justify-content: space-evenly;
     flex-direction: column;
+}
+
+.tarjeta::before{
+    content: "";
+    position: absolute;
+    height: 666px;
+    width: 657px;
+    background-image: conic-gradient(#0cbecc 20deg, transparent 120deg);
+    animation: rotar 3s linear infinite;
+}
+
+@keyframes rotar{
+    from{
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(-360deg);
+    }
+}
+
+.tarjeta::after{
+    content: "";
+    position: absolute;
+    height: 427px;
+    width: 451px;
+    background-color: #15297c;
+    border-radius: 10%;
+    box-shadow: inset 16px 14px 20px #0000008c;
+}
+
+.contenedor p{
+    color:White;
+    z-index: 2;
+    background-color: transparent;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-align: center;
+}
+
+.contenedor h3{
+    color:White;
+    z-index: 2;
+    background-color: transparent;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-align: center;
+}
+
+/*
+    !Imagen de la card
+*/
+
+.contenedor #foto-profile{
+    width: 40%;
+    height: 40%;
+    color:White;
+    z-index: 2;
+    background-color: transparent;
+
+}
+
+/*Botoners de acciones de usuario*/
+
+#actionesUsuario {
+
+    display: flex;
+    grid-row: 2 / 3;
+    flex-direction: row;
     align-content: center;
     align-items: center;
-    height: 70%;
+    justify-content: space-evenly;
+}    
 
-}
 
 #primer,
 #segundo,
@@ -213,49 +233,50 @@ button {
     color: white;
 }
 
-#saludo {
-    font-size: 40px;
-    color: white;
-}
+/*
+    !Formulario de logeo
+*/
 
-#photo {
-    border-radius: 25%;
-    width: 150px;
-    height: 150px;
-    background-color: #212529;
-    -webkit-border-radius: 25%;
-    -moz-border-radius: 25%;
-    -ms-border-radius: 25%;
-    -o-border-radius: 25%;
-}
-
-#foto-profile {
-    display: flex;
+#formContainer{
+    display: grid;
+    grid-template-rows: 30% 50%;
+    height: 100vh; /*Altura del formulario*/
+    justify-items: center;
     align-items: center;
     justify-content: center;
+    align-content: center;
 }
 
-#formulario {
-    display: flex;
-    width: 100%;
-    height: 408px;
-    align-items: center;
-    justify-content: center;
-    margin: 0px;
-}
+/*Logo en la interfaz de logeo*/
 
 #pic {
+    grid-row: 1 / 2;
     display: flex;
-    width: 100%;
-    height: 50%;
-    align-items: center;
+    align-self: center;
     justify-content: center;
-
+    align-content: center;
+    align-items: center;
 }
 
 #logo {
-    width: 13%;
-    height: 25%;
+    width: 20%;
+}
+
+#formulario {
+    grid-row: 2 / 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+/*Media Queries de formulario*/
+
+@media (min-width: 319px)  {
+    #logo{
+        height: 200px;
+        width: 200px;
+    }
 }
 
 
@@ -267,7 +288,6 @@ button {
     display: flex;
     justify-content: flex-end;
     transform: translate(-139px, 1px);
-
 }
 
 #boton {
@@ -276,11 +296,13 @@ button {
     align-items: center;
 }
 
+
+
 .btn-neon {
     position: relative;
     display: inline-block;
     padding: 15px 30px;
-    color: rgb(255, 255, 255);
+    color: rgb(255, 0, 0);
     letter-spacing: 4px;
     font-size: 15px;
     text-decoration: none;
@@ -294,19 +316,15 @@ button {
 }
 
 .svg-inline--fa {
-    display: var(--fa-display, inline-block);
     height: 27px;
-    overflow: visible;
-    vertical-align: -0.125em;
     width: 55px;
 }
 
 
 .btn-neon:hover {
-    background: rgb(255, 255, 255);
-    box-shadow: 0 0 10px rgb(0, 0, 0), 0 0 40px black, 0 0 80px rgb(0, 0, 0);
+    background: rgb(0, 75, 255);
+    box-shadow: 0 0 5px rgb(0, 0, 0), 0 0 5px black, 0 0 5px rgb(0, 0, 0);
     transition-delay: 1s;
-    color: rgb(0, 0, 0);
 }
 
 .btn-neon span {
@@ -346,41 +364,6 @@ button {
 }
 
 
-button {
-    appearance: auto;
-    writing-mode: horizontal-tb;
-    font-style: 0;
-    font-variant-ligatures: 0;
-    font-variant-caps: 0;
-    font-variant-numeric: 0;
-    font-variant-east-asian: 0;
-    font-weight: 0;
-    font-stretch: 0;
-    font-size: 0;
-    font-family: 0;
-    text-rendering: auto;
-    color: transparent;
-    letter-spacing: normal;
-    word-spacing: normal;
-    line-height: normal;
-    text-transform: none;
-    text-indent: 0px;
-    text-shadow: none;
-    display: inline-block;
-    text-align: center;
-    align-items: flex-start;
-    cursor: pointer;
-    box-sizing: border-box;
-    background-color: transparent;
-    margin: 0em;
-    padding: 1px 6px;
-    border-width: 2px;
-    border-style: none;
-    border-color: buttonborder;
-    border-image: initial;
-    -webkit-writing-mode: horizontal-tb;
-    -ms-writing-mode: horizontal-tb;
-}
 /*
 !Status Light
 */
@@ -476,59 +459,30 @@ td {
     margin: 5px;
 }
 
-/*
-Graficos
-*/
-
+/* Contenedor principal de las gráficas */
 #contenedor-graficas {
+    padding: 20px;
     display: grid;
-    grid-auto-columns: 50% 50%;
-    grid-auto-rows: 100%;
+    grid-template-columns: 1fr; /* Una sola columna */
+    grid-gap: 20px;
     background-color: #212529;
     justify-items: center;
-
-}
-
-/* .graficas-barras{
-   
-   
-    grid-column: 1/2;
-    width: 100%;
-    height: 100%;
+  }
   
-    
-} */
-
-.graficas-linea {
-
-
-    grid-column: 1/2;
-    grid-row: 1/1;
+  /* Gráficas individuales */
+  .graficas {
     width: 100%;
-    height: 100%;
-
-
-}
-
-.graficas-torta {
-
-
-    grid-column: 2/3;
-    width: 49%;
-    /* width: 100%;
-    height: 100%; */
-
-
-
-}
-
-#estadisticas-card {
-    width: 100%;
-    height: 200px;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-}
+    max-width: 600px; /* Ajuste para un buen ancho en todas las pantallas */
+    height: 400px; /* Ajusta la altura de las gráficas */
+  }
+  
+  /* Para pantallas más pequeñas, ajusta la altura */
+  @media (max-width: 768px) {
+    .graficas {
+      height: 300px; /* Reduce la altura en pantallas pequeñas */
+    }
+  }
+  
 
 .card-top {
     display: flex;
@@ -548,6 +502,7 @@ span {
 
 .number {
     margin: 4px;
+    display :flex;
 }
 
 .minus,

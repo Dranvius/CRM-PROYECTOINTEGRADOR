@@ -89,8 +89,9 @@ const cotizacionDatos =  async (indice) =>{
     const datos = await Axios.post('/indiceCotizacion',{
       indice
     })
+  
+    console.log(indice)
 
-    
 
     return datos.data;
 

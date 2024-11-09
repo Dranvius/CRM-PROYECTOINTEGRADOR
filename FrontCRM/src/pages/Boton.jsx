@@ -51,8 +51,6 @@ export function Boton() {
       password,
     });
 
-    console.log(peticion2.data);
-
     setUser(peticion2.data); //!Datos del usuario de manera local
 
     navigate("/profile");
@@ -72,65 +70,65 @@ export function Boton() {
 
   return (
     <>
-      <div id="pic">
-        <img src="../src/img/logoB.png" alt="mal" id="logo" />
-      </div>
+      <div id="formContainer">
 
-      <div className="row" id="formulario">
-        <div className="col-6 ">
-
-          
-
-          <form onSubmit={trigger}>
-            <div className="mb-3 text-center text-light">
-              <label htmlFor="exampleInputEmail1" className="form-label">
-                Usuario/Correo Electronico
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                id="exampleInputEmail1"
-                aria-describedby="emailHelp"
-              />
-              <div id="emailHelp" className="form-text text-center text-light">
-                Nosotros no vamos a compartir tu correo con nadie.
-              </div>
-            </div>
-            <div className="mb-3 text-center text-light">
-              <label htmlFor="exampleInputPassword1" className="form-label">
-                Contraseña
-              </label>
-              <input
-                type="password"
-                className="form-control"
-                id="exampleInputPassword1"
-              />
-            </div>
-
-            <div id="boton">
-              <button id="start" className="btn-neon">
-                <span id="span1"></span>
-                <span id="span2"></span>
-                <span id="span3"></span>
-                <span id="span4"></span>
-                
-                <div
-                  id="icono"
-                  onMouseOver={() => {
-                    setIcon(element);
-                  }}
-                  onMouseOut={() => {
-                    setIcon(element2);
-                  }}
-                >
-                  {icon}
-                </div>
-              </button>
-            </div>
-          </form>
+        <div id="pic">
+          <img src="../src/img/logoB.png" alt="mal" id="logo"/>
         </div>
 
+        <div id="formulario">
+
+          <div>
+
+            <form onSubmit={trigger}>
+              <div className="mb-3 text-center text-light">
+                <label htmlFor="exampleInputEmail1" className="form-label">
+                  Usuario
+                </label>
+                <input
+                    type="text"
+                    className="form-control"
+                    id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                />
+              </div>
+              <div className="mb-3 text-center text-light">
+                <label htmlFor="exampleInputPassword1" className="form-label">
+                  Contraseña
+                </label>
+                <input
+                    type="password"
+                    className="form-control"
+                    id="exampleInputPassword1"
+                />
+              </div>
+
+              <div id="boton">
+                <button id="start" className="btn-neon">
+                  <span id="span1"></span>
+                  <span id="span2"></span>
+                  <span id="span3"></span>
+                  <span id="span4"></span>
+
+                  <div
+                      id="icono"
+                      onMouseOver={() => {
+                        setIcon(element);
+                      }}
+                      onMouseOut={() => {
+                        setIcon(element2);
+                      }}
+                  >
+                    {icon}
+                  </div>
+                </button>
+              </div>
+            </form>
+          </div>
+
+        </div>
       </div>
+
     </>
   );
 }

@@ -1,19 +1,23 @@
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../storage/globalStorage";
 import { NavbarLinks } from "../components/NavbarLinks";
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import { perdata } from "../emails/data_perfil.js";
 import axios from "../lib/axios";
 
 import Swal from "sweetalert2";
 
 export function ProfilePage() {
-  
+
   const profile = useAuthStore((state) => state.user);
   const setUser = useAuthStore((state) => state.setUser);
   const navigate = useNavigate();
 
-  
+
+  function capitalizarPrimeraLetra(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
   //?Funciones
 
   const cambioName = async () => {
@@ -72,7 +76,7 @@ export function ProfilePage() {
           title: "Finalizado con exito",
           confirmButtonColor: "green",
         });
-        
+
 
 
       } catch (error) {
@@ -184,7 +188,7 @@ export function ProfilePage() {
           email: formValues[0],
           cc: profile.cc
         }
-        
+
         Swal.fire({
           icon: "success",
           title: "Finalizado con exito",
@@ -194,7 +198,7 @@ export function ProfilePage() {
         // setTimeout(() =>{
         //   window.location.href = window.location.href;
         // },1000) 
-        
+
         setUser(newVlues)
       } catch (error) {
         console.error(error);
@@ -217,88 +221,60 @@ export function ProfilePage() {
       <NavbarLinks page="profile" typeUser={profileStatus} />
 
       <div id="container-General">
-        <div id="left-area">
-          <div id="saludo">BUEN DÍA</div>
 
-          <div id="photo">
-            <img
-              src="../src/img/logoB.png"
-              width="150px"
-              height="150px"
-              alt="ProfilePhoto"
-              id="foto-profile"
-            />
-          </div>
+        <div className="contenedor">
+          <div className="tarjeta">
 
-          <div id="nombre">
-            {profile.name.toUpperCase()} {profile.lastName.toUpperCase()}
-          </div>
+            <img src="../src/img/logoB.png" alt="ProfilePhoto" id="foto-profile" />
 
-          <div id="list-action">
-            <a
-              className="btn btn-outline-light"
-              onClick={() => {
-                cambioName();
-                navigate("/profile");
-              }}
-              role="button"
-            >
-              Cambiar Nombre
-            </a>
+            <h3>DATOS DEL USUARIO</h3>
 
-            <a
-              className="btn btn-outline-light"
-              onClick={() => {
-                cambioContraseña();
-                navigate("/profile");
-              }}
-              role="button"
-            >
-              Cambiar Contraseña
-            </a>
-            <a
-              className="btn btn-outline-light"
-              onClick={() => {
-                cambioCorreo();
-              }}
-              role="button"
-            >
-              Cambiar Correo
-            </a>
-          </div>
+            <p className="textoUsuario">Nombre : {capitalizarPrimeraLetra(profile.name)} {capitalizarPrimeraLetra(profile.lastName)}</p>
+            <p className="textoUsuario">Cedula : {profile.cc.toUpperCase()}</p>
+            <p className="textoUsuario">Correo : {profile.email.toLowerCase()}</p>
 
-          <div id="Company-list">
-            <img
-              src="../src/img/logoB.png"
-              width="100px"
-              height="100px"
-              alt="LogoPic"
-            />
+
           </div>
         </div>
 
-        <div id="rigth-area">
-          <table className="table table-striped table-dark table-hover">
-            <thead>
-              <tr>
-                <th scope="col">Fecha</th>
-                <th scope="col">Descripción</th>
-                <th scope="col">Encabezado</th>
-                <th scope="col">#</th>
-              </tr>
-            </thead>
-            <tbody>
-            {perdata.map((valor, i) => (
-              <tr>
-              <td>{valor.Fecha}</td>
-              <td>{valor.Descripcion}</td>
-              <td>{valor.Email}</td>
-              <td>{valor.N}</td>
-              </tr>
-              ))}
-            </tbody>
-          </table>
+
+        <div id="actionesUsuario">
+
+          <a
+            className="btn btn-outline-light"
+            onClick={() => {
+              cambioContraseña();
+              navigate("/profile");
+            }}
+            role="button"
+          >
+            Cambiar Contraseña
+          </a>
+
+
+          <a
+            className="btn btn-outline-light"
+            onClick={() => {
+              cambioCorreo();
+            }}
+            role="button"
+          >
+            Cambiar Correo
+          </a>
+
+          <a
+            className="btn btn-outline-light"
+            onClick={() => {
+              cambioName();
+              navigate("/profile");
+            }}
+            role="button"
+          >
+            Cambiar Nombre
+          </a>
+
         </div>
+
       </div>
     </div>
   );

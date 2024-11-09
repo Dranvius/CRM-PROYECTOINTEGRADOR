@@ -7,7 +7,7 @@ import { BsFillChatSquareFill } from "react-icons/bs";
 import { BsBookFill } from "react-icons/bs";
 
 //const element = <FontAwesomeIcon icon={faComment} />;
-import { TableList } from "../components/TableList";
+import { TableList } from "../components/TableList.jsx";
 import { CrearPDF } from "../components/CrearPDF";
 import { useAuthStore } from "../storage/globalStorage.js";
 //!Importación del contexto

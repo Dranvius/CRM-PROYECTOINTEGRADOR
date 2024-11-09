@@ -7,7 +7,7 @@ import { faComment } from "@fortawesome/free-solid-svg-icons";
 import { FaBeer } from "react-icons/fa";
 import { BsFillChatSquareFill } from "react-icons/bs";
 import { BsBookFill } from "react-icons/bs";
-import { TableList } from "../components/TableList";
+import { TableList } from "../components/TableList.jsx";
 import { useAuthStore } from "../storage/globalStorage.js";
 
 //const element = <FontAwesomeIcon icon={faComment} />;

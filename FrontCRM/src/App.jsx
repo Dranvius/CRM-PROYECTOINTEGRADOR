@@ -7,7 +7,7 @@ import { DashBoard } from './pages/DashBoard';
 import { ListUsers } from './pages/ListUsers'
 import { ListClient } from './pages/ListClient';
 import { ListProducts } from './pages/ListProducts';
-import { CotizacionesList } from './pages/CotizacionesList';
+import { CotizacionesList } from './pages/CotizacionesList.jsx';
 import {ViewPdf} from './pages/ViewPdf.jsx'
 import {PDFViewer} from '@react-pdf/renderer'
 

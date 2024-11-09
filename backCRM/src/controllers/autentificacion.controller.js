@@ -9,14 +9,14 @@ const pool = new pg.Pool(ConfiguracionA);
 export const loginHandler = async (req, res) => {
 
   try {
- 
+
+    //!SOLICITUD A LA TABLA
+
     const queryText =
       "SELECT * FROM usuario INNER JOIN personaldats ON personaldats.id_personalid = usuario.id_users WHERE usuario.email = $1";
     const res1 = await pool.query(queryText, [req.body.user]);
 
     const { email, pass, tipo } = res1.rows[0];
-
-
 
     //!Verificaciòn correo.
     if (!(email === req.body.user)) {
@@ -46,8 +46,7 @@ export const loginHandler = async (req, res) => {
       }
     );
 
-    //!DEVOLVER token
-
+    //!DEVOLVER TOKEN
     return res.json({
       token,
     });
@@ -60,7 +59,8 @@ export const loginHandler = async (req, res) => {
   }
 };
 
+//!Devuelve los datos del usuario
 
 export const profileHandler = (req, res) => {
-  return res.json(req.user); //!Devuelve los datos del usuario
+  return res.json(req.user);
 }

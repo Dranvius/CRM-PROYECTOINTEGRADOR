@@ -200,13 +200,13 @@ export function CrearPDF(props) {
                         <th scope="col">Nombre</th>
                         <th scope="col">Descripción</th>
                         <th scope="col">Contador</th>
-                        <th scope="col">Seleccionar</th>
+                        <th scope="col">Selec</th>
                       </tr>
                       </thead>
                       <tbody>`
                         +listComplete(producto)+
                       `</tbody>
-                      </table>`;
+                      </table>`
 
                       
 

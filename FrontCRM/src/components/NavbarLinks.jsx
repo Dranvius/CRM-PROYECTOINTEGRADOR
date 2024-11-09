@@ -19,7 +19,8 @@ export function NavbarLinks({ page, typeUser }) {
 
   //*Manejo de condiciones props para devolver el componente
     //*En funciòn del ususario y de la pagina accedida
-  if (typeUser == false) {
+
+  if (typeUser == true) {
 
     return (
       <>

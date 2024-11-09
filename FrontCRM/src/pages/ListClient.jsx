@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import { BsFillChatSquareFill } from "react-icons/bs";
 import { BsBookFill } from "react-icons/bs";
 import { useAuthStore } from "../storage/globalStorage.js"; 
-import { TableList } from "../components/TableList";
+import { TableList } from "../components/TableList.jsx";
 import {useState,useRef} from 'react'
 import { PagNavigate } from "../components/pagNavigate";
 

@@ -33,32 +33,6 @@ export const ViewPdf = () => {
     fetchData();
   }, []);
 
-  console.log(datos);
-  console.log(loading)
-  
-
-  const productos = [
-    {
-      cantidad: 12,
-      descrición: "silla pro max",
-      precio: "2000",
-    },
-    {
-      cantidad: 17,
-      descrición: "Nappy pro max",
-      precio: "2000",
-    },
-    {
-      cantidad: 16,
-      descrición: "nada pro max",
-      precio: "2000",
-    },
-    {
-      cantidad: 14,
-      descrición: "ostias pro max",
-      precio: "2000",
-    },
-  ];
 
 return (
     <>

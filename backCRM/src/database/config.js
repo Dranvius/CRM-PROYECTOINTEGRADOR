@@ -8,8 +8,8 @@
 export const ConfiguracionA = {
   user: "postgres",
   host: "localhost",
-  password: "333144388",
-  database: "Crm",
+  password: "333",
+  database: "postgres",
 };
 
 // export const ConfiguracionA = process.env.DATABASE_URL;
