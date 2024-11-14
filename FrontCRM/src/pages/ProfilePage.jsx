@@ -4,7 +4,6 @@ import { NavbarLinks } from "../components/NavbarLinks";
 import { useEffect, useState } from "react";
 import { perdata } from "../emails/data_perfil.js";
 import axios from "../lib/axios";
-
 import Swal from "sweetalert2";
 
 export function ProfilePage() {
@@ -229,9 +228,9 @@ export function ProfilePage() {
 
             <h3>DATOS DEL USUARIO</h3>
 
-            <p className="textoUsuario">Nombre : {capitalizarPrimeraLetra(profile.name)} {capitalizarPrimeraLetra(profile.lastName)}</p>
-            <p className="textoUsuario">Cedula : {profile.cc.toUpperCase()}</p>
-            <p className="textoUsuario">Correo : {profile.email.toLowerCase()}</p>
+            <p className="textoUsuario">{capitalizarPrimeraLetra(profile.name)} {capitalizarPrimeraLetra(profile.lastName)}</p>
+            <p className="textoUsuario">{profile.cc.toUpperCase()}</p>
+            <p className="textoUsuario">{profile.email.toLowerCase()}</p>
 
 
           </div>

@@ -111,6 +111,30 @@ button {
     align-content: center;
 }
 
+/*container-users responsive*/
+
+/* Teléfonos pequeños y tablets */
+@media (max-width: 768px) {
+    #container-users {
+        min-height: 175vh; /* Altura especificada para dispositivos pequeños */
+    }
+}
+
+/* Tablets grandes */
+@media (min-width: 769px) and (max-width: 1024px) {
+    #container-users {
+        min-height: 90vh; /* Mantén la misma altura para tablets grandes */
+    }
+}
+
+/* Dispositivos más grandes (desktop) */
+@media (min-width: 1025px) {
+    #container-users {
+        min-height: 95.5vh; /* Altura original para pantallas grandes */
+    }
+}
+
+
 #userinfo {
     display: grid;
     grid-template-rows: 70% 100%;
@@ -547,6 +571,16 @@ span {
     flex-wrap: nowrap;
 }
 
+@media (max-width: 768px) {
+    #containerTop {
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+
+containerTop
 
 /*
 Tablero

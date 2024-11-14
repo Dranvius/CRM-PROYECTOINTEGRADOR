@@ -8,7 +8,7 @@
 export const ConfiguracionA = {
   user: "postgres",
   host: "localhost",
-  password: "333",
+  password: "333144388",
   database: "postgres",
 };
 

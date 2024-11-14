@@ -15,8 +15,7 @@ export function TableList({ ente }) {
   const [datos, setDatos] = useState([]);
   const [datosCliente, setDatosCliente] = useState([]);
   const [datosPorProceso, setDatosPorProceso] = useState(0);
-  const [search, setSearch] = useState("");
-  
+  const [search, setSearch] = useState("");  
   const context = useContext(ListsContext);
 
   useEffect(() => {
@@ -191,7 +190,9 @@ export function TableList({ ente }) {
   return (
     <div>
       <div id="search" className="pt-2">
-        <nav className="navbar bg-body-tertiary" id="containerTop">
+        <nav className="bg-body-tertiary" id="containerTop">
+
+
           <ul className="pagination">
             <li className="page-item">
               <button className="page-link" onClick={backPage}>Anterior</button>
@@ -200,20 +201,25 @@ export function TableList({ ente }) {
               <button className="page-link" onClick={nextPage}>Siguiente</button>
             </li>
           </ul>
+
           <div className="container-fluid">
             <form className="d-flex" role="search" onSubmit={handleFilter}>
               <input className="form-control me-2" type="search" placeholder={`Buscar ${ente}`} aria-label="Buscar" />
               <button className="btn btn-success" type="submit">Filtrar</button>
             </form>
           </div>
+
         </nav>
       </div>
+
+      <div class="table-responsive">
       <table className="table table-dark table-hover">
         <thead>
           <tr>{renderTableHeaders()}</tr>
         </thead>
         <tbody>{renderTableRows()}</tbody>
       </table>
+      </div>
     </div>
   );
 }
