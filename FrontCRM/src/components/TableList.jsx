@@ -74,7 +74,9 @@ export function TableList({ ente }) {
 
   const renderTableRows = () => {
     const currentData = datos.slice(datosPorProceso, datosPorProceso + 5);
+
     return currentData.map((item, i) => {
+
       if (ente === "usuario") {
         return (
           <tr key={i}>
@@ -84,10 +86,10 @@ export function TableList({ ente }) {
             <td>{item.cc}</td>
             <td>{item.email}</td>
             <td>{item.numbercelphone}</td>
-            <td>{item.tipo ? "Activo" : "Desactivado"}</td>
+            <td>{item.tipo ? "Administrador" : "Operador"}</td>
             <td>
               <div
-                id={item.statusu ? "circleStatusGreen" : "circleStatusRed"}
+                id={item.statusu === true ? "circleStatusGreen" : "circleStatusRed"}
               ></div>
             </td>
             <td>
@@ -212,7 +214,7 @@ export function TableList({ ente }) {
         </nav>
       </div>
 
-      <div class="table-responsive">
+      <div className="table-responsive">
       <table className="table table-dark table-hover">
         <thead>
           <tr>{renderTableHeaders()}</tr>

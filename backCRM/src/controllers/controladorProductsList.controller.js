@@ -47,7 +47,7 @@ const CrearproductoBD = async (newUser) => {
       newUser.datos[1], //precio
       newUser.datos[2], //descripcion
       newUser.datos[3],//descuento
-      newUser.datos[4] == "Activo" ? true : false
+      newUser.datos[4] = true
 
 
     ];

@@ -11,6 +11,7 @@ import { useParams } from "react-router-dom";
 import { useContext, useState, useEffect } from "react";
 import { ListsContext } from "../context/ListsContext";
 
+
 export const ViewPdf = () => {
   //Traer contexto
   const context = useContext(ListsContext);
@@ -32,7 +33,6 @@ export const ViewPdf = () => {
     }
     fetchData();
   }, []);
-
 
 return (
     <>
@@ -253,7 +253,7 @@ return (
                         borderRight: "1px",
                       }}
                     >
-                      Sub total : {parseInt(datos[0].valor_total) - (0.19*parseInt(datos[0].valor_total))}
+                      Sub total : {parseInt(datos[0].valor_total) + (0.19*parseInt(datos[0].valor_total))}
                     </Text>
                   </View>
                   <View style={{ display: "flex", paddingBottom: "20px" }}>

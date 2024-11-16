@@ -90,13 +90,10 @@ const cotizacionDatos =  async (indice) =>{
       indice
     })
   
-    console.log(indice)
-
-
     return datos.data;
 
   } catch (error) {
-    console.error(error)
+    console.err(error)
   }
 }
 

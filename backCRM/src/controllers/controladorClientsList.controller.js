@@ -51,7 +51,7 @@ const CrearclienteBD = async (newUser) => {
       newUser.datos[2], // Cédula
       newUser.datos[3], // Correo
       newUser.datos[4], // Número
-      newUser.datos[5] === "Activo", // Status
+      newUser.datos[5] = true, // Status
       res0.rows[0].id_users // Relación staff
     ];
 

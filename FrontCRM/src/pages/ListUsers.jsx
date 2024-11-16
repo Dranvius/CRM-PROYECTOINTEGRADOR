@@ -1,26 +1,31 @@
+import { useEffect, useState } from "react";
 import { NavbarLinks } from "../components/NavbarLinks";
 import axios from "../lib/axios";
-//Botones toaster
 import Swal from "sweetalert2";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faComment } from "@fortawesome/free-solid-svg-icons";
-import { FaBeer } from "react-icons/fa";
-import { BsFillChatSquareFill } from "react-icons/bs";
-import { BsBookFill } from "react-icons/bs";
+import { BsFillChatSquareFill, BsBookFill } from "react-icons/bs";
 import { TableList } from "../components/TableList.jsx";
 import { useAuthStore } from "../storage/globalStorage.js";
 
-//const element = <FontAwesomeIcon icon={faComment} />;
-
-
-
 export function ListUsers(props) {
-
   const profile = useAuthStore((state) => state.user);
-
-
   const profileStatus = profile.status;
 
+  const [usuarios, setUsuarios] = useState([]); // Estado para la lista de usuarios
+
+  // Función para cargar los usuarios desde el backend
+  const cargarUsuarios = async () => {
+    try {
+      const { data } = await axios.get("/userdats"); // Ruta del backend para obtener usuarios
+      setUsuarios(data); // Actualiza el estado con los usuarios
+    } catch (error) {
+      console.error("Error al cargar usuarios:", error);
+    }
+  };
+
+  // Cargar usuarios al montar el componente
+  useEffect(() => {
+    cargarUsuarios();
+  }, []);
 
   const CrearUsu = async () => {
     const { value: formValues } = await Swal.fire({
@@ -36,19 +41,33 @@ export function ListUsers(props) {
       cancelButtonColor: "#dc3545",
       background: "white",
       footer:
-        "<center><b>¡¡RECUERDA!!</b><br>Tipo Activo es para usuario Administrador Desactivado es para usuario Gestor</center>",
-      html:
-        '<input id="swal-input1" class="swal2-input" placeholder="Nombre">' +
-        '<input id="swal-input2" class="swal2-input" placeholder="Apellido">' +
-        '<input id="swal-input3" class="swal2-input" placeholder="Cedula">' +
-        '<input id="swal-input4" class="swal2-input" placeholder="Celular">' +
-        '<input id="swal-input5" class="swal2-input" placeholder="Correo Electronico">' +
-        '<input id="swal-input6" class="swal2-input" placeholder="Contraseña">' +
-        '<input id="swal-input7" class="swal2-input" placeholder="Tipo">' +
-        '<input id="swal-input8" class="swal2-input" placeholder="Estado">',
-
+        "<center><b>¡¡RECUERDA!!</b><br>Selecciona el tipo de usuario: Administrador o Normal</center>",
+      html: `
+          <div style="margin-bottom: 10px;">
+            <label for="swal-input1" style="font-weight: bold;">Información Personal</label>
+            <input id="swal-input1" class="swal2-input" placeholder="Nombre">
+            <input id="swal-input2" class="swal2-input" placeholder="Apellido">
+            <input id="swal-input3" class="swal2-input" placeholder="Cedula">
+            <input id="swal-input4" class="swal2-input" placeholder="Celular">
+          </div>
+          <div style="margin-bottom: 10px;">
+            <label for="swal-input6" style="font-weight: bold;">Credenciales</label>
+            <input id="swal-input5" class="swal2-input" placeholder="Correo Electronico">
+            <input id="swal-input6" class="swal2-input" type="password" placeholder="Contraseña">
+          </div>
+          <div style="margin-bottom: 10px; text-align: left;">
+            <label style="font-weight: bold;">Tipo de Usuario</label><br>
+            <label><input type="radio" name="tipoUsuario" value="true"> Administrador</label><br>
+            <label><input type="radio" name="tipoUsuario" value="false"> Normal</label>
+          </div>
+      `,
       focusConfirm: false,
       preConfirm: () => {
+        const tipoSeleccionado = document.querySelector('input[name="tipoUsuario"]:checked');
+        if (!tipoSeleccionado) {
+          Swal.showValidationMessage("Por favor selecciona el tipo de usuario (Administrador o Normal)");
+          return null;
+        }
         return [
           document.getElementById("swal-input1").value,
           document.getElementById("swal-input2").value,
@@ -56,48 +75,60 @@ export function ListUsers(props) {
           document.getElementById("swal-input4").value,
           document.getElementById("swal-input5").value,
           document.getElementById("swal-input6").value,
-          document.getElementById("swal-input7").value,
-          document.getElementById("swal-input8").value,
+          tipoSeleccionado.value, // Agregar el tipo seleccionado (true para Administrador o false para Normal)
         ];
       },
     });
 
     if (formValues) {
-
-      //peticion al back-end//
-      const resultado = await axios.post("/CrearUsu", {
-        datos: formValues,
-      });
+      try {
+        await axios.post("/CrearUsu", {
+          datos: formValues,
+        });
+        Swal.fire({
+          icon: "success",
+          title: "Usuario creado con éxito",
+          text: "El usuario ha sido registrado correctamente.",
+          confirmButtonText: "OK",
+          allowOutsideClick: false, 
+          allowEscapeKey: false, 
+        }).then((result) => {
+          if (result.isConfirmed) {
+            location.reload();
+          }
+        });
+      } catch (error) {
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "Ocurrió un error al crear el usuario.",
+        });
+      }
     }
-  }
+  };
 
   return (
     <>
       <NavbarLinks page="usuarios" typeUser={profileStatus} />
 
-
       <div id="container-users">
         <div id="list-users">
-          <TableList ente="usuario" />
+          {/* Pasa la lista de usuarios al componente TableList */}
+          <TableList ente="usuario" data={usuarios} />
         </div>
-
 
         <div id="downPartUserList">
           <div id="smallMenu">
             <BsFillChatSquareFill />
             <BsBookFill />
-
           </div>
           <a
             type="button"
             className="btn btn-success"
-            onClick={() => {
-              CrearUsu();
-            }}
+            onClick={CrearUsu}
           >
             Crear Usuario
           </a>
-
         </div>
       </div>
     </>

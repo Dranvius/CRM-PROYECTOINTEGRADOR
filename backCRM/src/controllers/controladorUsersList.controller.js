@@ -20,7 +20,7 @@ const traerDatosUsers = async () => {
   } catch (error) {
     console.error(error);
   }
-}
+};
 
 //Ruta de respuesta y traida(traer datos)
 export const AllDats = async (req, res) => {
@@ -31,7 +31,7 @@ export const AllDats = async (req, res) => {
   } catch (error) {
     console.error(error);
   }
-}
+};
 
 //*-----------------Eliminar user
 
@@ -45,9 +45,7 @@ const eliminar = async (dats) => {
     const res1 = await pool.query(queryText, ar);
 
     return res1;
-  } catch (error) {
-
-  }
+  } catch (error) {}
 };
 
 //Ruta de respuesta y traida(eliminar user)
@@ -59,8 +57,6 @@ export const EliminarUsario = async (req, res) => {
     console.error(error);
   }
 };
-
-
 
 //-----editar datos personales---///
 
@@ -93,56 +89,51 @@ const editar = async (change) => {
     ];
 
     const res2 = await pool.query(queryText2, cambioUser);
-  } catch (error) {
-
-  }
+  } catch (error) {}
 };
 
 //Ruta req y res en editicion de datos//
 export const EditarUsuario = async (req, res) => {
   try {
-
     const resBD = await editar(req.body);
 
     res.send("Usario modificado");
-  } catch (error) {
-
-  }
+  } catch (error) {}
 };
-
 
 //---CREAR USUARIO--//
 const CrearUsuBD = async (change) => {
   try {
-    const querytext = "INSERT INTO personaldats (firstname , lastname , cc , numbercelphone) VALUES ($1,$2,$3,$4)";
+    const querytext =
+      "INSERT INTO personaldats (firstname , lastname , cc , numbercelphone) VALUES ($1,$2,$3,$4)";
+
+    console.log(change);
 
     const creaUs = [
       change.datos[0],
       change.datos[1],
       change.datos[2],
-      change.datos[3]
+      change.datos[3],
     ];
 
-    const querytext1 = "INSERT INTO  usuario (email,pass,tipo,statusu) VALUES ( $1, $2, $3, $4)";
+    const querytext1 =
+      "INSERT INTO  usuario (email,pass,tipo,statusu) VALUES ( $1, $2, $3, $4)";
 
     const creaUsu2 = [
       change.datos[4],
       await encrypt(change.datos[5]),
-      change.datos[6] == "Activo" ? true : false,
-      change.datos[7] == "Activo" ? true : false
+      change.datos[6] === "true",
+      (change.datos[7] = true),
     ];
-
 
     const res2 = await pool.query(querytext1, creaUsu2);
 
     const res1 = await pool.query(querytext, creaUs);
 
-
     return 1;
   } catch (error) {
     console.error(error);
   }
-
 };
 
 //Ruta req y res crear de usuario//
@@ -154,4 +145,3 @@ export const CrearUsu = async (req, res) => {
     console.error(error);
   }
 };
-

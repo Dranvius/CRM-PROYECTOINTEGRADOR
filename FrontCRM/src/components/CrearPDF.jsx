@@ -123,9 +123,10 @@ export function CrearPDF(props) {
 
     const { value: opcion } = await Swal.fire({
       icon: "question",
-      iconColor: "blue",
+      iconColor: "0d6efd",
       title: "Desea Crear una cotización",
       input: "radio",
+      color: "#0d6efd",
       inputOptions: inputOptions,
       inputValidator: (value) => {
         if (!value) {
@@ -143,7 +144,8 @@ export function CrearPDF(props) {
         clientes.push(cliente[i].firstname + " " + cliente[i].lastname);
       }
       const { value: indice } = await Swal.fire({
-        title: "Selecionar Cliente",
+        title: "Seleccione Un Cliente",
+        color:"blue",
         input: "select",
         inputOptions: {
           clientes,
@@ -241,12 +243,10 @@ export function CrearPDF(props) {
                         console.table(nulos);
                       });
 
-                      console.log(!check.some((valor) => valor === true));
-                      
+                     
                       //!Pimera condición de la lista de productos
                       
                       if (!check.some((valor) => valor === true)) {
-                        console.log("no hay productos seleccionados");
                         Swal.close();
                         ToastNegative.fire({
                           icon: "warning",
@@ -257,7 +257,6 @@ export function CrearPDF(props) {
                       //!Pimera condición de la lista de productos
 
                       } else if (!nulos.some((valor) => valor > 0)) {
-                        console.log("no hay numeros positivos");
                         Swal.close();
                         ToastNegative.fire({
                           icon: "warning",

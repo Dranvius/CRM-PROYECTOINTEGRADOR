@@ -31,8 +31,8 @@ export function ListProducts(props) {
         '<input id="swal-input1" class="swal2-input" placeholder="Producto">' +
         '<input id="swal-input2" class="swal2-input" placeholder="Precio">' +
         '<input id="swal-input3" class="swal2-input" placeholder="Descripcion">' +
-        '<input id="swal-input4" class="swal2-input" placeholder="Descuento">' +
-        '<input id="swal-input5" class="swal2-input" placeholder="Status">',
+        '<input id="swal-input4" class="swal2-input" placeholder="Descuento">',
+
       focusConfirm: false,
       preConfirm: () => {
         return [
@@ -40,7 +40,6 @@ export function ListProducts(props) {
           document.getElementById("swal-input2").value,
           document.getElementById("swal-input3").value,
           document.getElementById("swal-input4").value,
-          document.getElementById("swal-input5").value,
 
         ];
       },
@@ -48,11 +47,24 @@ export function ListProducts(props) {
 
     if (formValues) {
 
-
       const resultado = await axios.post("/newProduct", {
         datos: formValues,
         creador: profile.id,
       });
+
+      Swal.fire({
+        icon: "success",
+        title: "Producto creado con éxito",
+        text: "El Producto ha sido registrado correctamente.",
+        confirmButtonText: "OK",
+        allowOutsideClick: false, 
+        allowEscapeKey: false, 
+      }).then((result) => {
+        if (result.isConfirmed) {
+          location.reload();
+        }
+      });
+
     }
   }
 

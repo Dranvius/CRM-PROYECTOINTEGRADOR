@@ -57,8 +57,6 @@ export function ProfilePage() {
 
         const peticion = await axios.post("/cambiarNombre", formValues);
 
-        console.log(peticion)
-
         const newVlues = {
           id: profile.id,
           name: formValues[0],
@@ -176,8 +174,6 @@ export function ProfilePage() {
         formValues.push(profile.cc);
 
         const peticion = await axios.post("/cambiarCorreo", formValues);
-
-        console.log(peticion)
 
         const newVlues = {
           id: profile.id,

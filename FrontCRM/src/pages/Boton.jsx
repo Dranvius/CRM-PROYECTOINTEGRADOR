@@ -61,7 +61,7 @@ export function Boton() {
         icon: 'error',
         title: 'Contraseña o correo incorrecto'
       })
-      console.log("error de autentificación")
+      console.err("error de autentificación")
     }
 
 
