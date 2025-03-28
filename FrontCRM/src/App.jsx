@@ -1,4 +1,4 @@
-import { Boton } from "./pages/Boton";
+import { Boton } from "./pages/Login.jsx";
 import { ProfilePage } from "./pages/ProfilePage";
 import { BrowserRouter, Routes, Route,Router } from "react-router-dom"; //!Especificar que se mostrara
 import { ProtectedRoute } from "./components/ProtectedRoute";

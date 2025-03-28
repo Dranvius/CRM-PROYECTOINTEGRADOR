@@ -46,7 +46,7 @@ export function ListClient(props) {
         <input id="swal-input1" class="swal2-input" placeholder="Nuevo Nombre">
         <input id="swal-input2" class="swal2-input" placeholder="Nuevo Apellido">
         <input id="swal-input3" class="swal2-input" placeholder="Nueva Cedula">
-        <label for="swal-input1" style="font-weight: bold;">Datos De Contacto</label>
+        <label for="swal-input1" style="font-weight: bold;"></label>
         <input id="swal-input5" class="swal2-input" placeholder="Nuevo Correo Electronico">
         <input id="swal-input4" class="swal2-input" placeholder="Nuevo Celular">`,
       focusConfirm: false,
@@ -89,10 +89,12 @@ export function ListClient(props) {
   return (
     <>
       <NavbarLinks page="clientes" typeUser={profileStatus} />
+      
       <div id="container-users">
         <div id="list-users">
           {/* Asegúrate de que TableList esté recibiendo clientes como prop */}
           <TableList ente="cliente" data={clientes} /> {/* Pasar datos actualizados */}
+          
         </div>
         <div id="downPartUserList">
           <div id="smallMenu">

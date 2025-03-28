@@ -86,7 +86,7 @@ const editarBD = async (change) => {
       change.datos[2],
       change.datos[3],
       change.datos[4],
-      change.datos[5] === "Activo",
+      change.datos[5],
       change.index
     ];
 
@@ -110,12 +110,15 @@ export const EditarCliente = async (req, res) => {
 // Función para eliminar cliente en la BD
 const eliminarBD = async (dats) => {
   try {
-    const queryText = "UPDATE client SET statusc = false WHERE id_client = $1";
+    
+
+    const queryText = "UPDATE client SET statusc = False WHERE id_client = $1";
     const ar = [dats];
     const res1 = await pool.query(queryText, ar);
     return res1;
   } catch (error) {
     console.log(error);
+    return 400;
   }
 };
 

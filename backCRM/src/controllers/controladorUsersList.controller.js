@@ -117,7 +117,7 @@ const CrearUsuBD = async (change) => {
     ];
 
     const querytext1 =
-      "INSERT INTO  usuario (email,pass,tipo,statusu) VALUES ( $1, $2, $3, $4)";
+      "INSERT INTO  usuario (email,pass,tipo,status) VALUES ( $1, $2, $3, $4)";
 
     const creaUsu2 = [
       change.datos[4],

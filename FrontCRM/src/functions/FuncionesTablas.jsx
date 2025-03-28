@@ -103,19 +103,27 @@ export const editClient = async (indice) => {
       '<input id="swal-input1" class="swal2-input" placeholder="Nombre ">' +
       '<input id="swal-input2" class="swal2-input" placeholder="Apellido">' +
       '<input id="swal-input3" class="swal2-input" placeholder="Cedula ">' +
-      '<input id="swal-input5" class="swal2-input" placeholder="Telefono">' +
       '<input id="swal-input4" class="swal2-input" placeholder="Correo">' +
-      '<input id="swal-input6" class="swal2-input" placeholder="Estado">',
-
+      '<input id="swal-input5" class="swal2-input" placeholder="Telefono">' +
+      `
+        <div style="text-align: left; margin-top: 10px;">
+          <label><strong>Estado:</strong></label><br>
+          <input type="radio" id="estado-activo" name="estado" value="true" checked>
+          <label for="estado-activo">Activo</label><br>
+          <input type="radio" id="estado-desactivo" name="estado" value="false">
+          <label for="estado-desactivo">Desactivo</label>
+        </div>
+      `,
     focusConfirm: false,
     preConfirm: () => {
+      const estadoValue = document.querySelector('input[name="estado"]:checked').value;
       return [
         document.getElementById("swal-input1").value,
         document.getElementById("swal-input2").value,
         document.getElementById("swal-input3").value,
         document.getElementById("swal-input4").value,
         document.getElementById("swal-input5").value,
-        document.getElementById("swal-input6").value,
+        estadoValue === "true", // convierte string a boolean
       ];
     },
   });
@@ -125,6 +133,9 @@ export const editClient = async (indice) => {
       datos: formValues,
       index: indice,
     });
+
+    location.reload();
+
   }
 };
 
@@ -152,11 +163,12 @@ export const deleteClient = async (indice) => {
   });
 
   if (opcion === "true") {
-    Swal.fire({ html: `La seleción es: ${opcion}` });
-
-    const respuesta = await axios.post("/deletClient", {
+    
+    await axios.post("/deletClient", {
       datos: indice,
     });
+    location.reload();
+
   } else {
     Swal.fire({
       icon: "warning",
@@ -174,36 +186,81 @@ export const deleteClient = async (indice) => {
 
 //!BOTONES PRODUCTOS
 
-//?Editar producto
-export const editProduct = async (indice) => {
+export const editProduct = async (indice, item) => {
   const { value: formValues } = await Swal.fire({
-    title: "Editar Cliente",
+    title: "Editar Producto",
     html:
-      '<input id="swal-input1" class="swal2-input" placeholder="Producto ">' +
-      '<input id="swal-input2" class="swal2-input" placeholder="Precio">' +
-      '<input id="swal-input3" class="swal2-input" placeholder="Descripcion">' +
-      '<input id="swal-input4" class="swal2-input" placeholder="Descuento">' +
-      '<input id="swal-input5" class="swal2-input" placeholder="Estado">',
-
+    `<input id="swal-input1" class="swal2-input" placeholder="Producto" value="${item.nameproduct}">` +
+    `<input id="swal-input2" class="swal2-input" placeholder="Precio" value="${item.price}">` +
+    `<input id="swal-input3" class="swal2-input" placeholder="Descripción" value="${item.description}">` +
+    `<div style="text-align: left; margin-top: 10px;">
+      <label><strong>Descuento : </strong></label><br>
+      <input type="radio" id="descuento-5" name="descuento" value="5" ${item.discount == 5 ? 'checked' : ''}>
+      <label for="descuento-5">5 %</label><br>
+      <input type="radio" id="descuento-25" name="descuento" value="25" ${item.discount == 25 ? 'checked' : ''}>
+      <label for="descuento-25">25 %</label>
+    </div>` +
+    `<div style="text-align: left; margin-top: 10px;">
+      <label><strong>Estado:</strong></label><br>
+      <input type="radio" id="estado-activo" name="estado" value="true" ${item.status === true ? 'checked' : ''}>
+      <label for="estado-activo">Activo</label><br>
+      <input type="radio" id="estado-inactivo" name="estado" value="false" ${item.status === false ? 'checked' : ''}>
+      <label for="estado-inactivo">Inactivo</label>
+    </div>`,
     focusConfirm: false,
+    showCancelButton: true,
+    confirmButtonText: "Guardar",
+    cancelButtonText: "Cancelar",
     preConfirm: () => {
-      return [
-        document.getElementById("swal-input1").value,
-        document.getElementById("swal-input2").value,
-        document.getElementById("swal-input3").value,
-        document.getElementById("swal-input4").value,
-        document.getElementById("swal-input5").value,
-      ];
+      const nombre = document.getElementById("swal-input1").value;
+      const precio = document.getElementById("swal-input2").value;
+      const descripcion = document.getElementById("swal-input3").value;
+      const descuento = document.querySelector('input[name="descuento"]:checked').value;
+      const estado = document.querySelector('input[name="estado"]:checked').value === "true";
+      return [nombre, precio, descripcion, descuento,estado];
     },
   });
 
   if (formValues) {
-    const resultado = await axios.post("/editProduct", {
-      datos: formValues,
-      index: indice,
-    });
+    try {
+      const resultado = await axios.post("/editProduct", {
+        datos: {
+          nameproduct: formValues[0],
+          price: formValues[1],
+          description: formValues[2],
+          discount: formValues[3],
+          status: formValues[4], // Asegúrate de que lo estés incluyendo
+        },
+        index: indice,
+      });
+  
+      // ✅ Si todo va bien
+      Swal.fire({
+        icon: "success",
+        title: "Producto actualizado",
+        text: "Los cambios han sido guardados correctamente.",
+        confirmButtonText: "OK",
+      });
+  
+      location.reload();
+
+    } catch (error) {
+      // ❌ Si hay error en la petición
+      console.error("Error al actualizar producto:", error);
+  
+      Swal.fire({
+        icon: "error",
+        title: "Error al actualizar",
+        text:
+          error.response?.data?.message ||
+          "Ocurrió un error inesperado al actualizar el producto.",
+        confirmButtonText: "OK",
+      });
+    }
   }
+  
 };
+
 
 //?Eliminar producto
 export const deleteProduct = async (indice) => {
@@ -229,11 +286,13 @@ export const deleteProduct = async (indice) => {
   });
 
   if (opcion === "true") {
-    Swal.fire({ html: `La seleción es: ${opcion}` });
 
     const respuesta = await axios.post("/deleteProduct", {
       datos: indice,
     });
+
+    location.reload();
+    
   } else {
     Swal.fire({
       icon: "warning",
@@ -412,7 +471,7 @@ export const viewTableDats = (ente, datos) => {
                   <a
                     className="btn btn-primary"
                     onClick={() => {
-                      editProduct(objeto.id_product);
+                      editProduct(objeto.id_product,objeto);
                     }}
                   >
                     Editar

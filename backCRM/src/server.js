@@ -10,6 +10,7 @@ import ListClients  from "../src/routes/clientPage.routes.js";
 import ListProducts from "../src/routes/products.Page.routes.js"
 import cotizacionRoutes from './routes/cotizacionProceso.routes.js';
 import ListCorreos from './routes/correo.routes.js';
+import {encrypt} from './helpers/encryptThem.js'
 import dotenv from 'dotenv'
 const pool = new pg.Pool(ConfiguracionA);
 

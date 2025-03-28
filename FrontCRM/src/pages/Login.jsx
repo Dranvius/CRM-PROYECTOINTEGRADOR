@@ -1,9 +1,9 @@
-import axios from "../lib/axios";
+import axios from "../lib/axios.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShare } from "@fortawesome/free-solid-svg-icons";
 import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
-import { useAuthStore } from "../storage/globalStorage.js"; 
+import { useAuthStore } from "../storage/globalStorage.js";
 import { useNavigate } from "react-router-dom";
 import "../style/estilos.css";
 import Swal from 'sweetalert2'
@@ -14,7 +14,7 @@ const element2 = <FontAwesomeIcon icon={faThumbsUp} />;
 export function Boton() {
   const setToken = useAuthStore((state) => state.setToken);
   const setUser = useAuthStore((state) => state.setUser);
-  
+
   const navigate = useNavigate();
   const [icon, setIcon] = useState(element2);
 
@@ -35,28 +35,28 @@ export function Boton() {
 
     const user = e.target[0].value;
     const password = e.target[1].value;
-    
+
 
     try {
 
-    const peticion = await axios.post("/login", {
-      user,
-      password,
-    });
+      const peticion = await axios.post("/login", {
+        user,
+        password,
+      });
 
-    setToken(peticion.data.token); //!Respuesta peticiòn 30
+      setToken(peticion.data.token); //!Respuesta peticiòn 30
 
-    const peticion2 = await axios.get("/login", {
-      user,
-      password,
-    });
+      const peticion2 = await axios.get("/login", {
+        user,
+        password,
+      });
 
-    setUser(peticion2.data); //!Datos del usuario de manera local
+      setUser(peticion2.data); //!Datos del usuario de manera local
 
-    navigate("/profile");
+      navigate("/profile");
 
     } catch (error) {
-     
+
       Toast.fire({
         icon: 'error',
         title: 'Contraseña o correo incorrecto'
@@ -65,7 +65,7 @@ export function Boton() {
     }
 
 
-    
+
   };
 
   return (
@@ -73,7 +73,7 @@ export function Boton() {
       <div id="formContainer">
 
         <div id="pic">
-          <img src="../src/img/logoB.png" alt="mal" id="logo"/>
+          <img src="../src/img/logoB.png" alt="mal" id="logo" />
         </div>
 
         <div id="formulario">
@@ -86,10 +86,10 @@ export function Boton() {
                   Usuario
                 </label>
                 <input
-                    type="text"
-                    className="form-control"
-                    id="exampleInputEmail1"
-                    aria-describedby="emailHelp"
+                  type="text"
+                  className="form-control"
+                  id="exampleInputEmail1"
+                  aria-describedby="emailHelp"
                 />
               </div>
               <div className="mb-3 text-center text-light">
@@ -97,9 +97,9 @@ export function Boton() {
                   Contraseña
                 </label>
                 <input
-                    type="password"
-                    className="form-control"
-                    id="exampleInputPassword1"
+                  type="password"
+                  className="form-control"
+                  id="exampleInputPassword1"
                 />
               </div>
 
@@ -111,13 +111,13 @@ export function Boton() {
                   <span id="span4"></span>
 
                   <div
-                      id="icono"
-                      onMouseOver={() => {
-                        setIcon(element);
-                      }}
-                      onMouseOut={() => {
-                        setIcon(element2);
-                      }}
+                    id="icono"
+                    onMouseOver={() => {
+                      setIcon(element);
+                    }}
+                    onMouseOut={() => {
+                      setIcon(element2);
+                    }}
                   >
                     {icon}
                   </div>

@@ -9,6 +9,9 @@ export const verificador = (req, res, next) => {
   //!AUTOMATICO
   const autorizacion = req.headers.authorization; //!Header con el Token
 
+
+  console.log(autorizacion)
+
   if (!autorizacion) {
     return res.status(401).json({
       message: "Error mal autentificado_1",
@@ -29,6 +32,8 @@ export const verificador = (req, res, next) => {
   try {
     jwt.verify(autorizacion, process.env.JWT_SECRET, async (err, user) => {
       //!Verificación del token
+
+
 
       if (err)
         return res.status(401).json({

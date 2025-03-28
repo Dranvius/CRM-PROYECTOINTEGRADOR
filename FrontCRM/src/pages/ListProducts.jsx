@@ -13,7 +13,7 @@ export function ListProducts(props) {
 
   const profileStatus = profile.status;
 
-  //crear nuevo cliente//
+  //crear nuevo producto//
   const CrearUsu = async () => {
     const { value: formValues } = await Swal.fire({
       titleText: "Crear nuevo Producto  :\n",
@@ -31,19 +31,24 @@ export function ListProducts(props) {
         '<input id="swal-input1" class="swal2-input" placeholder="Producto">' +
         '<input id="swal-input2" class="swal2-input" placeholder="Precio">' +
         '<input id="swal-input3" class="swal2-input" placeholder="Descripcion">' +
-        '<input id="swal-input4" class="swal2-input" placeholder="Descuento">',
-
+        `<div style="text-align: left; margin-top: 10px;">
+          <label><strong>Descuento : </strong></label><br>
+          <input type="radio" id="descuento-5" name="descuento" value="5" checked>
+          <label for="descuento-5">5 %</label><br>
+          <input type="radio" id="descuento-25" name="descuento" value="25">
+          <label for="descuento-25">25 %</label>
+        </div>`,
       focusConfirm: false,
       preConfirm: () => {
         return [
           document.getElementById("swal-input1").value,
           document.getElementById("swal-input2").value,
           document.getElementById("swal-input3").value,
-          document.getElementById("swal-input4").value,
-
+          document.querySelector('input[name="descuento"]:checked').value, // ✅ esta línea es clave
         ];
       },
     });
+    
 
     if (formValues) {
 
@@ -52,18 +57,43 @@ export function ListProducts(props) {
         creador: profile.id,
       });
 
-      Swal.fire({
-        icon: "success",
-        title: "Producto creado con éxito",
-        text: "El Producto ha sido registrado correctamente.",
-        confirmButtonText: "OK",
-        allowOutsideClick: false, 
-        allowEscapeKey: false, 
-      }).then((result) => {
-        if (result.isConfirmed) {
-          location.reload();
-        }
-      });
+      console.log(resultado)      
+
+      if (resultado.status == 200){
+
+        Swal.fire({
+          icon: "success",
+          title: "Producto creado con éxito",
+          text: "El Producto ha sido registrado correctamente.",
+          confirmButtonText: "OK",
+          allowOutsideClick: false, 
+          allowEscapeKey: false, 
+        }).then((result) => {
+          if (result.isConfirmed) {
+            location.reload();
+          }
+        });
+  
+
+      }else{
+
+        Swal.fire({
+          icon: "warning",
+          title: "Error al crear el producto",
+          text: "No se pudo crear el producto.",
+          confirmButtonText: "OK",
+          allowOutsideClick: false, 
+          allowEscapeKey: false, 
+        }).then((result) => {
+          if (result.isConfirmed) {
+            location.reload(); 
+          }
+        });
+
+
+      }
+
+
 
     }
   }

@@ -57,7 +57,7 @@ export function NavbarLinks({ page, typeUser }) {
                 Estadísticas
               </Link>
             </li>
-            {typeUser && (
+            {(typeUser == false) && (
               <li className="nav-item">
                 <Link
                   to="/usuarios"

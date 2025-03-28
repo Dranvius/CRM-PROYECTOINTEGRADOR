@@ -47,6 +47,7 @@ export function TableList({ ente }) {
     fetchData();
   }, [ente, context]);
 
+
   const handleFilter = (e) => {
     e.preventDefault();
     const value = e.target[0].value.toLowerCase();
@@ -89,7 +90,8 @@ export function TableList({ ente }) {
             <td>{item.tipo ? "Administrador" : "Operador"}</td>
             <td>
               <div
-                id={item.statusu === true ? "circleStatusGreen" : "circleStatusRed"}
+                id={item.status ? "circleStatusGreen" : "circleStatusRed"}
+
               ></div>
             </td>
             <td>
@@ -99,6 +101,8 @@ export function TableList({ ente }) {
           </tr>
         );
       } else if (ente === "cliente") {
+
+
         return (
           <tr key={i}>
             <td>{i + 1}</td>
@@ -109,7 +113,7 @@ export function TableList({ ente }) {
             <td>{item.numbercelphone}</td>
             <td>
               <div
-                id={item.statusc ? "circleStatusGreen" : "circleStatusRed"}
+                id={(item.statusc) ? "circleStatusGreen" : "circleStatusRed"}
               ></div>
             </td>
             <td>{item.email}</td>
@@ -126,14 +130,14 @@ export function TableList({ ente }) {
             <td>{item.nameproduct}</td>
             <td>{item.price}</td>
             <td>{item.description}</td>
-            <td>{item.discount}</td>
+            <td>{item.discount} %</td>
             <td>
               <div
-                id={item.statusp ? "circleStatusGreen" : "circleStatusRed"}
+                id={item.status ? "circleStatusGreen" : "circleStatusRed"}
               ></div>
             </td>
             <td>
-              <button onClick={() => editProduct(item.id_product)} className="btn btn-primary">Editar</button>
+              <button onClick={() => editProduct(item.id_product,item)} className="btn btn-primary">Editar</button>
               <button onClick={() => deleteProduct(item.id_product)} className="btn btn-danger">Eliminar</button>
             </td>
           </tr>

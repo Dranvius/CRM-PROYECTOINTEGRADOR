@@ -12,14 +12,18 @@ export const loginHandler = async (req, res) => {
 
     //!SOLICITUD A LA TABLA
 
+    console.log(req.body)
+
     const queryText =
       "SELECT * FROM usuario INNER JOIN personaldats ON personaldats.id_personalid = usuario.id_users WHERE usuario.email = $1";
     const res1 = await pool.query(queryText, [req.body.user]);
 
+    
     const { email, pass, tipo } = res1.rows[0];
 
     //!Verificaciòn correo.
     if (!(email === req.body.user)) {
+      
       return res.status(401).json({
         message: "Error en el correo",
       });
@@ -27,11 +31,14 @@ export const loginHandler = async (req, res) => {
 
     //!Verificaciòn contraseña.
     if (! await compareEncrypt(req.body.password, pass)) {
+      
       return res.status(401).json({
         message: "Error en la contraseña",
       });
     }
 
+
+    console.log('todo okey hasta el momento')
 
     //!GENERAR TOKEN
     const token = jwt.sign(
