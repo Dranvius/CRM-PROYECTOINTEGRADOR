@@ -53,7 +53,6 @@ const dataClient = async (clienteName) => {
   try {
     const queryText =
       "SELECT * FROM client WHERE firstname = $1 AND lastname =$2";
-
     const arr = [clienteName[0], clienteName[1]];
     const peticion = await pool.query(queryText, arr);
 
@@ -73,21 +72,23 @@ const llenadoTablaCotizacion = async (
 ) => {
   try {
 
-    //!Ingresar en SENT_QUOTATION ENVIAR AUTOMATICAMENTE
-    const queryText1 =
-      "INSERT INTO sent_quotation(nombre_usuario,nomb_cli_coti) VALUES($1,$2)";
+    // //!Ingresar en SENT_QUOTATION ENVIAR AUTOMATICAMENTE
+    // const queryText1 =
+    //   "INSERT INTO sent_quotation(nombre_usuario,nomb_cli_coti) VALUES($1,$2)";
+    // const datosSendCotizacion = [nombreUsuario.name, nombreCliente[0]];
+    // const peticionSend = await pool.query(queryText1, datosSendCotizacion);
 
-    const datosSendCotizacion = [nombreUsuario.name, nombreCliente[0]];
-    const peticionSend = await pool.query(queryText1, datosSendCotizacion);
-
+    
 
 
     //!LLENADO EN LA TABLA QUOTATION
 
-    const queryText0 = "INSERT INTO quotation(valor_total,cliente_coti) VALUES($1,$2)";
+    const queryText0 = "INSERT INTO quotation(valor,cliente_coti) VALUES($1,$2)";
 
     const datosCotizacion = [total, id];
     const peticionCliente = await pool.query(queryText0, datosCotizacion);
+
+    console.log(peticionCliente)
 
     //!lLENADO TABLA INTERMEDIA
 
@@ -103,17 +104,19 @@ const llenadoTablaCotizacion = async (
       let queryTexto1 =
         "INSERT INTO quotation_product(rela_cotiqp,rela_prodqp,cantidad) VALUES($1,$2,$3)";
       let valores = [idcotizacion, valor.id_product, valor.cantidad];
-      pool.query(queryTexto1, valores);
+      console.log(pool.query(queryTexto1, valores))
     });
 
     return "TABLAS LLENADAS";
   } catch (error) {
-
+    console.log(error)
   }
 };
 
 export const generarPDF = async (req, res) => {
   try {
+
+    console.log(req.body)
 
     const queryText = " SELECT count(*)  FROM quotation";
 
@@ -130,76 +133,12 @@ export const generarPDF = async (req, res) => {
       req.body.usuarioCreador
     );
 
-    //!Creador de transport para enviar mensajes (Configuración especial de windows)
-
-    const transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com",
-      port: 465,
-      secure: true,
-      auth: {
-        user: "linaresmodulareslm@gmail.com",
-        pass: "cuglrkxinfwxtwfw",
-      },
-    });
-
-    //!Donde se realiza la petición para la creación del documento.
-    //?Acá es donde debo realizar el envio de la correo.
-
-    //var pdfDoc = printer.createPdfKitDocument(datosPDF.pdf);
-
     const pdfDoc = pdfMake.createPdf(datosPDF.pdf, null, null, pdfFonts.pdfMake.vfs);
-
-
-    pdfDoc.getBuffer((buffer) => {
-      //! Datos de envio
-
-
-      let message = {
-        to: 'dranvius12@hotmail.com',
-        subject: 'Cotización de los productos solicitado',
-        text: 'Espero tenga un buen día. Comparto con usted la cotización de los productos solicitados',
-        attachments: [
-          //!Ligar el documento al mensaje Enviando
-          {
-            filename: 'archivo.pdf',
-            content: buffer,
-          },
-        ],
-      };
-
-      transporter.sendMail(message, (err, info) => {
-        if (err) {
-
-        } else {
-
-        }
-      });
-    });
-
-    //pdfDoc.end();
-
-    // pdfDoc.pipe(
-    //   fs.createWriteStream(
-    //     path.join(
-    //       "./src",
-    //       "/PDFs",
-    //       "/Storage",
-    //       "documento" + conteo.rows[0].count + ".pdf"
-    //     )
-    //   )
-    // );
-
-    // pdfDoc.end();
 
     const precios = []; //!Array para los precios
 
     //!Suma de valores de cantidades
     req.body.productos.map((valor, key) => {
-      // let primerParte = ((parseInt(valor.price) * parseInt(valor.discount.slice(0, -1))) / 100);
-      // let segundaParte = (((parseInt(valor.price) * parseInt(valor.discount.slice(0, -1))) / 100) * parseInt(valor.cantidad));
-      // let partetrestpuntocero =parseInt(valor.cantidad) * parseInt(valor.price);
-
-
 
       let terceraParte =
         parseInt(valor.cantidad) * parseInt(valor.price) -
@@ -216,6 +155,8 @@ export const generarPDF = async (req, res) => {
 
     precios.map((value) => (subTotal = subTotal + value));
     const Total = subTotal + (subTotal * 19) / 100;
+
+
 
     //!Llenado de base de datos.
     const finalProceso = await llenadoTablaCotizacion(
@@ -236,7 +177,7 @@ export const generarPDF = async (req, res) => {
       datosCliente: req.body.cliente,
     });
   } catch (error) {
-
+    console.log(error)
   }
 };
 

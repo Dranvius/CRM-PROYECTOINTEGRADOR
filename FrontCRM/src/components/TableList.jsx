@@ -76,7 +76,12 @@ export function TableList({ ente }) {
   const renderTableRows = () => {
     const currentData = datos.slice(datosPorProceso, datosPorProceso + 5);
 
+
+    console.log(currentData)
+
     return currentData.map((item, i) => {
+
+      // console.log(item)
 
       if (ente === "usuario") {
         return (
@@ -144,13 +149,14 @@ export function TableList({ ente }) {
         );
       } else if (ente === "cotizacion") {
         const cliente = datosCliente.find(c => c.id_client === item.cliente_coti) || {};
+        
         return (
           <tr key={i}>
             <td>{i + 1}</td>
             <td>{cliente.firstname}</td>
             <td>{cliente.lastname}</td>
             <td>{cliente.cc}</td>
-            <td>{item.valor_total}</td>
+            <td>{item.valor}</td>
             <td>
               <button onClick={() => deleteCoutation(item.id_quotation)} className="btn btn-danger">Eliminar</button>
               <Link to={`/vistaPdf/${item.id_quotation}`} className="btn btn-info" style={{ color: 'white' }}>Ver cotización</Link>

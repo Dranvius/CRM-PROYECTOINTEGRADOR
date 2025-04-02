@@ -10,7 +10,7 @@ const traerDatosClients = async () => {
     const queryText = `
       SELECT * FROM client 
       INNER JOIN staff ON staff.id_staff = client.relation_staff 
-      INNER JOIN usuario ON usuario.id_users = staff.id_staff 
+      INNER JOIN usuario ON usuario.id_staff = staff.id_staff 
       ORDER BY client.id_client
     `;
     const res1 = await pool.query(queryText);
@@ -19,7 +19,7 @@ const traerDatosClients = async () => {
     console.log("Error en la petición");
     console.error(error);
   }
-}
+};
 
 // Ruta para traer clientes
 export const TraerClientes = async (req, res) => {
@@ -29,36 +29,51 @@ export const TraerClientes = async (req, res) => {
   } catch (error) {
     console.log(error);
   }
-}
+};
 
 // Función para crear un cliente en la BD
 const CrearclienteBD = async (newUser) => {
   try {
+
+    console.log(newUser)
+
     const creador = [newUser.creador];
-    const querytext0 = "SELECT * FROM usuario WHERE id_users = $1";
-    const cantidad = "SELECT count(*) FROM client";
-    const res_00 = await pool.query(cantidad)
+    const querytext0 = "SELECT id_staff FROM usuario INNER JOIN personaldats ON personaldats.id_users = usuario.id_users WHERE id_personalid = $1";
     const res0 = await pool.query(querytext0, creador);
 
+    console.log(res0)
+
+
+    if (res0.rowCount === 0) {
+      throw new Error("Usuario creador no encontrado");
+    }
+
+    const id_staff = res0.rows[0].id_staff;
+
+    if (!id_staff) {
+      throw new Error("El usuario creador no tiene asociado un id_staff");
+    }
+
+    
     const querytext1 = `
-      INSERT INTO client(id_client,firstname, lastname, cc, numbercelphone, mail, statusc, relation_staff) 
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+      INSERT INTO client(firstname, lastname, cc, numbercelphone, mail, statusc, relation_staff) 
+      VALUES ($1, $2, $3, $4, $5, $6, $7)
     `;
     const creaCliente = [
-      res_00.rows[0].count + 1,
       newUser.datos[0], // Nombre
       newUser.datos[1], // Apellido
       newUser.datos[2], // Cédula
-      newUser.datos[3], // Correo
-      newUser.datos[4], // Número
-      newUser.datos[5] = true, // Status
-      res0.rows[0].id_users // Relación staff
+      newUser.datos[3], // Número
+      newUser.datos[4], // Correo
+      true,             // Status por defecto true
+      id_staff          // Relación staff
     ];
 
     const res1 = await pool.query(querytext1, creaCliente);
     return res1;
   } catch (error) {
     console.error(error);
+    throw error;
   }
 };
 
@@ -68,7 +83,7 @@ export const CrearClient = async (req, res) => {
     await CrearclienteBD(req.body);
     res.send("Cliente Creado");
   } catch (error) {
-    console.error(error);
+    res.status(400).send(error.message || "Error al crear cliente");
   }
 };
 
@@ -86,7 +101,7 @@ const editarBD = async (change) => {
       change.datos[2],
       change.datos[3],
       change.datos[4],
-      change.datos[5],
+      change.datos[5] === "true" || change.datos[5] === "Activo",
       change.index
     ];
 
@@ -110,9 +125,7 @@ export const EditarCliente = async (req, res) => {
 // Función para eliminar cliente en la BD
 const eliminarBD = async (dats) => {
   try {
-    
-
-    const queryText = "UPDATE client SET statusc = False WHERE id_client = $1";
+    const queryText = "UPDATE client SET statusc = false WHERE id_client = $1";
     const ar = [dats];
     const res1 = await pool.query(queryText, ar);
     return res1;
@@ -135,7 +148,7 @@ export const EliminarCliente = async (req, res) => {
 // Función para traer todos los datos de clientes ordenados
 const BaseDatosClientesOrdenados = async () => {
   try {
-    const queryText = "SELECT * FROM client";
+    const queryText = "SELECT * FROM client ORDER BY id_client";
     const res1 = await pool.query(queryText);
     return res1;
   } catch (error) {

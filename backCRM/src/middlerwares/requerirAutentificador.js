@@ -9,16 +9,11 @@ export const verificador = (req, res, next) => {
   //!AUTOMATICO
   const autorizacion = req.headers.authorization; //!Header con el Token
 
-
-  console.log(autorizacion)
-
   if (!autorizacion) {
     return res.status(401).json({
       message: "Error mal autentificado_1",
     });
   }
-
-  //const token = autorizacion.split(' ')[1]; //!Toquen enviado por header
 
   if (!autorizacion) {
     //!Existencia de TOken en el header
@@ -33,8 +28,6 @@ export const verificador = (req, res, next) => {
     jwt.verify(autorizacion, process.env.JWT_SECRET, async (err, user) => {
       //!Verificación del token
 
-
-
       if (err)
         return res.status(401).json({
           message: "Error en token",
@@ -42,10 +35,9 @@ export const verificador = (req, res, next) => {
 
       try {
         const queryText =
-          "SELECT * FROM  usuario INNER JOIN personaldats ON personaldats.id_personalid = USUARIO.id_users WHERE usuario.email = $1";
+          "SELECT * FROM usuario INNER JOIN personaldats ON personaldats.id_users = usuario.id_users WHERE usuario.email = $1";
 
         const dat = [user.user];
-
         const res = await pool.query(queryText, dat);
 
         if (res.rows.length > 0) {
@@ -72,6 +64,6 @@ export const verificador = (req, res, next) => {
       }
     });
   } catch (error) {
-
+    console.err('error de autentificacion')
   }
 };

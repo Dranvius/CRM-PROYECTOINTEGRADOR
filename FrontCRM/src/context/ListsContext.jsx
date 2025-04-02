@@ -85,6 +85,7 @@ const cotizacionDatos =  async (indice) =>{
   //Cédula del cliente
   //Correo del Cliente
   //Datos de cotización
+  
   try {
     const datos = await Axios.post('/indiceCotizacion',{
       indice

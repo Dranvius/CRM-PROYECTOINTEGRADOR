@@ -12,12 +12,10 @@ export const loginHandler = async (req, res) => {
 
     //!SOLICITUD A LA TABLA
 
-    console.log(req.body)
 
     const queryText =
-      "SELECT * FROM usuario INNER JOIN personaldats ON personaldats.id_personalid = usuario.id_users WHERE usuario.email = $1";
+      "SELECT * FROM usuario INNER JOIN personaldats ON personaldats.id_users = usuario.id_users WHERE usuario.email = $1";
     const res1 = await pool.query(queryText, [req.body.user]);
-
     
     const { email, pass, tipo } = res1.rows[0];
 
@@ -37,9 +35,6 @@ export const loginHandler = async (req, res) => {
       });
     }
 
-
-    console.log('todo okey hasta el momento')
-
     //!GENERAR TOKEN
     const token = jwt.sign(
       {
@@ -52,6 +47,9 @@ export const loginHandler = async (req, res) => {
         expiresIn: "2h",
       }
     );
+
+
+
 
     //!DEVOLVER TOKEN
     return res.json({
@@ -69,5 +67,6 @@ export const loginHandler = async (req, res) => {
 //!Devuelve los datos del usuario
 
 export const profileHandler = (req, res) => {
+
   return res.json(req.user);
 }

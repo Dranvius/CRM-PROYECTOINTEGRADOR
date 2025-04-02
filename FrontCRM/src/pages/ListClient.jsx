@@ -10,6 +10,7 @@ export function ListClient(props) {
   const profile = useAuthStore((state) => state.user);
   const profileStatus = profile.status;
 
+
   const [clientes, setClientes] = useState([]); // Estado para la lista de clientes
 
   // Función para cargar la lista de clientes
@@ -52,14 +53,16 @@ export function ListClient(props) {
       focusConfirm: false,
       preConfirm: () => {
         return [
-          document.getElementById("swal-input1").value,
-          document.getElementById("swal-input2").value,
-          document.getElementById("swal-input3").value,
-          document.getElementById("swal-input4").value,
-          document.getElementById("swal-input5").value,
+          document.getElementById("swal-input1").value, //Nombre
+          document.getElementById("swal-input2").value, //Apellido
+          document.getElementById("swal-input3").value, //Cedula
+          document.getElementById("swal-input4").value, //Numero
+          document.getElementById("swal-input5").value, //correo
+          // Default True
         ];
       },
     });
+
 
     if (formValues) {
       try {

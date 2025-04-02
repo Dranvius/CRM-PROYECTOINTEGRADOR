@@ -44,12 +44,17 @@ export function Boton() {
         password,
       });
 
+  
       setToken(peticion.data.token); //!Respuesta peticiòn 30
+
+      //PETICION A USUARIOS 
 
       const peticion2 = await axios.get("/login", {
         user,
         password,
       });
+
+      console.log(peticion2.data)
 
       setUser(peticion2.data); //!Datos del usuario de manera local
 

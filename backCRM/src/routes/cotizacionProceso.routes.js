@@ -10,7 +10,7 @@ import {ReqDatosUsuaruioSeleccionado, generarPDF,enviarDatosCotizaciones,llevarI
 cotizacionRoutes.post("/cotizacionStart",ReqDatosUsuaruioSeleccionado);
 cotizacionRoutes.post("/construccionPDF",generarPDF);
 cotizacionRoutes.get("/quotationDats",enviarDatosCotizaciones);
-cotizacionRoutes.post("/indiceCotizacion",llevarInformacionACotizacion);
+cotizacionRoutes.post("/indiceCotizacion",llevarInformacionACotizacion); //utilizado para mostrar el pdf
 
 
 export default cotizacionRoutes;

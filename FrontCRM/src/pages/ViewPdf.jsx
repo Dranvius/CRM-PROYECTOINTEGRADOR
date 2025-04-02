@@ -253,7 +253,7 @@ return (
                         borderRight: "1px",
                       }}
                     >
-                      Sub total : {parseInt(datos[0].valor_total) + (0.19*parseInt(datos[0].valor_total))}
+                      Sub total : {parseInt(datos[0].valor) + (0.19*parseInt(datos[0].valor))}
                     </Text>
                   </View>
                   <View style={{ display: "flex", paddingBottom: "20px" }}>
@@ -271,7 +271,7 @@ return (
                         borderRight: "1px",
                       }}
                     >
-                      Total : {datos[0].valor_total}
+                      Total : {datos[0].valor}
                     </Text>
                     <View style={{ display: "flex" }}>
                       <Image

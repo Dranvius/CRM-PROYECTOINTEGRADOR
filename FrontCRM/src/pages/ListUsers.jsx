@@ -10,6 +10,8 @@ export function ListUsers(props) {
   const profile = useAuthStore((state) => state.user);
   const profileStatus = profile.status;
 
+  
+
   const [usuarios, setUsuarios] = useState([]); // Estado para la lista de usuarios
 
   // Función para cargar los usuarios desde el backend
