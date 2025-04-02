@@ -6,50 +6,47 @@ import router from "./routes/autentificacion.routes.js";
 import profile from "./routes/peticionesProfilePage.routes.js";
 import { ConfiguracionA } from "./database/config.js";
 import ListUsers from "../src/routes/usersPage.routes.js";
-import ListClients  from "../src/routes/clientPage.routes.js";
-import ListProducts from "../src/routes/products.Page.routes.js"
-import cotizacionRoutes from './routes/cotizacionProceso.routes.js';
-import dotenv from 'dotenv'
+import ListClients from "../src/routes/clientPage.routes.js";
+import ListProducts from "../src/routes/products.Page.routes.js";
+import cotizacionRoutes from "./routes/cotizacionProceso.routes.js";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const pool = new pg.Pool(ConfiguracionA);
+const app = Express(); // 👈 Cambiado de App a app para mantener consistencia
 
-const App = Express();
+// ✅ Cargar la URL del frontend desde las variables
+const FRONTEND_URL = process.env.FRONTEND_URL;
 
-dotenv.config()
-
-//!Port
-
-//const port = process.env.PORT || 3000; //!Variable de entorno o del sistema
-
-//! DEFAULT Middlerwares
-
-App.use(
+app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: FRONTEND_URL,
     credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
   })
 );
-App.use(morgan("dev"));
-App.use(Express.json());
-App.use(Express.urlencoded({ extended: true }));
 
-//?RUTAS
+// MIDDLEWARES
+app.use(morgan("dev"));
+app.use(Express.json());
+app.use(Express.urlencoded({ extended: true }));
 
-App.use(router); 
-//App.use(ListCorreos);  //Para correos;
-App.use(profile);
-App.use(ListUsers);
-App.use(ListClients);
-App.use(ListProducts);
-App.use(cotizacionRoutes);
+// RUTAS
+app.use(router);
+app.use(profile);
+app.use(ListUsers);
+app.use(ListClients);
+app.use(ListProducts);
+app.use(cotizacionRoutes);
 
-
-//?Default Route
-
-App.get("/", (req, res) => {
+// Ruta base
+app.get("/", (req, res) => {
   res.send("Saludo desde server");
 });
 
-App.listen(3000);
-
-console.log("Server conectado 3000");
+// PUERTO
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log("Server conectado en puerto", PORT);
+});
