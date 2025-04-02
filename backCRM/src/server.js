@@ -14,11 +14,10 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const pool = new pg.Pool(ConfiguracionA);
-const app = Express(); // 👈 Cambiado de App a app para mantener consistencia
+const app = Express();
 
-// ✅ Cargar la URL del frontend desde las variables
+// ✅ Configurar CORS con URL del frontend
 const FRONTEND_URL = process.env.FRONTEND_URL;
-
 app.use(
   cors({
     origin: FRONTEND_URL,
@@ -45,8 +44,18 @@ app.get("/", (req, res) => {
   res.send("Saludo desde server");
 });
 
-// PUERTO
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log("Server conectado en puerto", PORT);
-});
+// ✅ Verificación de conexión a PostgreSQL
+pool.connect()
+  .then(client => {
+    console.log("✅ Conexión a PostgreSQL exitosa");
+    client.release(); // ¡Importante liberar el cliente!
+    
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, () => {
+      console.log(`🚀 Server corriendo en puerto ${PORT}`);
+    });
+  })
+  .catch(err => {
+    console.error("❌ Error conectando a PostgreSQL:", err.message);
+    process.exit(1); // Detiene el servidor si no conecta
+  });
