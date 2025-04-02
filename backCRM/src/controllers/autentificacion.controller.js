@@ -8,6 +8,8 @@ const pool = new pg.Pool(ConfiguracionA);
 //!Logica de logeo
 export const loginHandler = async (req, res) => {
 
+  console.log(req)
+
   try {
 
     //!SOLICITUD A LA TABLA
