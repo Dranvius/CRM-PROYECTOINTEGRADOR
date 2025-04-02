@@ -1,21 +1,23 @@
-import axios from 'axios'
-import {useAuthStore} from '../storage/globalStorage.js'
+import axios from 'axios';
+import { useAuthStore } from '../storage/globalStorage.js';
+
+// 📦 Usamos la variable de entorno definida en .env o en Render
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 const authApi = axios.create({
-    baseURL: "http://localhost:3000", //Cambiar en product
-    withCredentials: true
-})
+  baseURL: BASE_URL,
+  withCredentials: true,
+});
 
-authApi.interceptors.request.use(config =>{
+// 🔐 Interceptor para agregar token de autenticación a cada request
+authApi.interceptors.request.use(config => {
+  const token = useAuthStore.getState().token;
 
-    const token = useAuthStore.getState().token;
-    
-    config.headers ={
-        Authorization: token
-    }
-    
-    return config
-})
+  if (token) {
+    config.headers.Authorization = token;
+  }
 
+  return config;
+});
 
 export default authApi;

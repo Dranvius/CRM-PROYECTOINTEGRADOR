@@ -78,7 +78,7 @@ export function Boton() {
       <div id="formContainer">
 
         <div id="pic">
-          <img src="../src/img/logoB.png" alt="mal" id="logo" />
+          <img src="/img/logoB.png" alt="mal" id="logo" />
         </div>
 
         <div id="formulario">

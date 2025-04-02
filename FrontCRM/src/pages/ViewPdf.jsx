@@ -64,7 +64,7 @@ return (
                     }}
                   >
                     <Image
-                      src="../src/img/logo.png"
+                      src="/img/logo.png"
                       source="error"
                       style={{ width: "100px", height: "100px" }}
                     ></Image>

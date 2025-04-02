@@ -220,7 +220,7 @@ export function ProfilePage() {
         <div className="contenedor">
           <div className="tarjeta">
 
-            <img src="../src/img/logoB.png" alt="ProfilePhoto" id="foto-profile" />
+            <img src="/img/logoB.png" alt="ProfilePhoto" id="foto-profile" />
 
             <h3>DATOS DEL USUARIO</h3>
 

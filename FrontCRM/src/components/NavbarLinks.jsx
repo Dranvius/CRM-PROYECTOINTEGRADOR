@@ -27,7 +27,7 @@ export function NavbarLinks({ page, typeUser }) {
         {/* Logo y Nombre */}
         <a className="navbar-brand" href="#">
           <img
-            src="../src/img/logoB.png"
+            src="/img/logoB.png"
             width="50"
             height="50"
             alt="LogoPic"
